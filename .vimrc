@@ -9,7 +9,8 @@ set tabstop=4
 set softtabstop=4
 set expandtab "以下三个配置配合使用，设置tab和缩进空格数
 set cursorline "为光标所在行加下划线
-set number "显示行号
+"set number "显示行号
+set nonumber "不显示行号
 set autoread "文件在Vim之外修改过，自动重新读入
 set scrolloff=3
 set autoindent
@@ -39,7 +40,8 @@ set fileencodings=uft-8,gbk "使用utf-8或gbk打开文件
 set helplang=cn "帮助系统设置为中文
 set foldmethod=syntax "代码折叠
 
-set wrap "换行设置
+" set wrap "换行设置
+set nowrap "不换行设置
 set textwidth=79
 set formatoptions=qrn1
 "}}
@@ -106,6 +108,8 @@ let Tlist_Auto_Open = 1 "每次vim运行时自动打开taglist
 nnoremap <leader>tl : Tlist<CR> 
 "}
 set tags=./tags;,/home/plc/ti-dvsdk_dm365-evm_4_02_00_06/psp/linux-2.6.32.17-psp03.01.01.39/tags
+set tags+=./tags;,/home/plc/ti-dvsdk_dm365-evm_4_02_00_06/dmai_2_20_00_15/tags
+set tags+=./tags;,/home/plc/opt/arm-2009q1/arm-none-linux-gnueabi/tags
 "}
 
 
