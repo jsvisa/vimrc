@@ -1,6 +1,7 @@
 have_header: checking for ruby.h... -------------------- yes
 
-"gcc -E -I. -I/usr/lib/ruby/1.8/i486-linux -I.  -D_FILE_OFFSET_BITS=64  -fno-strict-aliasing -g -g -O2  -fPIC    conftest.c -o conftest.i"
+"gcc -E -I. -I/usr/lib/ruby/1.8/i686-linux -I.  -D_FILE_OFFSET_BITS=64  -fno-strict-aliasing -g -g -O2  -fPIC    conftest.c -o conftest.i"
+/usr/lib/ruby/1.8/mkmf.rb:266: warning: Insecure world writable dir /home/realtimedsp/workdir/dm365/project/u-boot/tools in PATH, mode 040777
 checked program was:
 /* begin */
 1: #include <ruby.h>
