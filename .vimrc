@@ -42,7 +42,7 @@ set foldmethod=syntax "代码折叠
 
 " set wrap "换行设置
 set nowrap "不换行设置
-set textwidth=79
+" set textwidth=79
 set formatoptions=qrn1
 "}}
 
@@ -104,14 +104,30 @@ let Tlist_Exit_OnlyWindow = 1 "如果taglist是最后一个窗口，则退出vim
 let Tlist_Use_Right_Window = 1 "在右侧窗口中显示taglist
 let Tlist_GainFocus_On_ToggleOpen = 1 "打开taglist时，光标保留在taglist窗口
 let Tlist_Ctags_Cmd='/usr/bin/ctags' "设置ctags命令的位置
-let Tlist_Auto_Open = 1 "每次vim运行时自动打开taglist
+let Tlist_Auto_Open = 0 "每次vim运行时自动打开taglist
 nnoremap <leader>tl : Tlist<CR> 
 "}
-set tags=./tags;,/home/plc/ti-dvsdk_dm365-evm_4_02_00_06/psp/linux-2.6.32.17-psp03.01.01.39/tags
-set tags+=./tags;,/home/plc/ti-dvsdk_dm365-evm_4_02_00_06/dmai_2_20_00_15/tags
-set tags+=./tags;,/home/plc/opt/arm-2009q1/arm-none-linux-gnueabi/tags
+"set tags=./tags;,/home/plc/ti-dvsdk_dm365-evm_4_02_00_06/psp/linux-2.6.32.17-psp03.01.01.39/tags
+"set tags+=./tags;,/home/plc/ti-dvsdk_dm365-evm_4_02_00_06/dmai_2_20_00_15/tags
+"set tags+=./tags;,/home/plc/opt/arm-2009q1/arm-none-linux-gnueabi/tags
+"set tags=./tags;,~/workdir/dm365/mv_pro_5.0/tags
+"set tags+=./tags;,~/workdir/lsp/ti-davinci/sjw/linux-2.6.18_pro500/tags
+"set tags+=~/workdir/lsp/ti-davinci/linux-2.6.18_pro500_plc/linux-2.6.18_pro500/tags
+"set tags+=./tags;,~/workdir/dm365/dvsdk_2_10_01_18/dmai_1_21_00_10/tags
+"set tags+=./tags;,~/workdir/dm365/dvsdk_2_10_01_18/dvsdk_demos_2_10_00_17/tags
+set tags+=~/dvsdk_2_10_01_18/dmai_1_21_00_10/tags
+set tags+=~/dvsdk_2_10_01_18/dvsdk_demos_2_10_00_17/tags
+"set tags+=~/workdir/dm365/dvsdk_2_10_01_18/qt/qt-everywhere-opensource-src-4.6.2/examples/tags
+"set tags+=~/workdir/dm365/dvsdk_2_10_01_18/qt/qt-everywhere-opensource-src-4.6.2/include/tags
 "}
 
+" vimdiff color scheme
+highlight DiffChange cterm=none ctermfg=black ctermbg=LightGreen gui=none guifg=bg guibg=LightGreen
+highlight DiffText cterm=none ctermfg=black ctermbg=Red gui=none guifg=bg guibg=Red
+
+" Git Gutter
+nnoremap <leader>ggt :GitGutterToggle<cr>
+let g:gitgutter_enabled = 0
 
 "cscope{
  
@@ -124,16 +140,40 @@ set tags+=./tags;,/home/plc/opt/arm-2009q1/arm-none-linux-gnueabi/tags
     " if you want the reverse search order.
     set csto=0
 
-    " add any cscope database in current directory
-    if filereadable("cscope.out")
-        cs add cscope.out  
-    " else add the database pointed to by environment variable 
-    elseif $CSCOPE_DB != ""
-        cs add $CSCOPE_DB
-    endif
+"    " add any exiting csope database from above directory
+"    let db = findfile("cscope.out", ".;")
+"    if (!empty(db))
+"        let path = strpart(db, 0, match(db, "/cscope.out$"))
+"        set nocscopeverbose " suppress 'duplicate connection' error
+"        exe "cs add " . db . " " . path
+"        set cscopeverbose
+"    endif
+"
+"    " add any cscope database in current directory
+"    if filereadable("cscope.out")
+"        cs add cscope.out  
+"    " else add the database pointed to by environment variable 
+"    elseif $CSCOPE_DB != ""
+"        cs add $CSCOPE_DB
+"    endif
 
     " show msg when any other cscope db added
-    set cscopeverbose  
+    "set cscopeverbose 
+
+   " add user defined cscope db
+    "cs add ~/opt/arm-2009q1/cscope.out ~/opt/arm-2009q1/
+    "cs add ~/ti-dvsdk_dm365-evm_4_02_00_06/dmai_2_20_00_15/cscope.out ~/ti-dvsdk_dm365-evm_4_02_00_06/dmai_2_20_00_15/
+    "cs add ~/ti-dvsdk_dm365-evm_4_02_00_06/dvsdk-demos_4_02_00_01/cscope.out ~/ti-dvsdk_dm365-evm_4_02_00_06/dvsdk-demos_4_02_00_01/
+    "cs add ~/ti-dvsdk_dm365-evm_4_02_00_06/psp/linux-2.6.32.17-psp03.01.01.39/cscope.out ~/ti-dvsdk_dm365-evm_4_02_00_06/psp/linux-2.6.32.17-psp03.01.01.39/
+    "cs add ~/workdir/dm365/mv_pro_5.0/cscope.out ~/workdir/dm365/mv_pro_5.0/
+    "cs add ~/workdir/lsp/ti-davinci/sjw/linux-2.6.18_pro500/cscope.out ~/workdir/lsp/ti-davinci/sjw/linux-2.6.18_pro500/
+    "cs add ~/workdir/dm365/dvsdk_2_10_01_18/dmai_1_21_00_10/cscope.out ~/workdir/dm365/dvsdk_2_10_01_18/dmai_1_21_00_10/
+    "cs add ~/workdir/dm365/dvsdk_2_10_01_18/dvsdk_demos_2_10_00_17/cscope.out ~/workdir/dm365/dvsdk_2_10_01_18/dvsdk_demos_2_10_00_17/
+    cs add ~/dvsdk_2_10_01_18/dmai_1_21_00_10/cscope.out ~/dvsdk_2_10_01_18/dmai_1_21_00_10/
+    cs add ~/dvsdk_2_10_01_18/dvsdk_demos_2_10_00_17/cscope.out ~/dvsdk_2_10_01_18/dvsdk_demos_2_10_00_17/
+    "cs add ~/workdir/lsp/ti-davinci/linux-2.6.18_pro500_plc/linux-2.6.18_pro500/cscope.out ~/workdir/lsp/ti-davinci/linux-2.6.18_pro500_plc/linux-2.6.18_pro500/
+    "cs add ~/workdir/dm365/dvsdk_2_10_01_18/qt/qt-everywhere-opensource-src-4.6.2/examples/cscope.out ~/workdir/dm365/dvsdk_2_10_01_18/qt/qt-everywhere-opensource-src-4.6.2/examples/
+    "cs add ~/workdir/dm365/dvsdk_2_10_01_18/qt/qt-everywhere-opensource-src-4.6.2/include/cscope.out ~/workdir/dm365/dvsdk_2_10_01_18/qt/qt-everywhere-opensource-src-4.6.2/include/
 
 
     """"""""""""" My cscope/vim key mappings
