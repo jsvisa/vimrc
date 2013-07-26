@@ -1,6 +1,7 @@
 syn on "语法支持
 
-autocmd VimEnter * NERDTree
+"auto run command on run vim
+"autocmd VimEnter * NERDTree
 
 "common conf {{ 通用配置
 set ai "自动缩进
@@ -10,23 +11,21 @@ set shiftwidth=4
 set tabstop=4
 set softtabstop=4
 set expandtab "以下三个配置配合使用，设置tab和缩进空格数
-set cursorline "为光标所在行加下划线
-"set number "显示行号
-set nonumber "不显示行号
+"set cursorline "为光标所在行加下划线
+set number "显示行号
+"set nonumber "不显示行号
 set autoread "文件在Vim之外修改过，自动重新读入
 set scrolloff=3
 set autoindent
 set showmode
 set showcmd
-set hidden
+"set hidden
 set wildmenu
 set wildmode=list:longest
 set visualbell
-set cursorline
 set ttyfast
 set ruler
 set backspace=indent,eol,start
-set laststatus=2
 hi Search term=standout ctermbg=11 
 
 nnoremap / /\v
@@ -44,7 +43,7 @@ set foldmethod=syntax "代码折叠
 
 " set wrap "换行设置
 set nowrap "不换行设置
-" set textwidth=79
+set textwidth=80
 set formatoptions=qrn1
 "}}
 
@@ -106,7 +105,7 @@ let Tlist_Exit_OnlyWindow = 1 "如果taglist是最后一个窗口，则退出vim
 let Tlist_Use_Right_Window = 1 "在右侧窗口中显示taglist
 let Tlist_GainFocus_On_ToggleOpen = 1 "打开taglist时，光标保留在taglist窗口
 let Tlist_Ctags_Cmd='/usr/bin/ctags' "设置ctags命令的位置
-let Tlist_Auto_Open = 0 "每次vim运行时自动打开taglist
+"let Tlist_Auto_Open = 0 "每次vim运行时自动打开taglist
 nnoremap <leader>tl : Tlist<CR> 
 "}
 "set tags=./tags;,/home/plc/ti-dvsdk_dm365-evm_4_02_00_06/psp/linux-2.6.32.17-psp03.01.01.39/tags
