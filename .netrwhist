@@ -1,3 +1,11 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =1
+let g:netrw_dirhist_cnt =9
 let g:netrw_dirhist_1='/home/plc/ti-dvsdk_dm365-evm_4_02_00_06/docs'
+let g:netrw_dirhist_2='/Users/zhengdelweng/workspace/rails_learning/jsvisa/chapter3_demo'
+let g:netrw_dirhist_3='/Users/zhengdelweng/workspace/rails_learning/jsvisa/chapter3_demo/.bundle'
+let g:netrw_dirhist_4='/Users/zhengdelweng/workspace/rails_learning/jsvisa/chapter3_demo/app/views/layouts'
+let g:netrw_dirhist_5='/Users/zhengdelweng/workspace/rails_learning/jsvisa/chapter3_demo'
+let g:netrw_dirhist_6='/Users/zhengdelweng/.vim'
+let g:netrw_dirhist_7='/usr/share/vim'
+let g:netrw_dirhist_8='/Users/zhengdelweng/.vim'
+let g:netrw_dirhist_9='/Users/zhengdelweng/workspace/rails_learning/jsvisa/chapter3_demo'
