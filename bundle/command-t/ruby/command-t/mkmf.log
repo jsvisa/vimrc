@@ -1,0 +1,10 @@
+have_header: checking for ruby.h... -------------------- yes
+
+"/opt/local/bin/gcc-apple-4.2 -E -I. -I/Users/zhengdelweng/.rvm/rubies/ruby-1.8.7-p374/lib/ruby/1.8/i686-darwin12.4.0 -I.  -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE   -O3 -I/opt/local/include  -fno-common -pipe -fno-common    conftest.c -o conftest.i"
+checked program was:
+/* begin */
+1: #include <ruby.h>
+/* end */
+
+--------------------
+

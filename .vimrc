@@ -9,8 +9,8 @@ set ai "自动缩进
 set bs=2 "在insert模式下用退格键删除
 set laststatus=2 "总是显示状态行
 set shiftwidth=4
-set tabstop=4
-set softtabstop=4
+set tabstop=2
+set softtabstop=2
 set expandtab "以下三个配置配合使用，设置tab和缩进空格数
 "set cursorline "为光标所在行加下划线
 set number "显示行号
@@ -40,7 +40,7 @@ set hlsearch
 
 set fileencodings=uft-8,gbk "使用utf-8或gbk打开文件
 set helplang=cn "帮助系统设置为中文
-set foldmethod=syntax "代码折叠
+"set foldmethod=syntax "代码折叠
 "set foldmethod=indent "代码折叠
 
 " set wrap "换行设置
