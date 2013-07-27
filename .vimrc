@@ -28,7 +28,7 @@ set ruler
 set backspace=indent,eol,start
 hi Search term=standout ctermbg=11 
 
-nnoremap / /\v
+"nnoremap / /\v "add \v after key in /
 vnoremap / /\v
 set ignorecase "搜索小写正文时大小写不敏感，搜索正文包含大写时大小写敏感
 set smartcase
@@ -40,6 +40,7 @@ set hlsearch
 set fileencodings=uft-8,gbk "使用utf-8或gbk打开文件
 set helplang=cn "帮助系统设置为中文
 set foldmethod=syntax "代码折叠
+"set foldmethod=indent "代码折叠
 
 " set wrap "换行设置
 set nowrap "不换行设置
