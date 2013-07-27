@@ -2,6 +2,7 @@ syn on "语法支持
 
 "auto run command on run vim
 "autocmd VimEnter * NERDTree
+"ln -s ~/.vim/.vimrc ~/.vimrc
 
 "common conf {{ 通用配置
 set ai "自动缩进
