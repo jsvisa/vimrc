@@ -1,17 +1,20 @@
-syn on "语法支持
+syn on 
+
+"Hint ln -s ~/.vim/.vimrc ~/.vimrc
 
 "auto run command on run vim
 "autocmd VimEnter * NERDTree
-"ln -s ~/.vim/.vimrc ~/.vimrc
 
-"common conf {{ 通用配置
-set ai "自动缩进
+"common conf 
 set bs=2 "在insert模式下用退格键删除
 set laststatus=2 "总是显示状态行
-set shiftwidth=4
+
+"以下三个配置配合使用，设置tab和缩进空格数
+"Personal shift width for Ruby html
+set shiftwidth=2
 set tabstop=2
 set softtabstop=2
-set expandtab "以下三个配置配合使用，设置tab和缩进空格数
+set expandtab 
 "set cursorline "为光标所在行加下划线
 set number "显示行号
 "set nonumber "不显示行号
@@ -110,6 +113,8 @@ let Tlist_Ctags_Cmd='/usr/bin/ctags' "设置ctags命令的位置
 "let Tlist_Auto_Open = 0 "每次vim运行时自动打开taglist
 nnoremap <leader>tl : Tlist<CR> 
 "}
+
+"Tags from plc {
 "set tags=./tags;,/home/plc/ti-dvsdk_dm365-evm_4_02_00_06/psp/linux-2.6.32.17-psp03.01.01.39/tags
 "set tags+=./tags;,/home/plc/ti-dvsdk_dm365-evm_4_02_00_06/dmai_2_20_00_15/tags
 "set tags+=./tags;,/home/plc/opt/arm-2009q1/arm-none-linux-gnueabi/tags
@@ -118,8 +123,8 @@ nnoremap <leader>tl : Tlist<CR>
 "set tags+=~/workdir/lsp/ti-davinci/linux-2.6.18_pro500_plc/linux-2.6.18_pro500/tags
 "set tags+=./tags;,~/workdir/dm365/dvsdk_2_10_01_18/dmai_1_21_00_10/tags
 "set tags+=./tags;,~/workdir/dm365/dvsdk_2_10_01_18/dvsdk_demos_2_10_00_17/tags
-set tags+=~/dvsdk_2_10_01_18/dmai_1_21_00_10/tags
-set tags+=~/dvsdk_2_10_01_18/dvsdk_demos_2_10_00_17/tags
+"set tags+=~/dvsdk_2_10_01_18/dmai_1_21_00_10/tags
+"set tags+=~/dvsdk_2_10_01_18/dvsdk_demos_2_10_00_17/tags
 "set tags+=~/workdir/dm365/dvsdk_2_10_01_18/qt/qt-everywhere-opensource-src-4.6.2/examples/tags
 "set tags+=~/workdir/dm365/dvsdk_2_10_01_18/qt/qt-everywhere-opensource-src-4.6.2/include/tags
 "}
@@ -293,3 +298,4 @@ let g:gitgutter_enabled = 0
 "}
 
 "}}
+
