@@ -1,6 +1,12 @@
 syn on 
 
-"Hint ln -s ~/.vim/.vimrc ~/.vimrc
+"paste keeping
+autocmd InsertEnter * setlocal paste
+autocmd InsertLeave * setlocal nopaste
+
+"nnoremap <F2> :set invpaste paste?<CR>
+"imap <F2> <C-O>:set invpaste paste?<CR>
+"set pastetoggle=<F2>
 
 "auto run command on run vim
 "autocmd VimEnter * NERDTree
