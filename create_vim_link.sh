@@ -1,6 +1,6 @@
 #!/bin/sh
 
-if [[ -f "~/.vimrc" ]]; then
+if [[ -e "~/.vimrc" ]]; then
   rm ~/.vimrc
 fi 
 

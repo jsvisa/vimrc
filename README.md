@@ -10,6 +10,14 @@ otherwise Vim can't read ~/.vim/ directory.</p>
 eg: `ln -s ~/.vim/.vimrc ~/.vimrc`, or you can use the '$ sh create_vim_link.sh' to replace it. 
 
 ###Useful vim commands:
-*. scriptnames  show the vim loading configure files
+:scriptnames  show the vim loading configure files</p>
+:echo $VIM    show vim path</p>
 
-*. echo $VIM    show vim path
+####Jumps
+:tags show records</p>
+:ptag function show the function preview</p>
+:pclose close preview
+<Ctrl+]> jumps to the definiement</p>
+<Ctrl+T> jumps backward</p>
+<Ctrl+O> jumps forward</p>
+
