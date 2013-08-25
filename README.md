@@ -11,4 +11,5 @@ eg: `ln -s ~/.vim/.vimrc ~/.vimrc`
 
 ###Usage vim commands:
 *. scriptnames  show the vim loading configure files
+
 *. echo $VIM    show vim path
