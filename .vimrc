@@ -1,12 +1,13 @@
 syn on 
 
 "paste keeping
-autocmd InsertEnter * setlocal paste
-autocmd InsertLeave * setlocal nopaste
+"autocmd InsertEnter * setlocal paste
+"autocmd InsertLeave * setlocal nopaste
 
-"nnoremap <F2> :set invpaste paste?<CR>
-"imap <F2> <C-O>:set invpaste paste?<CR>
-"set pastetoggle=<F2>
+"set nopaste
+nnoremap <F2> :set invpaste paste?<CR>
+imap <F2> <C-O>:set invpaste paste?<CR>
+set pastetoggle=<F2>
 
 "auto run command on run vim
 "autocmd VimEnter * NERDTree
@@ -32,10 +33,10 @@ autocmd InsertLeave * setlocal nopaste
 "set list                     " 显示Tab符，使用一高亮竖线代替
 "set listchars=tab:\|\ ,
 "syntax enable                " 打开语法高亮
-"syntax on                    " 开启文件类型侦测
-"filetype indent on           " 针对不同的文件类型采用不同的缩进格式
+filetype on
 filetype plugin on           " 针对不同的文件类型加载对应的插件
 filetype plugin indent on    " 启用自动补全
+
 set omnifunc=syntaxcomplete#Complete
 
 "common conf 
