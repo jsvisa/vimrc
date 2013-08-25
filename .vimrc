@@ -32,7 +32,6 @@ set pastetoggle=<F2>
 "set hidden                   " 允许在有未保存的修改时切换缓冲区
 "set list                     " 显示Tab符，使用一高亮竖线代替
 "set listchars=tab:\|\ ,
-"syntax enable                " 打开语法高亮
 filetype on
 filetype plugin on           " 针对不同的文件类型加载对应的插件
 filetype plugin indent on    " 启用自动补全
@@ -139,8 +138,7 @@ set t_Co=256
 let g:Powerline_symbols = 'fancy'
 "}
 
-"CommandT setting 
-"{
+"CommandT setting {
 let g:CommandTCancelMap='<C-x>'
 let g:CommandTHighlightColor = 'PmenuSel'
 "}
@@ -150,9 +148,14 @@ let Tlist_Show_One_File = 1 "只显示当前文件的taglist，默认是显示�
 let Tlist_Exit_OnlyWindow = 1 "如果taglist是最后一个窗口，则退出vim
 let Tlist_Use_Right_Window = 1 "在右侧窗口中显示taglist
 let Tlist_GainFocus_On_ToggleOpen = 1 "打开taglist时，光标保留在taglist窗口
-let Tlist_Ctags_Cmd='/usr/bin/ctags' "设置ctags命令的位置
+let Tlist_Ctags_Cmd='/usr/local/bin/ctags' "设置ctags命令的位置
 "let Tlist_Auto_Open = 0 "每次vim运行时自动打开taglist
 nnoremap <leader>tl : Tlist<CR> 
+"}
+
+"Tags from delweng {
+set tags=./tags
+set tags+=~/tags/tags-ruby-2.0.0
 "}
 
 "Tags from plc {
