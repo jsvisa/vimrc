@@ -11,27 +11,18 @@ set pastetoggle=<F2>
 
 "auto run command on run vim
 "autocmd VimEnter * NERDTree
-"colorscheme blackboard       " 适合Ruby开发的蓝色主题
 "set guifont=Monaco:h10       " 适合Ruby开发的字体 && 字号
-"set tabstop=4                " 设置tab键的宽度
-"set shiftwidth=4             " 换行时行间交错使用4个空格
-"set autoindent               " 自动对齐
-"set backspace=2              " 设置退格键可用
 "set cindent shiftwidth=4     " 自动缩进4空格
 "set smartindent              " 智能自动缩进
 "set ai!                      " 设置自动缩进
 "set nu!                      " 显示行号
 "set mouse=a                  " 启用鼠标
-"set ruler                    " 右下角显示光标位置的状态行
-"set incsearch                " 查找book时，当输入/b时会自动找到
-"set hlsearch                 " 开启高亮显示结果
-"set incsearch                " 开启实时搜索功能
 "set nowrapscan               " 搜索到文件两端时不重新搜索
-"set nocompatible             " 关闭兼容模式
 "set vb t_vb=                 " 关闭提示音
 "set hidden                   " 允许在有未保存的修改时切换缓冲区
 "set list                     " 显示Tab符，使用一高亮竖线代替
 "set listchars=tab:\|\ ,
+"
 filetype on
 filetype plugin on           " 针对不同的文件类型加载对应的插件
 filetype plugin indent on    " 启用自动补全
@@ -39,10 +30,9 @@ filetype plugin indent on    " 启用自动补全
 set omnifunc=syntaxcomplete#Complete
 
 "common conf 
-set bs=2 "在insert模式下用退格键删除
-set laststatus=2 "总是显示状态行
+set bs=2 
+set laststatus=2 
 
-"以下三个配置配合使用，设置tab和缩进空格数
 "Personal shift width for Ruby html
 set shiftwidth=2
 set tabstop=2
@@ -52,7 +42,7 @@ set expandtab
 set number "显示行号
 "set nonumber "不显示行号
 set autoread "文件在Vim之外修改过，自动重新读入
-"set autowriteall "使用tag跳转时先提示保存
+set autowriteall "使用tag跳转时先提示保存
 set scrolloff=3
 set autoindent
 set showmode
@@ -76,15 +66,16 @@ set showmatch
 set hlsearch
 
 set fileencodings=uft-8,gbk "使用utf-8或gbk打开文件
-set helplang=cn "帮助系统设置为中文
+"set helplang=cn "帮助系统设置为中文
+
 "set foldmethod=syntax "代码折叠
 "set foldmethod=indent "代码折叠
 
-" set wrap "换行设置
+" set wrap "换行设置 {
 set nowrap "不换行设置
 set textwidth=80
 set formatoptions=qrn1
-"}}
+"}
 
 "Easy navigation{
 inoremap jj <ESC>
@@ -133,17 +124,17 @@ call pathogen#infect()
 "状态栏的配置 
 "powerline{
 set guifont=PowerlineSymbols\ for\ Powerline
-set nocompatible
+set nocompatible " 关闭兼容模式
 set t_Co=256
 let g:Powerline_symbols = 'fancy'
 "}
 
-"CommandT setting {
+" CommandT setting {
 let g:CommandTCancelMap='<C-x>'
 let g:CommandTHighlightColor = 'PmenuSel'
 "}
 
-"taglist{ 
+" Taglist{ 
 let Tlist_Show_One_File = 1 "只显示当前文件的taglist，默认是显示多个
 let Tlist_Exit_OnlyWindow = 1 "如果taglist是最后一个窗口，则退出vim
 let Tlist_Use_Right_Window = 1 "在右侧窗口中显示taglist
@@ -156,30 +147,39 @@ nnoremap <leader>tl : Tlist<CR>
 "Tags from delweng {
 set tags=./tags
 set tags+=~/tags/tags-ruby-2.0.0
-"}
-
-"Tags from plc {
-"set tags=./tags;,/home/plc/ti-dvsdk_dm365-evm_4_02_00_06/psp/linux-2.6.32.17-psp03.01.01.39/tags
-"set tags+=./tags;,/home/plc/ti-dvsdk_dm365-evm_4_02_00_06/dmai_2_20_00_15/tags
-"set tags+=./tags;,/home/plc/opt/arm-2009q1/arm-none-linux-gnueabi/tags
-"set tags=./tags;,~/workdir/dm365/mv_pro_5.0/tags
-"set tags+=./tags;,~/workdir/lsp/ti-davinci/sjw/linux-2.6.18_pro500/tags
-"set tags+=~/workdir/lsp/ti-davinci/linux-2.6.18_pro500_plc/linux-2.6.18_pro500/tags
-"set tags+=./tags;,~/workdir/dm365/dvsdk_2_10_01_18/dmai_1_21_00_10/tags
-"set tags+=./tags;,~/workdir/dm365/dvsdk_2_10_01_18/dvsdk_demos_2_10_00_17/tags
-"set tags+=~/dvsdk_2_10_01_18/dmai_1_21_00_10/tags
-"set tags+=~/dvsdk_2_10_01_18/dvsdk_demos_2_10_00_17/tags
-"set tags+=~/workdir/dm365/dvsdk_2_10_01_18/qt/qt-everywhere-opensource-src-4.6.2/examples/tags
-"set tags+=~/workdir/dm365/dvsdk_2_10_01_18/qt/qt-everywhere-opensource-src-4.6.2/include/tags
-"}
+" }
 
 " vimdiff color scheme
 highlight DiffChange cterm=none ctermfg=black ctermbg=LightGreen gui=none guifg=bg guibg=LightGreen
 highlight DiffText cterm=none ctermfg=black ctermbg=Red gui=none guifg=bg guibg=Red
 
-" Git Gutter
+" Git Gutter {
 nnoremap <leader>ggt :GitGutterToggle<cr>
 let g:gitgutter_enabled = 0
+" }
+
+" Ctags auto update {
+function! DelTagOfFile(file)
+  let fullpath = a:file
+  let cwd = getcwd()
+  let tagfilename = cwd . "/tags"
+  let f = substitute(fullpath, cwd . "/", "", "")
+  let f = escape(f, './')
+  let cmd = 'sed -i "/' . f . '/d" "' . tagfilename . '"'
+  let resp = system(cmd)
+endfunction
+
+function! UpdateTags()
+  let f = expand("%:p")
+  let cwd = getcwd()
+  let tagfilename = cwd . "/tags"
+  let cmd = 'ctags -a -f ' . tagfilename . ' --c++-kinds=+p --fields=+iaS --extra=+q ' . '"' . f . '"'
+  call DelTagOfFile(f)
+  let resp = system(cmd)
+endfunction
+" autocmd BufWritePost *.cpp,*.h,*.c call UpdateTags()
+autocmd BufWritePost *.*rb call UpdateTags()
+" }
 
 "cscope{
  
@@ -221,8 +221,6 @@ let g:gitgutter_enabled = 0
     "cs add ~/workdir/lsp/ti-davinci/sjw/linux-2.6.18_pro500/cscope.out ~/workdir/lsp/ti-davinci/sjw/linux-2.6.18_pro500/
     "cs add ~/workdir/dm365/dvsdk_2_10_01_18/dmai_1_21_00_10/cscope.out ~/workdir/dm365/dvsdk_2_10_01_18/dmai_1_21_00_10/
     "cs add ~/workdir/dm365/dvsdk_2_10_01_18/dvsdk_demos_2_10_00_17/cscope.out ~/workdir/dm365/dvsdk_2_10_01_18/dvsdk_demos_2_10_00_17/
-    cs add ~/dvsdk_2_10_01_18/dmai_1_21_00_10/cscope.out ~/dvsdk_2_10_01_18/dmai_1_21_00_10/
-    cs add ~/dvsdk_2_10_01_18/dvsdk_demos_2_10_00_17/cscope.out ~/dvsdk_2_10_01_18/dvsdk_demos_2_10_00_17/
     "cs add ~/workdir/lsp/ti-davinci/linux-2.6.18_pro500_plc/linux-2.6.18_pro500/cscope.out ~/workdir/lsp/ti-davinci/linux-2.6.18_pro500_plc/linux-2.6.18_pro500/
     "cs add ~/workdir/dm365/dvsdk_2_10_01_18/qt/qt-everywhere-opensource-src-4.6.2/examples/cscope.out ~/workdir/dm365/dvsdk_2_10_01_18/qt/qt-everywhere-opensource-src-4.6.2/examples/
     "cs add ~/workdir/dm365/dvsdk_2_10_01_18/qt/qt-everywhere-opensource-src-4.6.2/include/cscope.out ~/workdir/dm365/dvsdk_2_10_01_18/qt/qt-everywhere-opensource-src-4.6.2/include/
