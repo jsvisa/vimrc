@@ -158,6 +158,10 @@ nnoremap <leader>ggt :GitGutterToggle<cr>
 let g:gitgutter_enabled = 0
 " }
 
+" Markdown disable folding {
+let g:vim_markdown_folding_disabled=1
+" }
+
 " Ctags auto update {
 function! DelTagOfFile(file)
   let fullpath = a:file
