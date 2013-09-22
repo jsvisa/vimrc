@@ -22,7 +22,7 @@ set pastetoggle=<F2>
 "set hidden                   " 允许在有未保存的修改时切换缓冲区
 "set list                     " 显示Tab符，使用一高亮竖线代替
 "set listchars=tab:\|\ ,
-"
+
 filetype on
 filetype plugin on           " 针对不同的文件类型加载对应的插件
 filetype plugin indent on    " 启用自动补全
@@ -34,9 +34,11 @@ set bs=2
 set laststatus=2 
 
 "Personal shift width for Ruby html
-set shiftwidth=2
-set tabstop=2
-set softtabstop=2
+" autocmd BufNewFile,BufRead *.html,*.htm,*.css,*.js set noexpandtab tabstop=2 shiftwidth=2
+autocmd BufNewFile,BufRead *.html,*.htm,*.css,*.js,*.erb,*.rb set tabstop=2 shiftwidth=2 softtabstop=2
+set shiftwidth=4
+set tabstop=4
+set softtabstop=4
 set expandtab 
 "set cursorline "为光标所在行加下划线
 set number "显示行号
@@ -217,18 +219,7 @@ autocmd BufWritePost *.*rb call UpdateTags()
     "set cscopeverbose 
 
    " add user defined cscope db
-    "cs add ~/opt/arm-2009q1/cscope.out ~/opt/arm-2009q1/
-    "cs add ~/ti-dvsdk_dm365-evm_4_02_00_06/dmai_2_20_00_15/cscope.out ~/ti-dvsdk_dm365-evm_4_02_00_06/dmai_2_20_00_15/
-    "cs add ~/ti-dvsdk_dm365-evm_4_02_00_06/dvsdk-demos_4_02_00_01/cscope.out ~/ti-dvsdk_dm365-evm_4_02_00_06/dvsdk-demos_4_02_00_01/
-    "cs add ~/ti-dvsdk_dm365-evm_4_02_00_06/psp/linux-2.6.32.17-psp03.01.01.39/cscope.out ~/ti-dvsdk_dm365-evm_4_02_00_06/psp/linux-2.6.32.17-psp03.01.01.39/
-    "cs add ~/workdir/dm365/mv_pro_5.0/cscope.out ~/workdir/dm365/mv_pro_5.0/
-    "cs add ~/workdir/lsp/ti-davinci/sjw/linux-2.6.18_pro500/cscope.out ~/workdir/lsp/ti-davinci/sjw/linux-2.6.18_pro500/
-    "cs add ~/workdir/dm365/dvsdk_2_10_01_18/dmai_1_21_00_10/cscope.out ~/workdir/dm365/dvsdk_2_10_01_18/dmai_1_21_00_10/
-    "cs add ~/workdir/dm365/dvsdk_2_10_01_18/dvsdk_demos_2_10_00_17/cscope.out ~/workdir/dm365/dvsdk_2_10_01_18/dvsdk_demos_2_10_00_17/
-    "cs add ~/workdir/lsp/ti-davinci/linux-2.6.18_pro500_plc/linux-2.6.18_pro500/cscope.out ~/workdir/lsp/ti-davinci/linux-2.6.18_pro500_plc/linux-2.6.18_pro500/
     "cs add ~/workdir/dm365/dvsdk_2_10_01_18/qt/qt-everywhere-opensource-src-4.6.2/examples/cscope.out ~/workdir/dm365/dvsdk_2_10_01_18/qt/qt-everywhere-opensource-src-4.6.2/examples/
-    "cs add ~/workdir/dm365/dvsdk_2_10_01_18/qt/qt-everywhere-opensource-src-4.6.2/include/cscope.out ~/workdir/dm365/dvsdk_2_10_01_18/qt/qt-everywhere-opensource-src-4.6.2/include/
-
 
     """"""""""""" My cscope/vim key mappings
     "
