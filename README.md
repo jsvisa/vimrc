@@ -16,7 +16,7 @@ eg: `ln -s ~/.vim/.vimrc ~/.vimrc`, or you can use the '$ sh create_vim_link.sh'
 `:set fileencoding=utf-8`</p>
 
 ####Jumps
-`:tags` show records/p>
+`:tags` show records</p>
 `:ptag function` show the function preview</p>
 `:pclose` close preview
 <Ctrl+]> jumps to the definiement</p>

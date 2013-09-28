@@ -35,7 +35,7 @@ set laststatus=2
 
 "Personal shift width for Ruby html
 " autocmd BufNewFile,BufRead *.html,*.htm,*.css,*.js set noexpandtab tabstop=2 shiftwidth=2
-autocmd BufNewFile,BufRead *.html,*.htm,*.css,*.js,*.erb,*.rb set tabstop=2 shiftwidth=2 softtabstop=2
+autocmd BufNewFile,BufRead *.html,*.htm,*.css,*.js,*.erb,*.rb,*.yml set tabstop=2 shiftwidth=2 softtabstop=2
 set shiftwidth=4
 set tabstop=4
 set softtabstop=4
@@ -183,8 +183,9 @@ function! UpdateTags()
   call DelTagOfFile(f)
   let resp = system(cmd)
 endfunction
+
 " autocmd BufWritePost *.cpp,*.h,*.c call UpdateTags()
-autocmd BufWritePost *.*rb call UpdateTags()
+autocmd BufWritePost *.*rb,*.c,*.h call UpdateTags()
 " }
 
 "cscope{
