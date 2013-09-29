@@ -4,10 +4,11 @@ syn on
 "autocmd InsertEnter * setlocal paste
 "autocmd InsertLeave * setlocal nopaste
 
-"set nopaste
+"set paste/nopaste mode {
 nnoremap <F2> :set invpaste paste?<CR>
 imap <F2> <C-O>:set invpaste paste?<CR>
 set pastetoggle=<F2>
+" }
 
 "auto run command on run vim
 "autocmd VimEnter * NERDTree
@@ -27,6 +28,17 @@ filetype on
 filetype plugin on           " 针对不同的文件类型加载对应的插件
 filetype plugin indent on    " 启用自动补全
 
+set encoding=utf8
+set tw=140                       " 140字符自动换行
+set expandtab                    " expandtab，用空格代替Tab键
+retab                            " 打开vim时把已有的Tab全部转换成空格
+
+au InsertLeave *.* write         " 每次退出插入模式时自动保存
+au FocusLost * :wa "saving on losing focus
+
+" autocmd BufNewFile,BufRead *.html,*.htm,*.css,*.js set noexpandtab tabstop=2 shiftwidth=2
+autocmd BufNewFile,BufRead *.html,*.htm,*.css,*.js,*.erb,*.rb,*.yml set tabstop=2 shiftwidth=2 softtabstop=2
+
 set omnifunc=syntaxcomplete#Complete
 
 "common conf 
@@ -34,12 +46,10 @@ set bs=2
 set laststatus=2 
 
 "Personal shift width for Ruby html
-" autocmd BufNewFile,BufRead *.html,*.htm,*.css,*.js set noexpandtab tabstop=2 shiftwidth=2
-autocmd BufNewFile,BufRead *.html,*.htm,*.css,*.js,*.erb,*.rb,*.yml set tabstop=2 shiftwidth=2 softtabstop=2
 set shiftwidth=4
 set tabstop=4
 set softtabstop=4
-set expandtab 
+
 "set cursorline "为光标所在行加下划线
 set number "显示行号
 "set nonumber "不显示行号
@@ -75,7 +85,6 @@ set fileencodings=uft-8,gbk "使用utf-8或gbk打开文件
 
 " set wrap "换行设置 {
 set nowrap "不换行设置
-set textwidth=80
 set formatoptions=qrn1
 "}
 
@@ -104,10 +113,9 @@ nnoremap <F1> <ESC>
 vnoremap <F1> <ESC>
 nnoremap ; :
 
-au FocusLost * :wa "saving on losing focus
 "}
 
-"用户自定义快捷键{
+" User defined hotkey{
 let mapleader = ','
 nnoremap <leader><space> :noh<cr> 
 nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>
@@ -116,9 +124,9 @@ nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>
 "nnoremap <leader>t : tabe<CR>
 "}
 
-"conf for plugins {{ 插件相关的配置
+"conf for plugins {{ 
 
-"pathogen是Vim用来管理插件的插件
+"pathogen 是Vim用来管理插件的插件
 "pathogen{
 call pathogen#infect()
 "}
@@ -146,9 +154,9 @@ let Tlist_Ctags_Cmd='/usr/local/bin/ctags' "设置ctags命令的位置
 nnoremap <leader>tl : Tlist<CR> 
 "}
 
-"Tags from delweng {
-set tags=./tags
-set tags+=~/tags/tags-ruby-2.0.0
+"Tags from Ruby {
+" set tags=./tags
+" set tags+=~/tags/tags-ruby-2.0.0
 " }
 
 " vimdiff color scheme
@@ -220,7 +228,7 @@ autocmd BufWritePost *.*rb,*.c,*.h call UpdateTags()
     "set cscopeverbose 
 
    " add user defined cscope db
-    "cs add ~/workdir/dm365/dvsdk_2_10_01_18/qt/qt-everywhere-opensource-src-4.6.2/examples/cscope.out ~/workdir/dm365/dvsdk_2_10_01_18/qt/qt-everywhere-opensource-src-4.6.2/examples/
+    "cs add ~/workdir/dm365/dvsdk_2_10_01_18/qt/qt-everywhere-opensource-src-4.6.2/examples/cscope.out 
 
     """"""""""""" My cscope/vim key mappings
     "
