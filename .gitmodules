@@ -19,3 +19,6 @@
 [submodule "bundle/vim-erlang"]
 	path = bundle/vim-erlang
 	url = https://github.com/onlychoice/vimerl/
+[submodule "bundle/ctrlp"]
+	path = bundle/ctrlp
+	url = https://github.com/kien/ctrlp.vim

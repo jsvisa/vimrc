@@ -88,6 +88,17 @@ set nowrap "不换行设置
 set formatoptions=qrn1
 "}
 
+" set ctrlp {
+let g:ctrlp_open_new_file = 't'
+let g:ctrlp_open_multiple_files = 'v'
+
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.o
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\v[\/]\.(git)$',
+  \ 'file': '\v\.(log|jpg|png|jpeg)$',
+  \ }
+"}
+
 "Easy navigation{
 inoremap jj <ESC>
 
@@ -126,9 +137,10 @@ nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>
 
 "conf for plugins {{ 
 
-"pathogen 是Vim用来管理插件的插件
-"pathogen{
+" pathogen 是Vim用来管理插件的插件
+" pathogen{
 call pathogen#infect()
+call pathogen#helptags() "update all plugins help doc
 "}
 
 "状态栏的配置 
