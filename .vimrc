@@ -38,7 +38,6 @@ autocmd BufNewFile,BufRead *.html,*.htm,*.css,*.js,*.erb,*.rb,*.yml set tabstop=
 
 set omnifunc=syntaxcomplete#Complete
 
-"common conf 
 set bs=2 
 set laststatus=2 
 
@@ -105,6 +104,8 @@ inoremap jj <ESC>
 "inoremap <left> <nop>
 "inoremap <right> <nop>
 
+map <C-j> :tag<CR>
+
 nnoremap <up> <nop>
 nnoremap <down> <nop>
 nnoremap <left> <nop>
@@ -150,18 +151,19 @@ nnoremap <leader>t : tabe<CR>
     "}
 
     " Taglist{ 
-    let Tlist_Show_One_File = 1 "只显示当前文件的taglist，默认是显示多个
-    let Tlist_Exit_OnlyWindow = 1 "如果taglist是最后一个窗口，则退出vim
-    let Tlist_Use_Right_Window = 1 "在右侧窗口中显示taglist
-    let Tlist_GainFocus_On_ToggleOpen = 1 "打开taglist时，光标保留在taglist窗口
-    let Tlist_Ctags_Cmd='/usr/local/bin/ctags' "设置ctags命令的位置
-    " let Tlist_Auto_Open = 0 "每次vim运行时自动打开taglist
-    nnoremap <leader>tl : Tlist<CR> 
-    "}
+    " let Tlist_Show_One_File = 1 "只显示当前文件的taglist，默认是显示多个
+    " let Tlist_Exit_OnlyWindow = 1 "如果taglist是最后一个窗口，则退出vim
+    " let Tlist_Use_Right_Window = 1 "在右侧窗口中显示taglist
+    " let Tlist_GainFocus_On_ToggleOpen = 1 "打开taglist时，光标保留在taglist窗口
+    " let Tlist_Ctags_Cmd='/usr/local/bin/ctags' "设置ctags命令的位置
+    " " let Tlist_Auto_Open = 0 "每次vim运行时自动打开taglist
+    " nnoremap <leader>tl : Tlist<CR> 
+    " "}
 
     " My personal Tags  {
-    set tags=./tags
-    set tags+=~/tags/tags-ruby-2.0.0
+    set tags=tags;
+    set autochdir
+    " set tags+=~/tags/tags-ruby-2.0.0
    " }
 
      " Ctags auto update {
@@ -185,7 +187,7 @@ nnoremap <leader>t : tabe<CR>
     endfunction
 
     " autocmd BufWritePost *.cpp,*.h,*.c call UpdateTags()
-    autocmd BufWritePost *.*rb,*.c,*.h call UpdateTags()
+    " autocmd BufWritePost *.*rb,*.c,*.h call UpdateTags()
 
     " }
 
