@@ -26,7 +26,8 @@ eg: `ln -s ~/.vim/.vimrc ~/.vimrc`, or you can use the '$ sh create_vim_link.sh'
     :tabp      前一个
     :tabn      后一个
     标准模式下：
-    gt, gT 可以直接在tab之间切换。
+ 
+gt, gT 可以直接在tab之间切换。
     gt, gT 可以直接在tab之间切换。
 
 ####Jumps
