@@ -155,7 +155,7 @@ nnoremap <leader>t : tabe<CR>
     let Tlist_Use_Right_Window = 1 "在右侧窗口中显示taglist
     let Tlist_GainFocus_On_ToggleOpen = 1 "打开taglist时，光标保留在taglist窗口
     let Tlist_Ctags_Cmd='/usr/local/bin/ctags' "设置ctags命令的位置
-    let Tlist_Auto_Open = 0 "每次vim运行时自动打开taglist
+    " let Tlist_Auto_Open = 0 "每次vim运行时自动打开taglist
     nnoremap <leader>tl : Tlist<CR> 
     "}
 
@@ -181,12 +181,12 @@ nnoremap <leader>t : tabe<CR>
       let cwd = getcwd()
       let tagfilename = cwd . "/tags"
       let cmd = 'ctags -a -f ' . tagfilename . ' --c++-kinds=+p --fields=+iaS --extra=+q ' . '"' . f . '"'
-      " call DelTagOfFile(f)
+      call DelTagOfFile(f)
       let resp = system(cmd)
     endfunction
 
     " autocmd BufWritePost *.cpp,*.h,*.c call UpdateTags()
-    autocmd BufWritePost *.*rb,*.cpp,*.c,*.h call UpdateTags()
+    autocmd BufWritePost *.*rb,*.c,*.h call UpdateTags()
     " }
 
     " vimdiff color scheme
