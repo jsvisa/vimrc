@@ -165,7 +165,6 @@ nnoremap <leader>t : tabe<CR>
    " }
 
      " Ctags auto update {
-     " delete current file ctags
     function! DelTagOfFile(file)
       let fullpath = a:file
       let cwd = getcwd()
@@ -187,6 +186,7 @@ nnoremap <leader>t : tabe<CR>
 
     " autocmd BufWritePost *.cpp,*.h,*.c call UpdateTags()
     autocmd BufWritePost *.*rb,*.c,*.h call UpdateTags()
+
     " }
 
     " vimdiff color scheme
