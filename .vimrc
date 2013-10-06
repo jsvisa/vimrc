@@ -28,14 +28,13 @@ autocmd FileType c set tabstop=4 shiftwidth=4 softtabstop=4
 set omnifunc=syntaxcomplete#Complete
 
 set bs=2 
-set laststatus=2 
 
 "Personal shift width for Ruby html
 set shiftwidth=2
 set tabstop=2
 set softtabstop=2
 
-set cursorline "为光标所在行加下划线
+" set cursorline "为光标所在行加下划线
 set number "显示行号
 set cindent " 自动缩进4空格
 set smartindent    " 智能自动缩进
@@ -77,11 +76,11 @@ set formatoptions=qrn1
 let g:ctrlp_open_new_file = 't'
 let g:ctrlp_open_multiple_files = 'v'
  
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.o
-let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/]\.(git)$',
-  \ 'file': '\v\.(log|jpg|png|jpeg)$',
-  \ }
+" set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.o
+" let g:ctrlp_custom_ignore = {
+"   \ 'dir':  '\v[\/]\.(git)$',
+"   \ 'file': '\v\.(log|jpg|png|jpeg)$',
+"   \ }
 "}
 
 "Easy navigation{
@@ -126,6 +125,7 @@ nnoremap <leader>e : e#<CR>
     " powerline{
     set guifont=PowerlineSymbols\ for\ Powerline
     set nocompatible " 关闭兼容模式
+    set laststatus=2
     set t_Co=256
     let g:Powerline_symbols = 'fancy'
     "}
@@ -140,6 +140,7 @@ nnoremap <leader>e : e#<CR>
     let Tlist_Exit_OnlyWindow = 1 "如果taglist是最后一个窗口，则退出vim
     let Tlist_Use_Right_Window = 1 "在右侧窗口中显示taglist
     let Tlist_GainFocus_On_ToggleOpen = 1 "打开taglist时，光标保留在taglist窗口
+    let Tlist_Close_On_Select = 1 "选择了tag后自动关闭taglist窗口
     let Tlist_Ctags_Cmd='/usr/local/bin/ctags' "设置ctags命令的位置
     " let Tlist_Auto_Open = 0 "每次vim运行时自动打开taglist
     nnoremap <leader>tl : Tlist<CR> 
@@ -147,7 +148,7 @@ nnoremap <leader>e : e#<CR>
 
     " My personal Tags  {
     set tags=tags;
-    set autochdir
+    " set autochdir
     set tags+=~/tags/tags-ruby-2.0.0
    " }
 
