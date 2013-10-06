@@ -1,10 +1,12 @@
 syn on 
+set background=dark
+colorscheme solarized
 
 "set paste/nopaste mode {
 nnoremap <F2> :set invpaste paste?<CR>
 imap <F2> <C-O>:set invpaste paste?<CR>
 set pastetoggle=<F2>
-" }
+"" }
 
 "set ai!                      " 设置自动缩进
 "set list                     " 显示Tab符，使用一高亮竖线代替
