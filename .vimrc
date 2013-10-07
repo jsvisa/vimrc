@@ -1,6 +1,6 @@
 syn on 
-set background=dark
-colorscheme solarized
+" set background=dark
+" colorscheme solarized
 
 "set paste/nopaste mode {
 nnoremap <F2> :set invpaste paste?<CR>
@@ -91,6 +91,7 @@ nnoremap <up> <nop>
 nnoremap <down> <nop>
 nnoremap <left> <nop>
 nnoremap <right> <nop>
+nnoremap gcc gcc<ESC>
 
 nnoremap <C-r> :tag<CR>
 map <C-h> <C-w>h
@@ -144,13 +145,13 @@ nnoremap <leader>e : e#<CR>
     let Tlist_Ctags_Cmd='/usr/local/bin/ctags' "设置ctags命令的位置
     " let Tlist_Auto_Open = 0 "每次vim运行时自动打开taglist
     nnoremap <leader>tl : Tlist<CR> 
-    " "}
+    " }
 
     " My personal Tags  {
     set tags=tags;
-    " set autochdir
+    " set autochdir " file tags only exist in the root dir
     set tags+=~/tags/tags-ruby-2.0.0
-   " }
+    " }
 
      " Ctags auto update {
     function! DelTagOfFile(file)
