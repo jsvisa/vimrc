@@ -39,6 +39,8 @@ gt, gT 可以直接在tab之间切换。
 <Ctrl+O> jumps forward</p>
 
 ###Ctrlp
+<Ctrl+p> 启用CtrlP
+
 <Ctrl+Y> 新建一个文件
 
 <Ctrl+D> 切换到匹配文件名，而非路径名

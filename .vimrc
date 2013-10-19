@@ -68,7 +68,7 @@ set fileencodings=uft-8,gbk "使用utf-8或gbk打开文件
 "set foldmethod=indent "代码折叠
 
 " set wrap "换行设置 {
-set nowrap "不换行设置
+" set nowrap "不换行设置
 set formatoptions=qrn1
 "}
 
@@ -114,6 +114,7 @@ nnoremap <C-h> gT
 nnoremap <leader>t : tabe<CR>
 nnoremap <leader>c : tabc<CR>
 nnoremap <leader>e : e#<CR>
+nnoremap <leader>vm : e ~/.vimrc<CR>
 "}
 
 " Configure for plugins {{ 
