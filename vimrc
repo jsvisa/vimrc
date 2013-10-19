@@ -92,6 +92,7 @@ nnoremap <down> <nop>
 nnoremap <left> <nop>
 nnoremap <right> <nop>
 nnoremap gcc gcc<ESC>
+nnoremap <F8> :!
 
 nnoremap <C-r> :tag<CR>
 map <C-h> <C-w>h
@@ -115,6 +116,13 @@ nnoremap <leader>t : tabe<CR>
 nnoremap <leader>c : tabc<CR>
 nnoremap <leader>e : e#<CR>
 nnoremap <leader>vm : e ~/.vimrc<CR>
+
+" more leader for git 
+nnoremap <leader>gs :GitStatus<cr>
+nnoremap <leader>gc :GitCommit<cr>
+nnoremap <leader>ga :GitAdd<cr>
+nnoremap <leader>gp :GitPush<cr>
+nnoremap <leader>gl :GitPull<cr>
 "}
 
 " Configure for plugins {{ 
