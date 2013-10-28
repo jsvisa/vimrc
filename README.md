@@ -48,3 +48,15 @@ gt, gT 可以直接在tab之间切换。
 <Ctrl+Z> 标注打开的文件，多文件同时打开时使用
 
 <Ctrl+O> 同时打开多个文件
+
+###Vimdiff
+`]c` go to the next diff
+
+`[c` go to the previous diff
+
+`dp` diff put
+
+`do` diff get
+
+`:diffupdate` update a diff point
+
