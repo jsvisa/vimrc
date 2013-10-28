@@ -7,7 +7,7 @@ My private vim configuration including .vim/ directory and .vimrc file
 You should create a symbol link to ./.vimrc,</p> 
 otherwise Vim can't read ~/.vim/ directory.</p>
 
-eg: `ln -s ~/.vim/.vimrc ~/.vimrc`, or you can use the '$ sh create_vim_link.sh' to replace it. 
+eg: `ln -s ~/.vim/.vimrc ~/.vimrc`
 
 ###Useful vim commands:
 `:scriptnames  show the vim loading configure files`</p>
@@ -15,7 +15,7 @@ eg: `ln -s ~/.vim/.vimrc ~/.vimrc`, or you can use the '$ sh create_vim_link.sh'
 在Vim中直接进行转换文件编码,比如将一个文件转换成utf-8格式:
 `:set fileencoding=utf-8`</p>
 
-<Ctrl+w+o> 将当前分屏最大化
+`<Ctrl+w+o>` 将当前分屏最大化
 
 **tab** 多窗口
 
@@ -28,26 +28,25 @@ eg: `ln -s ~/.vim/.vimrc ~/.vimrc`, or you can use the '$ sh create_vim_link.sh'
     标准模式下：
  
 gt, gT 可以直接在tab之间切换。
-    gt, gT 可以直接在tab之间切换。
 
 ####Jumps
 `:tags` show records</p>
 `:ptag function` show the function preview</p>
 `:pclose` close preview
-<Ctrl+]> jumps to the definiement</p>
-<Ctrl+T> jumps backward</p>
-<Ctrl+O> jumps forward</p>
+`<Ctrl+]>` jumps to the definiement</p>
+`<Ctrl+T>` jumps backward</p>
+`<Ctrl+O>` jumps forward</p>
 
 ###Ctrlp
-<Ctrl+p> 启用CtrlP
+`<Ctrl+p>` 启用CtrlP
 
-<Ctrl+Y> 新建一个文件
+`<Ctrl+Y>` 新建一个文件
 
-<Ctrl+D> 切换到匹配文件名，而非路径名
+`<Ctrl+D>` 切换到匹配文件名，而非路径名
 
-<Ctrl+Z> 标注打开的文件，多文件同时打开时使用
+`<Ctrl+Z>` 标注打开的文件，多文件同时打开时使用
 
-<Ctrl+O> 同时打开多个文件
+`<Ctrl+O>` 同时打开多个文件
 
 ###Vimdiff
 `]c` go to the next diff
