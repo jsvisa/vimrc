@@ -34,7 +34,7 @@ snippet when
 snippet def
 	def ${1:method_name}
 		${2}
-	end
+	end # end of def
 snippet deft
 	def test_${1:case_name}
 		${2}
@@ -59,11 +59,11 @@ snippet unless
 snippet while
 	while ${1:condition}
 		${2}
-	end
+	end # end of while
 snippet for
 	for ${1:e} in ${2:c}
 		${3}
-	end		
+	end # end of for	
 snippet until
 	until ${1:condition}
 		${2}
@@ -71,7 +71,7 @@ snippet until
 snippet cla class .. end
 	class ${1:`substitute(Filename(), '^.', '\u&', '')`}
 		${2}
-	end
+	end # end of class
 snippet cla class .. initialize .. end
 	class ${1:`substitute(Filename(), '^.', '\u&', '')`}
 		def initialize(${2:args})
@@ -79,7 +79,7 @@ snippet cla class .. initialize .. end
 		end
 
 
-	end
+	end # end of class
 snippet cla class .. < ParentClass .. initialize .. end
 	class ${1:`substitute(Filename(), '^.', '\u&', '')`} < ${2:ParentClass}
 		def initialize(${3:args})
@@ -87,7 +87,7 @@ snippet cla class .. < ParentClass .. initialize .. end
 		end
 
 
-	end
+	end # end of class
 snippet cla ClassName = Struct .. do .. end
 	${1:`substitute(Filename(), '^.', '\u&', '')`} = Struct.new(:${2:attr_names}) do
 		def ${3:method_name}
@@ -95,14 +95,14 @@ snippet cla ClassName = Struct .. do .. end
 		end
 
 
-	end
+	end # end of class
 snippet cla class BlankSlate .. initialize .. end
 	class ${1:BlankSlate}
 		instance_methods.each { |meth| undef_method(meth) unless meth =~ /\A__/ }
 snippet cla class << self .. end
 	class << ${1:self}
 		${2}
-	end
+	end # end of class
 # class .. < DelegateClass .. initialize .. end
 snippet cla-
 	class ${1:`substitute(Filename(), '^.', '\u&', '')`} < DelegateClass(${2:ParentClass})
@@ -113,17 +113,17 @@ snippet cla-
 		end
 
 
-	end
+	end # end of class
 snippet mod module .. end
 	module ${1:`substitute(Filename(), '^.', '\u&', '')`}
 		${2}
-	end
+	end # end of module
 snippet mod module .. module_function .. end
 	module ${1:`substitute(Filename(), '^.', '\u&', '')`}
 		module_function
 
 		${2}
-	end
+	end # end of module
 snippet mod module .. ClassMethods .. end
 	module ${1:`substitute(Filename(), '^.', '\u&', '')`}
 		module ClassMethods
@@ -138,7 +138,7 @@ snippet mod module .. ClassMethods .. end
 			receiver.extend         ClassMethods
 			receiver.send :include, InstanceMethods
 		end
-	end
+	end # end of module
 # attr_reader
 snippet r
 	attr_reader :${1:attr_names}
@@ -375,6 +375,10 @@ snippet seld
 snippet lam
 	lambda { |${1:args}| ${2} }
 snippet do
+	do 
+		${1}
+	end
+snippet doo
 	do |${1:variable}|
 		${2}
 	end

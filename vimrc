@@ -2,49 +2,47 @@ syn on
 " set background=dark
 " colorscheme solarized
 
-"set paste/nopaste mode {
+" set paste/nopaste mode {
 nnoremap <F2> :set invpaste paste?<CR>
 imap <F2> <C-O>:set invpaste paste?<CR>
 set pastetoggle=<F2>
 "" }
 
-"set ai!                      " 设置自动缩进
 "set list                     " 显示Tab符，使用一高亮竖线代替
 "set listchars=tab:\|\ ,
 
 filetype on
-filetype plugin on           " 针对不同的文件类型加载对应的插件
-filetype plugin indent on    " 启用自动补全
+filetype plugin on               " 针对不同的文件类型加载对应的插件
+filetype plugin indent on        " 启用自动补全
 set encoding=utf8
 set expandtab                    " expandtab，用空格代替Tab键
 retab                            " 打开vim时把已有的Tab全部转换成空格
 
-autocmd InsertLeave *.* write         " 每次退出插入模式时自动保存
-autocmd FocusLost * :wa               "saving on losing focus
+autocmd InsertLeave *.* write    " 每次退出插入模式时自动保存
+autocmd FocusLost * :wa          "saving on losing focus
 
 " autocmd BufNewFile,BufRead *.html,*.htm,*.css,*.js,*.erb,*.rb,*.yml set tabstop=2 shiftwidth=2 softtabstop=2
 autocmd FileType c set tabstop=4 shiftwidth=4 softtabstop=4
 
 set omnifunc=syntaxcomplete#Complete
 
-set bs=2 
-
 "Personal shift width for Ruby html
+set bs=2 
 set shiftwidth=2
 set tabstop=2
 set softtabstop=2
 
 " set cursorline "为光标所在行加下划线
-set number "显示行号
-set cindent " 自动缩进4空格
+set number         "显示行号
+set cindent        " 自动缩进4空格
 set smartindent    " 智能自动缩进
-set autoindent
+set autoindent     " 设置自动缩进
 set autoread       "文件在Vim之外修改过，自动重新读入
 set autowriteall   "提示保存
 set scrolloff=3
 set showmode
 set showcmd
-"set hidden
+" set hidden
 set wildmenu
 set wildmode=list:longest
 set visualbell
@@ -56,21 +54,19 @@ hi Search term=standout ctermbg=11
 vnoremap / /\v "add \v after key in /
 set ignorecase "搜索小写正文时大小写不敏感，搜索正文包含大写时大小写敏感
 set smartcase
-"set gdefault
+" set gdefault
 set incsearch "高亮搜索文本
 set showmatch
 set hlsearch
 
-set fileencodings=uft-8,gbk "使用utf-8或gbk打开文件
-"set helplang=cn "帮助系统设置为中文
+set fileencodings=uft-8 ",gbk "使用utf-8或gbk打开文件
+" set helplang=cn              "帮助系统设置为中文
 
-"set foldmethod=syntax "代码折叠
-"set foldmethod=indent "代码折叠
+" set foldmethod=syntax "代码折叠
+" set foldmethod=indent "代码折叠
 
-" set wrap "换行设置 {
-" set nowrap "不换行设置
+" set wrap   "换行设置 
 set formatoptions=qrn1
-"}
 
 " set ctrlp {
 let g:ctrlp_open_new_file = 't'
@@ -84,17 +80,16 @@ let g:ctrlp_open_multiple_files = 'v'
 "}
 
 "Easy navigation{
-" "noremap" means no recursive mapping
+" `noremap` means no recursive mapping
 inoremap jj <ESC>
 
-nnoremap <up> <nop>
-nnoremap <down> <nop>
-nnoremap <left> <nop>
-nnoremap <right> <nop>
+" nnoremap <up> <nop>
+" nnoremap <down> <nop>
+" nnoremap <left> <nop>
+" nnoremap <right> <nop>
 nnoremap gcc gcc<ESC>
 nnoremap <F8> :!
 
-nnoremap <C-r> :tag<CR>
 map <C-h> <C-w>h
 map <C-j> <C-w>j
 map <C-k> <C-w>k
@@ -112,10 +107,14 @@ nnoremap <leader><space> :noh<cr>
 nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>
 nnoremap <C-l> gt
 nnoremap <C-h> gT
-nnoremap <leader>t : tabe<CR>
-nnoremap <leader>c : tabc<CR>
-nnoremap <leader>e : e#<CR>
-nnoremap <leader>vm : e ~/.vimrc<CR>
+nnoremap <C-r>      :tag<CR>
+nnoremap <leader>t  :tabe<CR>
+nnoremap <leader>c  :tabc<CR>
+nnoremap <leader>e  :e#<CR>
+nnoremap <leader>vm :e ~/.vimrc<CR>
+nnoremap <leader>so :source ~/.vimrc<CR>
+nnoremap <leader>ne :NERDTree<CR>
+nnoremap <leader>nc :NERDTreeClose<CR>
 
 " more leader for git 
 nnoremap <leader>gs :GitStatus<cr>
@@ -146,20 +145,20 @@ nnoremap <leader>gl :GitPull<cr>
     "}
 
     " Taglist{ 
-    let Tlist_Show_One_File = 1 "只显示当前文件的taglist，默认是显示多个
-    let Tlist_Exit_OnlyWindow = 1 "如果taglist是最后一个窗口，则退出vim
-    let Tlist_Use_Right_Window = 1 "在右侧窗口中显示taglist
-    let Tlist_GainFocus_On_ToggleOpen = 1 "打开taglist时，光标保留在taglist窗口
-    let Tlist_Close_On_Select = 1 "选择了tag后自动关闭taglist窗口
-    let Tlist_Ctags_Cmd='/usr/local/bin/ctags' "设置ctags命令的位置
-    " let Tlist_Auto_Open = 0 "每次vim运行时自动打开taglist
+    let Tlist_Show_One_File = 1                 "只显示当前文件的taglist，默认是显示多个
+    let Tlist_Exit_OnlyWindow = 1               "如果taglist是最后一个窗口，则退出vim
+    let Tlist_Use_Right_Window = 1              "在右侧窗口中显示taglist
+    let Tlist_GainFocus_On_ToggleOpen = 0       "打开taglist时，光标保留在taglist窗口
+    let Tlist_Close_On_Select = 1               "选择了tag后自动关闭taglist窗口
+    let Tlist_Ctags_Cmd='/usr/local/bin/ctags'  "设置ctags命令的位置
+    " let Tlist_Auto_Open = 0                   "每次vim运行时自动打开taglist
     nnoremap <leader>tl : Tlist<CR> 
     " }
 
     " My personal Tags  {
-    set tags=tags;
-    " set autochdir " file tags only exist in the root dir
-    set tags+=~/tags/tags-ruby-2.0.0
+    set tags=tags
+    " set autochdir 
+    set tags+=~/tags/tags*
     " }
 
      " Ctags auto update {

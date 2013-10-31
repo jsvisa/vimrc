@@ -12,22 +12,22 @@ eg: `ln -s ~/.vim/.vimrc ~/.vimrc`
 ###Useful vim commands:
 `:scriptnames  show the vim loading configure files`</p>
 `:echo $VIM    show vim path`</p>
-ÔÚVimÖĞÖ±½Ó½øĞĞ×ª»»ÎÄ¼ş±àÂë,±ÈÈç½«Ò»¸öÎÄ¼ş×ª»»³Éutf-8¸ñÊ½:
+åœ¨Vimä¸­ç›´æ¥è¿›è¡Œè½¬æ¢æ–‡ä»¶ç¼–ç ,æ¯”å¦‚å°†ä¸€ä¸ªæ–‡ä»¶è½¬æ¢æˆutf-8æ ¼å¼:
 `:set fileencoding=utf-8`</p>
 
-`<Ctrl+w+o>` ½«µ±Ç°·ÖÆÁ×î´ó»¯
+`<Ctrl+w+o>` å°†å½“å‰åˆ†å±æœ€å¤§åŒ–
 
-**tab** ¶à´°¿Ú
+**tab** å¤šçª—å£
 
-    :tabnew file ĞÂ´°¿ÚÖĞ´ò¿ªÒ»¸öÎÄ¼ş
-    :tabc       ¹Ø±Õµ±Ç°µÄtab
-    :tabo       ¹Ø±ÕËùÓĞÆäËûµÄtab
-    :tabs       ²é¿´ËùÓĞ´ò¿ªµÄtab
-    :tabp      Ç°Ò»¸ö
-    :tabn      ºóÒ»¸ö
-    ±ê×¼Ä£Ê½ÏÂ£º
+    :tabnew file æ–°çª—å£ä¸­æ‰“å¼€ä¸€ä¸ªæ–‡ä»¶
+    :tabc       å…³é—­å½“å‰çš„tab
+    :tabo       å…³é—­æ‰€æœ‰å…¶ä»–çš„tab
+    :tabs       æŸ¥çœ‹æ‰€æœ‰æ‰“å¼€çš„tab
+    :tabp      å‰ä¸€ä¸ª
+    :tabn      åä¸€ä¸ª
+    æ ‡å‡†æ¨¡å¼ä¸‹ï¼š
  
-gt, gT ¿ÉÒÔÖ±½ÓÔÚtabÖ®¼äÇĞ»»¡£
+gt, gT å¯ä»¥ç›´æ¥åœ¨tabä¹‹é—´åˆ‡æ¢ã€‚
 
 ####Jumps
 `:tags` show records</p>
@@ -38,15 +38,15 @@ gt, gT ¿ÉÒÔÖ±½ÓÔÚtabÖ®¼äÇĞ»»¡£
 `<Ctrl+O>` jumps forward</p>
 
 ###Ctrlp
-`<Ctrl+p>` ÆôÓÃCtrlP
+`<Ctrl+p>` å¯ç”¨CtrlP
 
-`<Ctrl+Y>` ĞÂ½¨Ò»¸öÎÄ¼ş
+`<Ctrl+Y>` æ–°å»ºä¸€ä¸ªæ–‡ä»¶
 
-`<Ctrl+D>` ÇĞ»»µ½Æ¥ÅäÎÄ¼şÃû£¬¶ø·ÇÂ·¾¶Ãû
+`<Ctrl+D>` åˆ‡æ¢åˆ°åŒ¹é…æ–‡ä»¶åï¼Œè€Œéè·¯å¾„å
 
-`<Ctrl+Z>` ±ê×¢´ò¿ªµÄÎÄ¼ş£¬¶àÎÄ¼şÍ¬Ê±´ò¿ªÊ±Ê¹ÓÃ
+`<Ctrl+Z>` æ ‡æ³¨æ‰“å¼€çš„æ–‡ä»¶ï¼Œå¤šæ–‡ä»¶åŒæ—¶æ‰“å¼€æ—¶ä½¿ç”¨
 
-`<Ctrl+O>` Í¬Ê±´ò¿ª¶à¸öÎÄ¼ş
+`<Ctrl+O>` åŒæ—¶æ‰“å¼€å¤šä¸ªæ–‡ä»¶
 
 ###Vimdiff
 `]c` go to the next diff
@@ -59,3 +59,5 @@ gt, gT ¿ÉÒÔÖ±½ÓÔÚtabÖ®¼äÇĞ»»¡£
 
 `:diffupdate` update a diff point
 
+###Ack
+`:Ack -Q "*file"` çº¯æ–‡æœ¬æ–¹å¼æŸ¥æ‰¾ "*file"
