@@ -22,15 +22,15 @@ autocmd InsertLeave *.* write    " 每次退出插入模式时自动保存
 autocmd FocusLost * :wa          "saving on losing focus
 
 " autocmd BufNewFile,BufRead *.html,*.htm,*.css,*.js,*.erb,*.rb,*.yml set tabstop=2 shiftwidth=2 softtabstop=2
-autocmd FileType c set tabstop=4 shiftwidth=4 softtabstop=4
+" autocmd FileType c set tabstop=4 shiftwidth=4 softtabstop=4
 
 set omnifunc=syntaxcomplete#Complete
 
 "Personal shift width for Ruby html
 set bs=2 
-set shiftwidth=2
-set tabstop=2
-set softtabstop=2
+set shiftwidth=4
+set tabstop=4
+set softtabstop=4
 
 " set cursorline "为光标所在行加下划线
 set number         "显示行号
@@ -89,6 +89,7 @@ inoremap jj <ESC>
 " nnoremap <right> <nop>
 nnoremap gcc gcc<ESC>
 nnoremap <F8> :!
+nnoremap <F5> :!pry<CR>
 
 map <C-h> <C-w>h
 map <C-j> <C-w>j
@@ -136,7 +137,9 @@ nnoremap <leader>gl :GitPull<cr>
     set nocompatible " 关闭兼容模式
     set laststatus=2
     set t_Co=256
-    let g:Powerline_symbols = 'fancy'
+    let g:Powerline_symbols = 'unicode'
+    set rtp+={path_to_powerline}/powerline/bindings/vim
+    set noshowmode
     "}
 
     " CommandT setting {
