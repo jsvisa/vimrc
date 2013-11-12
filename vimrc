@@ -1,16 +1,10 @@
-syn on 
-" set background=dark
-" colorscheme solarized
-
 " set paste/nopaste mode {
 nnoremap <F2> :set invpaste paste?<CR>
 imap <F2> <C-O>:set invpaste paste?<CR>
 set pastetoggle=<F2>
-"" }
+" }
 
-"set list                     " 显示Tab符，使用一高亮竖线代替
-"set listchars=tab:\|\ ,
-
+syn on
 filetype on
 filetype plugin on               " 针对不同的文件类型加载对应的插件
 filetype plugin indent on        " 启用自动补全
@@ -27,7 +21,7 @@ autocmd FocusLost * :wa          "saving on losing focus
 set omnifunc=syntaxcomplete#Complete
 
 "Personal shift width for Ruby html
-set bs=2 
+set bs=2
 set shiftwidth=4
 set tabstop=4
 set softtabstop=4
@@ -39,17 +33,10 @@ set smartindent    " 智能自动缩进
 set autoindent     " 设置自动缩进
 set autoread       "文件在Vim之外修改过，自动重新读入
 set autowriteall   "提示保存
-set scrolloff=3
-set showmode
-set showcmd
-" set hidden
 set wildmenu
 set wildmode=list:longest
-set visualbell
-set ttyfast
-set ruler
 set backspace=indent,eol,start
-hi Search term=standout ctermbg=11 
+hi Search term=standout ctermbg=11
 
 vnoremap / /\v "add \v after key in /
 set ignorecase "搜索小写正文时大小写不敏感，搜索正文包含大写时大小写敏感
@@ -65,21 +52,21 @@ set fileencodings=uft-8 ",gbk "使用utf-8或gbk打开文件
 " set foldmethod=syntax "代码折叠
 " set foldmethod=indent "代码折叠
 
-" set wrap   "换行设置 
+" set wrap   "换行设置
 set formatoptions=qrn1
 
 " set ctrlp {
 let g:ctrlp_open_new_file = 't'
 let g:ctrlp_open_multiple_files = 'v'
- 
+
 " set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.o
 " let g:ctrlp_custom_ignore = {
 "   \ 'dir':  '\v[\/]\.(git)$',
 "   \ 'file': '\v\.(log|jpg|png|jpeg)$',
 "   \ }
-"}
+" }
 
-"Easy navigation{
+"Easy navigation {
 " `noremap` means no recursive mapping
 inoremap jj <ESC>
 
@@ -100,11 +87,11 @@ inoremap <F1> <ESC>
 nnoremap <F1> <ESC>
 vnoremap <F1> <ESC>
 nnoremap ; :
-"}
+" }
 
 " <leader> hotkey {
 let mapleader = ','
-nnoremap <leader><space> :noh<cr> 
+nnoremap <leader><space> :noh<cr>
 nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>
 nnoremap <C-l> gt
 nnoremap <C-h> gT
@@ -117,87 +104,96 @@ nnoremap <leader>so :source ~/.vimrc<CR>
 nnoremap <leader>ne :NERDTree<CR>
 nnoremap <leader>nc :NERDTreeClose<CR>
 
-" more leader for git 
 nnoremap <leader>gs :GitStatus<cr>
 nnoremap <leader>gc :GitCommit<cr>
 nnoremap <leader>ga :GitAdd<cr>
 nnoremap <leader>gp :GitPush<cr>
 nnoremap <leader>gl :GitPull<cr>
-"}
+" }
 
-" Configure for plugins {{ 
+" Display extra whitespace
+set list listchars=tab:»·,trail:·
 
-    " pathogen{
-    call pathogen#infect()
-    call pathogen#helptags() "update all plugins help doc
-    "}
+fun! StripTrailingWhitespace()
+    " Don't strip on these filetypes
+    if &ft =~ 'markdown'
+        return
+    endif
+    %s/\s\+$//e
+endfun
 
-    " powerline{
-    set guifont=PowerlineSymbols\ for\ Powerline
-    set nocompatible " 关闭兼容模式
-    set laststatus=2
-    set t_Co=256
-    let g:Powerline_symbols = 'unicode'
-    set rtp+={path_to_powerline}/powerline/bindings/vim
-    set noshowmode
-    "}
+autocmd BufWritePre * call StripTrailingWhitespace()
 
-    " CommandT setting {
-    let g:CommandTCancelMap='<C-x>'
-    let g:CommandTHighlightColor = 'PmenuSel'
-    "}
+" pathogen {
+call pathogen#infect()
+call pathogen#helptags() "update all plugins help doc
+" }
 
-    " Taglist{ 
-    let Tlist_Show_One_File = 1                 "只显示当前文件的taglist，默认是显示多个
-    let Tlist_Exit_OnlyWindow = 1               "如果taglist是最后一个窗口，则退出vim
-    let Tlist_Use_Right_Window = 1              "在右侧窗口中显示taglist
-    let Tlist_GainFocus_On_ToggleOpen = 0       "打开taglist时，光标保留在taglist窗口
-    let Tlist_Close_On_Select = 1               "选择了tag后自动关闭taglist窗口
-    let Tlist_Ctags_Cmd='/usr/local/bin/ctags'  "设置ctags命令的位置
-    " let Tlist_Auto_Open = 0                   "每次vim运行时自动打开taglist
-    nnoremap <leader>tl : Tlist<CR> 
-    " }
+" powerline {
+set guifont=PowerlineSymbols\ for\ Powerline
+set nocompatible " 关闭兼容模式
+set laststatus=2
+set t_Co=256
+let g:Powerline_symbols = 'unicode'
+set rtp+={path_to_powerline}/powerline/bindings/vim
+set noshowmode
+" }
 
-    " My personal Tags  {
-    set tags=tags
-    " set autochdir 
-    set tags+=~/tags/tags*
-    " }
+" CommandT setting {
+let g:CommandTCancelMap='<C-x>'
+let g:CommandTHighlightColor = 'PmenuSel'
+" }
 
-     " Ctags auto update {
-    function! DelTagOfFile(file)
-      let fullpath = a:file
-      let cwd = getcwd()
-      let tagfilename = cwd . "/tags"
-      let f = substitute(fullpath, cwd . "/", "", "")
-      let f = escape(f, './')
-      let cmd = 'sed -i "/' . f . '/d" "' . tagfilename . '"'
-      let resp = system(cmd)
-    endfunction
+" Taglist {
+let Tlist_Show_One_File = 1                 "只显示当前文件的taglist，默认是显示多个
+let Tlist_Exit_OnlyWindow = 1               "如果taglist是最后一个窗口，则退出vim
+let Tlist_Use_Right_Window = 1              "在右侧窗口中显示taglist
+let Tlist_GainFocus_On_ToggleOpen = 0       "打开taglist时，光标保留在taglist窗口
+let Tlist_Close_On_Select = 1               "选择了tag后自动关闭taglist窗口
+let Tlist_Ctags_Cmd='/usr/local/bin/ctags'  "设置ctags命令的位置
+" let Tlist_Auto_Open = 0                   "每次vim运行时自动打开taglist
+nnoremap <leader>tl : Tlist<CR>
+" }
 
-    function! UpdateTags()
-      let f = expand("%:p")
-      let cwd = getcwd()
-      let tagfilename = cwd . "/tags"
-      let cmd = 'ctags -a -f ' . tagfilename . ' --c++-kinds=+p --fields=+iaS --extra=+q ' . '"' . f . '"'
-      call DelTagOfFile(f)
-      let resp = system(cmd)
-    endfunction
+" My personal Tags  {
+" set autochdir
+set tags=tags
+set tags+=~/tags/tags*
+" }
 
-    autocmd BufWritePost *.*rb,*.c,*.cpp,*.h call UpdateTags()
+" Ctags auto update {
+function! DelTagOfFile(file)
+  let fullpath = a:file
+  let cwd = getcwd()
+  let tagfilename = cwd . "/tags"
+  let f = substitute(fullpath, cwd . "/", "", "")
+  let f = escape(f, './')
+  let cmd = 'sed -i "/' . f . '/d" "' . tagfilename . '"'
+  let resp = system(cmd)
+endfunction
 
-    " }
+function! UpdateTags()
+  let f = expand("%:p")
+  let cwd = getcwd()
+  let tagfilename = cwd . "/tags"
+  let cmd = 'ctags -a -f ' . tagfilename . ' --c++-kinds=+p --fields=+iaS --extra=+q ' . '"' . f . '"'
+  call DelTagOfFile(f)
+  let resp = system(cmd)
+endfunction
 
-    " vimdiff color scheme
-    highlight DiffChange cterm=none ctermfg=black ctermbg=LightGreen gui=none guifg=bg guibg=LightGreen
-    highlight DiffText cterm=none ctermfg=black ctermbg=Red gui=none guifg=bg guibg=Red
+autocmd BufWritePost *.*rb,*.c,*.cpp,*.h call UpdateTags()
+" }
 
-    " Git Gutter {
-    nnoremap <leader>ggt :GitGutterToggle<cr>
-    let g:gitgutter_enabled = 0
-    " }
+" vimdiff color scheme
+highlight DiffChange cterm=none ctermfg=black ctermbg=LightGreen gui=none guifg=bg guibg=LightGreen
+highlight DiffText cterm=none ctermfg=black ctermbg=Red gui=none guifg=bg guibg=Red
 
-    " Markdown disable folding {
-    let g:vim_markdown_folding_disabled=1
-    " }
+" Git Gutter {
+nnoremap <leader>ggt :GitGutterToggle<cr>
+let g:gitgutter_enabled = 0
+" }
+
+" Markdown disable folding {
+let g:vim_markdown_folding_disabled=1
+" }
 
