@@ -3,8 +3,8 @@ Vimcfg
 
 My private vim configuration including .vim/ directory and .vimrc file
 
-###Hint: 
-You should create a symbol link to ./.vimrc,</p> 
+###Hint:
+You should create a symbol link to ./.vimrc,</p>
 otherwise Vim can't read ~/.vim/ directory.</p>
 
 eg: `ln -s ~/.vim/.vimrc ~/.vimrc`
@@ -26,7 +26,7 @@ eg: `ln -s ~/.vim/.vimrc ~/.vimrc`
     :tabp      前一个
     :tabn      后一个
     标准模式下：
- 
+
 gt, gT 可以直接在tab之间切换。
 
 ####Jumps
@@ -61,3 +61,7 @@ gt, gT 可以直接在tab之间切换。
 
 ###Ack
 `:Ack -Q "*file"` 纯文本方式查找 "*file"
+
+###ctags
+
+    $ ctags -R   --exclude=*.js ~/.rvm/gems/ruby-2.0.0-p247/gems/

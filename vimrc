@@ -17,6 +17,8 @@ autocmd FocusLost * :wa          "saving on losing focus
 " }
 
 set omnifunc=syntaxcomplete#Complete
+set path=**
+set completeopt=longest,menuone
 
 " Personal shift width for Ruby html
 set bs=2
@@ -73,6 +75,7 @@ set formatoptions=qrn1
     " nnoremap <right> <nop>
     nnoremap gcc gcc<ESC>
     nnoremap <F8> :!
+    nnoremap <F10> :Ack --nojs --nohtml
     nnoremap <F5> :!pry<CR>
 
     map <C-h> <C-w>h
@@ -161,7 +164,7 @@ set formatoptions=qrn1
 " My personal Tags  {
     " set autochdir
     set tags=tags
-    set tags+=~/tags/tags*
+    set tags+=~/tags/tags
 " }
 
 " Ctags auto update {
