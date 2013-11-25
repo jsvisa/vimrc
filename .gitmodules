@@ -1,36 +1,33 @@
 [submodule "bundle/vim-rails"]
-	path = bundle/vim-rails
-	url = git://github.com/tpope/vim-rails
+    path = bundle/vim-rails
+    url = git://github.com/tpope/vim-rails
 [submodule "bundle/nerdtree"]
-	path = bundle/nerdtree
-	url = git://github.com/scrooloose/nerdtree
+    path = bundle/nerdtree
+    url = git://github.com/scrooloose/nerdtree
 [submodule "bundle/vim-bundler"]
-	path = bundle/vim-bundler
-	url = git://github.com/tpope/vim-bundler
+    path = bundle/vim-bundler
+    url = git://github.com/tpope/vim-bundler
 [submodule "bundle/vim-markdown"]
-	path = bundle/vim-markdown
-	url = https://github.com/plasticboy/vim-markdown.git
+    path = bundle/vim-markdown
+    url = https://github.com/plasticboy/vim-markdown.git
 [submodule "bundle/vim-erlang"]
-	path = bundle/vim-erlang
-	url = https://github.com/onlychoice/vimerl/
+    path = bundle/vim-erlang
+    url = https://github.com/onlychoice/vimerl/
 [submodule "bundle/ctrlp"]
-	path = bundle/ctrlp
-	url = https://github.com/kien/ctrlp.vim
+    path = bundle/ctrlp
+    url = https://github.com/kien/ctrlp.vim
 [submodule "bundle/vim-powerline"]
-	path = bundle/vim-powerline
-	url = git://github.com/Lokaltog/vim-powerline.git
+    path = bundle/vim-powerline
+    url = git://github.com/Lokaltog/vim-powerline.git
 [submodule "bundle/vim-git"]
-	path = bundle/vim-git
-	url = https://github.com/motemen/git-vim
+    path = bundle/vim-git
+    url = https://github.com/motemen/git-vim
 [submodule "bundle/vim-ack"]
-	path = bundle/vim-ack
-	url = https://github.com/mileszs/ack.vim.git
+    path = bundle/vim-ack
+    url = https://github.com/mileszs/ack.vim.git
 [submodule "bundle/vim-gitgutter"]
-	path = bundle/vim-gitgutter
-	url = git://github.com/airblade/vim-gitgutter.git
+    path = bundle/vim-gitgutter
+    url = git://github.com/airblade/vim-gitgutter.git
 [submodule "bundle/vim-indeneLine"]
-	path = bundle/vim-indeneLine
-	url = https://github.com/Yggdroot/indentLine.git
-[submodule "bundle/vim-autoComlPop"]
-	path = bundle/vim-autoComlPop
-	url = https://github.com/vim-scripts/AutoComplPop.git
+    path = bundle/vim-indeneLine
+    url = https://github.com/Yggdroot/indentLine.git
