@@ -28,3 +28,9 @@
 [submodule "bundle/vim-gitgutter"]
 	path = bundle/vim-gitgutter
 	url = git://github.com/airblade/vim-gitgutter.git
+[submodule "bundle/vim-indeneLine"]
+	path = bundle/vim-indeneLine
+	url = https://github.com/Yggdroot/indentLine.git
+[submodule "bundle/vim-autoComlPop"]
+	path = bundle/vim-autoComlPop
+	url = https://github.com/vim-scripts/AutoComplPop.git

@@ -21,6 +21,7 @@ set path=**
 set completeopt=longest,menuone
 
 " Personal shift width for Ruby html
+set cc=120
 set bs=2
 set shiftwidth=4
 set tabstop=4
@@ -45,11 +46,7 @@ set incsearch "高亮搜索文本
 set showmatch
 set hlsearch
 
-set fileencodings=uft-8 ",gbk "使用utf-8或gbk打开文件
-" set helplang=cn              "帮助系统设置为中文
-
-" set foldmethod=syntax "代码折叠
-" set foldmethod=indent "代码折叠
+set fileencodings=utf-8 ",gbk "使用utf-8或gbk打开文件
 
 " set wrap   "换行设置
 set formatoptions=qrn1
@@ -69,10 +66,6 @@ set formatoptions=qrn1
     " 'noremap' means no recursive mapping
     inoremap jj <ESC>
 
-    " nnoremap <up> <nop>
-    " nnoremap <down> <nop>
-    " nnoremap <left> <nop>
-    " nnoremap <right> <nop>
     nnoremap gcc gcc<ESC>
     nnoremap <F8> :!
     nnoremap <F10> :Ack --nojs --nohtml
@@ -92,7 +85,7 @@ set formatoptions=qrn1
 " <leader> hotkey {
     let mapleader = ','
     nnoremap <leader><space> :noh<cr>
-    nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>
+    nnoremap <leader>w :%s/\s\+$//<cr>:let @/=''<CR>
     nnoremap <C-l> gt
     nnoremap <C-h> gT
     nnoremap <C-r>      :tag<CR>
@@ -202,4 +195,20 @@ highlight DiffText cterm=none ctermfg=black ctermbg=Red gui=none guifg=bg guibg=
 " Markdown disable folding {
     let g:vim_markdown_folding_disabled=1
 " }
+
+let g:indent_guides_guide_size=1
+let g:indent_guides_auto_colors = 0
+autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=blue   ctermbg=3
+autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=green ctermbg=4
+
+map ,ch :call SetColorColumn()<CR>
+function! SetColorColumn()
+    let col_num = virtcol(".")
+    let cc_list = split(&cc, ',')
+    if count(cc_list, string(col_num)) <= 0
+        execute "set cc+=".col_num
+    else
+        execute "set cc-=".col_num
+    endif
+endfunction
 
