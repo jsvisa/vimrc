@@ -27,6 +27,10 @@ set shiftwidth=4
 set tabstop=4
 set softtabstop=4
 
+set grepprg=ack
+map <F3> :cp<cr>
+map <F4> :cn<cr>
+
 " set cursorline "为光标所在行加下划线
 set number         "显示行号
 set cindent        " 自动缩进4空格
@@ -68,7 +72,7 @@ set formatoptions=qrn1
 
     nnoremap gcc gcc<ESC>
     nnoremap <F8> :!
-    nnoremap <F10> :Ack --nojs --nohtml
+    nnoremap <F10> :Ack
     nnoremap <F5> :!pry<CR>
 
     map <C-h> <C-w>h
@@ -92,6 +96,7 @@ set formatoptions=qrn1
     nnoremap <leader>t  :tabe<CR>
     nnoremap <leader>c  :tabc<CR>
     nnoremap <leader>e  :e#<CR>
+    " nnoremap <leader>,e  :e <CR>=expand("%:p:h") .  '/' <CR>
     nnoremap <leader>vm :e ~/.vimrc<CR>
     nnoremap <leader>so :source ~/.vimrc<CR>
     nnoremap <leader>ne :NERDTree<CR>
@@ -195,14 +200,6 @@ highlight DiffText cterm=none ctermfg=black ctermbg=Red gui=none guifg=bg guibg=
 " Markdown disable folding {
     let g:vim_markdown_folding_disabled=1
 " }
-
-" let g:indent_guides_enable_on_vim_startup = 1
-let g:indent_guides_guide_size=1
-let g:indent_guides_auto_colors = 0
-let g:indent_guides_color_change_percent = 80
-let g:indent_guides_start_level = 2
-autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=grey   ctermbg=3
-autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=grey ctermbg=4
 
 map ,ch :call SetColorColumn()<CR>
 function! SetColorColumn()
