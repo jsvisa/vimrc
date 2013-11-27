@@ -55,7 +55,7 @@ set formatoptions=qrn1
     let g:ctrlp_open_new_file = 't'
     let g:ctrlp_open_multiple_files = 'v'
 
-    " set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.o
+    set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.o
     " let g:ctrlp_custom_ignore = {
     "   \ 'dir':  '\v[\/]\.(git)$',
     "   \ 'file': '\v\.(log|jpg|png|jpeg)$',
@@ -118,7 +118,7 @@ set formatoptions=qrn1
 
     fun! StripTrailingWhitespace()
         " Don't strip on these filetypes
-        if &ft =~ 'markdown'
+        if &ft =~ 'snippets'
             return
         endif
         %s/\s\+$//e
@@ -196,10 +196,13 @@ highlight DiffText cterm=none ctermfg=black ctermbg=Red gui=none guifg=bg guibg=
     let g:vim_markdown_folding_disabled=1
 " }
 
+" let g:indent_guides_enable_on_vim_startup = 1
 let g:indent_guides_guide_size=1
 let g:indent_guides_auto_colors = 0
-autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=blue   ctermbg=3
-autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=green ctermbg=4
+let g:indent_guides_color_change_percent = 80
+let g:indent_guides_start_level = 2
+autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=grey   ctermbg=3
+autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=grey ctermbg=4
 
 map ,ch :call SetColorColumn()<CR>
 function! SetColorColumn()
