@@ -31,3 +31,6 @@
 [submodule "bundle/vim-indeneLine"]
     path = bundle/vim-indeneLine
     url = https://github.com/Yggdroot/indentLine.git
+[submodule "bundle/vim-fugitive"]
+	path = bundle/vim-fugitive
+	url = https://github.com/tpope/vim-fugitive

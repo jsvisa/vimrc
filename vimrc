@@ -17,11 +17,9 @@ autocmd FocusLost * :wa          "saving on losing focus
 " }
 
 set omnifunc=syntaxcomplete#Complete
-set path=**
-set completeopt=longest,menuone
+" set path=**
+" set completeopt=longest,menuone
 
-" Personal shift width for Ruby html
-set cc=120
 set bs=2
 set shiftwidth=4
 set tabstop=4
@@ -31,13 +29,13 @@ set grepprg=ack
 map <F3> :cp<cr>
 map <F4> :cn<cr>
 
-" set cursorline "为光标所在行加下划线
-set number         "显示行号
+" set cursorline " 为光标所在行加下划线
+set number         " 显示行号
 set cindent        " 自动缩进4空格
 set smartindent    " 智能自动缩进
 set autoindent     " 设置自动缩进
-set autoread       "文件在Vim之外修改过，自动重新读入
-set autowriteall   "提示保存
+set autoread       " 文件在Vim之外修改过，自动重新读入
+set autowriteall   " 提示保存
 set wildmenu
 set wildmode=list:longest
 set backspace=indent,eol,start
@@ -60,10 +58,10 @@ set formatoptions=qrn1
     let g:ctrlp_open_multiple_files = 'v'
 
     set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.o
-    " let g:ctrlp_custom_ignore = {
-    "   \ 'dir':  '\v[\/]\.(git)$',
-    "   \ 'file': '\v\.(log|jpg|png|jpeg)$',
-    "   \ }
+    let g:ctrlp_custom_ignore = {
+      \ 'dir':  '\v[\/]\.(git)$',
+      \ 'file': '\v\.(log|jpg|png|jpeg)$',
+      \ }
 " }
 
 " Easy navigation {
@@ -97,7 +95,7 @@ set formatoptions=qrn1
     nnoremap <leader>c  :tabc<CR>
     nnoremap <leader>e  :e#<CR>
     " nnoremap <leader>,e  :e <CR>=expand("%:p:h") .  '/' <CR>
-    nnoremap <leader>vm :e ~/.vimrc<CR>
+    nnoremap <leader>vm :e ~/.vim/vimrc<CR>
     nnoremap <leader>so :source ~/.vimrc<CR>
     nnoremap <leader>ne :NERDTree<CR>
     nnoremap <leader>nc :NERDTreeClose<CR>
@@ -137,6 +135,7 @@ set formatoptions=qrn1
     set guifont=PowerlineSymbols\ for\ Powerline
     set nocompatible
     set laststatus=2
+    " set statusline=%f:\ %l
     set t_Co=256
     let g:Powerline_symbols = 'unicode'
     set rtp+={path_to_powerline}/powerline/bindings/vim
@@ -211,4 +210,18 @@ function! SetColorColumn()
         execute "set cc-=".col_num
     endif
 endfunction
+
+" let g:indentLine_char = '┆'
+
+autocmd FileType cucumber compiler cucumber | setl makeprg=cucumber\ \"%:p\"
+autocmd FileType ruby
+      \ if expand('%') =~# '_test\.rb$' |
+      \   compiler rubyunit | setl makeprg=testrb\ \"%:p\" |
+      \ elseif expand('%') =~# '_spec\.rb$' |
+      \   compiler rspec | setl makeprg=rspec\ \"%:p\" |
+      \ else |
+      \   compiler ruby | setl makeprg=ruby\ -wc\ \"%:p\" |
+      \ endif
+autocmd User Rake
+      \ if &makeprg !~# 'bundle' | setl makeprg^=bundle\ exec\  | endif
 
