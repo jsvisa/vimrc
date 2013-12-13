@@ -36,7 +36,7 @@ snippet when
 snippet def
 	def ${1:method_name}
 		${2}
-	end # end of def
+	end
 snippet deft
 	def test_${1:case_name}
 		${2}
@@ -61,11 +61,11 @@ snippet unless
 snippet while
 	while ${1:condition}
 		${2}
-	end # end of while
+	end
 snippet for
 	for ${1:e} in ${2:c}
 		${3}
-	end # end of for
+	end
 snippet until
 	until ${1:condition}
 		${2}
@@ -73,36 +73,36 @@ snippet until
 snippet cla
 	class ${1:`substitute(Filename(), '^.', '\u&', '')`}
 		${2}
-	end # end of class
+	end
 snippet clai
 	class ${1:`substitute(Filename(), '^.', '\u&', '')`}
 		def initialize(${2:args})
 			${3}
 		end
-	end # end of class
+	end
 snippet clap
 	class ${1:`substitute(Filename(), '^.', '\u&', '')`} < ${2:ParentClass}
 		${3}
-	end # end of class
+	end
 snippet clapi
 	class ${1:`substitute(Filename(), '^.', '\u&', '')`} < ${2:ParentClass}
 		def initialize(${3:args})
 			${4}
 		end
-	end # end of class
+	end
 snippet cla ClassName = Struct .. do .. end
 	${1:`substitute(Filename(), '^.', '\u&', '')`} = Struct.new(:${2:attr_names}) do
 		def ${3:method_name}
 			${4}
 		end
-	end # end of class
+	end
 snippet cla class BlankSlate .. initialize .. end
 	class ${1:BlankSlate}
 		instance_methods.each { |meth| undef_method(meth) unless meth =~ /\A__/ }
 snippet clas
 	class << ${1:self}
 		${2}
-	end # end of class
+	end
 # class .. < DelegateClass .. initialize .. end
 snippet cla-
 	class ${1:`substitute(Filename(), '^.', '\u&', '')`} < DelegateClass(${2:ParentClass})
@@ -111,17 +111,17 @@ snippet cla-
 
 			${5}
 		end
-	end # end of class
+	end
 snippet mod
 	module ${1:`substitute(Filename(), '^.', '\u&', '')`}
 		${2}
-	end # end of module
+	end
 snippet modf
 	module ${1:`substitute(Filename(), '^.', '\u&', '')`}
 		module_function
 
 		${2}
-	end # end of module
+	end
 snippet mod module .. ClassMethods .. end
 	module ${1:`substitute(Filename(), '^.', '\u&', '')`}
 		module ClassMethods
@@ -136,7 +136,7 @@ snippet mod module .. ClassMethods .. end
 			receiver.extend         ClassMethods
 			receiver.send :include, InstanceMethods
 		end
-	end # end of module
+	end
 snippet {
 	{ ${1} }
 # attr_reader
@@ -512,13 +512,21 @@ snippet des
 	end
 snippet let
 	let(:${1}) { ${2} }
+snippet lett
+	let!(:${1}) { ${2} }
 snippet bef
 	before { ${1} }
 snippet befo
 	before do
 		${1}
 	end
+snippet it
+	it { should${1} }
 snippet itt
 	it "${1}" do
 		${2}
 	end
+snippet (
+	(${1})
+snippet [
+	[${1}]
