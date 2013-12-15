@@ -1,18 +1,21 @@
 Vimcfg
 ======
 
-My private vim configuration including .vim/ directory and .vimrc file
+My private vim configuration including *.vim/* directory and *.vimrc* file
 
 ###Hint:
-You should create a symbol link to ./.vimrc,</p>
-otherwise Vim can't read ~/.vim/ directory.</p>
+You should create a symbol link to *./.vimrc*,
 
-eg: `ln -s ~/.vim/.vimrc ~/.vimrc`
+otherwise Vim can't read *~/.vim/* directory.
+
+eg: `ln -snf ~/.vim/.vimrc ~/.vimrc`
 
 ###Useful vim commands:
 `:scriptnames  show the vim loading configure files`</p>
 `:echo $VIM    show vim path`</p>
-在Vim中直接进行转换文件编码,比如将一个文件转换成utf-8格式:
+
+在Vim中直接进行转换文件编码,比如将一个文件转换成 utf-8 格式:
+
 `:set fileencoding=utf-8`</p>
 
 `<Ctrl+w+o>` 将当前分屏最大化
@@ -60,8 +63,10 @@ gt, gT 可以直接在tab之间切换。
 `:diffupdate` update a diff point
 
 ###Ack
+
 `:Ack -Q "*file"` 纯文本方式查找 "*file"
 
 ###ctags
 
     $ ctags -R   --exclude=*.js ~/.rvm/gems/ruby-2.0.0-p247/gems/
+
