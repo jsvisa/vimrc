@@ -34,3 +34,12 @@
 [submodule "bundle/vim-fugitive"]
 	path = bundle/vim-fugitive
 	url = https://github.com/tpope/vim-fugitive
+[submodule "bundle/vim-lua"]
+	path = bundle/vim-lua
+	url = https://github.com/vim-scripts/lua.vim.git
+[submodule "bundle/vim-lua-ftplugin"]
+	path = bundle/vim-lua-ftplugin
+	url = http://github.com/xolox/vim-lua-ftplugin
+[submodule "bundle/vim-misc"]
+	path = bundle/vim-misc
+	url = http://github.com/xolox/vim-misc

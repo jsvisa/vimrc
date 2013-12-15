@@ -78,6 +78,9 @@ set formatoptions=qrn1
   map <C-j> <C-w>j
   map <C-k> <C-w>k
   map <C-l> <C-w>l
+  nnoremap <C-l> gt
+  nnoremap <C-h> gT
+  nnoremap <C-r>      :tag<CR>
 
   inoremap <F1> <ESC>
   nnoremap <F1> <ESC>
@@ -89,15 +92,12 @@ set formatoptions=qrn1
   let mapleader = ','
   nnoremap <leader><space> :noh<cr>
   nnoremap <leader>w :%s/\s\+$//<cr>:let @/=''<CR>
-  nnoremap <C-l> gt
-  nnoremap <C-h> gT
-  nnoremap <C-r>      :tag<CR>
   nnoremap <leader>t  :tabe<CR>
   nnoremap <leader>c  :tabc<CR>
   nnoremap <leader>e  :e#<CR>
   " nnoremap <leader>,e  :e <CR>=expand("%:p:h") .  '/' <CR>
   nnoremap <leader>vm :e ~/.vim/vimrc<CR>
-  nnoremap <leader>rb :e ~/.vim/bundle/vim-snipmate/snippets/ruby.snippets<CR>
+  nnoremap <leader>rb :e ~/.vim/bundle/vim-snipmate/snippets/<CR>
   nnoremap <leader>so :source ~/.vimrc<CR>
   nnoremap <leader>ne :NERDTree<CR>
   nnoremap <leader>nc :NERDTreeClose<CR>
@@ -109,15 +109,19 @@ set formatoptions=qrn1
   nnoremap <leader>gl :GitPull<cr>
   nnoremap <leader>r  :Rake!<cr>
   nnoremap <leader>rr :.Rake!<cr>
+  inoremap (    ()<left>
+  " inoremap [    []<left>
+  inoremap "    ""<left>
+  inoremap '    ''<left>
 " }
 
 " Set paste/nopaste mode {
-  nnoremap <F2> :set invpaste paste?<CR>
-  imap <F2> <C-O>:set invpaste paste?<CR>
+  nnoremap <F2>         :set invpaste paste?<CR>
+  inoremap <F2> <C-O>   :set invpaste paste?<CR>
   set pastetoggle=<F2>
-  " copy selection to system clipboard in Os X
-  vmap <C-x> :!pbcopy<CR>
-  vmap <C-c> :w !pbcopy<CR><CR>
+  " copy selection to system clipboard in Mac Os X
+  vnoremap <C-x> :!pbcopy<CR>
+  vnoremap <C-c> :w !pbcopy<CR><CR>
 " }
 
 " Display extra whitespace {
@@ -183,7 +187,7 @@ set formatoptions=qrn1
     let resp = system(cmd)
   endfunction
 
-  autocmd BufWritePost *.*rb,*.c,*.cpp,*.h call UpdateTags()
+  autocmd BufWritePost *.*rb,*.c,*.cpp,*.h,*.erl call UpdateTags()
 " }
 
 " vimdiff color scheme
@@ -212,15 +216,15 @@ endfunction
 
 " let g:indentLine_char = '┆'
 
-autocmd FileType cucumber compiler cucumber | setl makeprg=cucumber\ \"%:p\"
-autocmd FileType ruby
-  \ if expand('%') =~# '_test\.rb$' |
-  \   compiler rubyunit | setl makeprg=testrb\ \"%:p\" |
-  \ elseif expand('%') =~# '_spec\.rb$' |
-  \   compiler rspec | setl makeprg=rspec\ \"%:p\" |
-  \ else |
-  \   compiler ruby | setl makeprg=ruby\ -wc\ \"%:p\" |
-  \ endif
-autocmd User Rake
-  \ if &makeprg !~# 'bundle' | setl makeprg^=bundle\ exec\  | endif
+" autocmd FileType cucumber compiler cucumber | setl makeprg=cucumber\ \"%:p\"
+" autocmd FileType ruby
+"   \ if expand('%') =~# '_test\.rb$' |
+"   \   compiler rubyunit | setl makeprg=testrb\ \"%:p\" |
+"   \ elseif expand('%') =~# '_spec\.rb$' |
+"   \   compiler rspec | setl makeprg=rspec\ \"%:p\" |
+"   \ else |
+"   \   compiler ruby | setl makeprg=ruby\ -wc\ \"%:p\" |
+"   \ endif
+" autocmd User Rake
+"   \ if &makeprg !~# 'bundle' | setl makeprg^=bundle\ exec\  | endif
 
