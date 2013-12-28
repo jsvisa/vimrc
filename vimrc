@@ -80,7 +80,7 @@ set formatoptions=qrn1
   map <C-l> <C-w>l
   nnoremap <C-l> gt
   nnoremap <C-h> gT
-  nnoremap <C-r>      :tag<CR>
+  " nnoremap <C-r>      :tag<CR>
 
   inoremap <F1> <ESC>
   nnoremap <F1> <ESC>
@@ -112,7 +112,7 @@ set formatoptions=qrn1
   inoremap (    ()<left>
   " inoremap [    []<left>
   inoremap "    ""<left>
-  inoremap '    ''<left>
+  " inoremap '    ''<left>
 " }
 
 " Set paste/nopaste mode {
@@ -227,4 +227,15 @@ endfunction
 "   \ endif
 " autocmd User Rake
 "   \ if &makeprg !~# 'bundle' | setl makeprg^=bundle\ exec\  | endif
+
+""""""""""""""""""""""""""""""
+" BufExplorer
+"""""""""""""""""""""""""""""""""
+let g:bufExplorerDefaultHelp=0       " Do not show default help.
+" let g:bufExplorerShowRelativePath=1  " Show relative paths.
+let g:bufExplorerSortBy='mru'        " Sort by most recently used.
+let g:bufExplorerSplitRight=0        " Split left.
+let g:bufExplorerSplitVertical=1     " Split vertically.
+let g:bufExplorerSplitVertSize=30    " Split width
+let g:bufExplorerUseCurrentWindow=1  " Open in new window.
 

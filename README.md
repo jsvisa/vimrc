@@ -8,7 +8,7 @@ You should create a symbol link to *./.vimrc*,
 
 otherwise Vim can't read *~/.vim/* directory.
 
-eg: `ln -snf ~/.vim/.vimrc ~/.vimrc`
+eg: `ln -snf ~/.vim/vimrc ~/.vimrc`
 
 ###Useful vim commands:
 `:scriptnames  show the vim loading configure files`</p>
