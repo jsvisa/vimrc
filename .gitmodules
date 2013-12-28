@@ -43,3 +43,6 @@
 [submodule "bundle/vim-misc"]
 	path = bundle/vim-misc
 	url = http://github.com/xolox/vim-misc
+[submodule "bundle/vim-bufexplorer"]
+	path = bundle/vim-bufexplorer
+	url = https://github.com/vim-scripts/bufexplorer.zip.git
