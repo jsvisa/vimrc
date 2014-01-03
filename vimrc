@@ -1,4 +1,4 @@
-syn on
+syntax on
 filetype on
 filetype plugin on               " 针对不同的文件类型加载对应的插件
 filetype plugin indent on        " 启用自动补全
@@ -119,6 +119,7 @@ set formatoptions=qrn1
   nnoremap <F2>         :set invpaste paste?<CR>
   inoremap <F2> <C-O>   :set invpaste paste?<CR>
   set pastetoggle=<F2>
+  set clipboard=unnamed
   " copy selection to system clipboard in Mac Os X
   vnoremap <C-x> :!pbcopy<CR>
   vnoremap <C-c> :w !pbcopy<CR><CR>
@@ -203,7 +204,8 @@ highlight DiffText cterm=none ctermfg=black ctermbg=Red gui=none guifg=bg guibg=
     let g:vim_markdown_folding_disabled=1
 " }
 
-map ,ch :call SetColorColumn()<CR>
+set cc=100
+map <leader>ch :call SetColorColumn()<CR>
 function! SetColorColumn()
   let col_num = virtcol(".")
   let cc_list = split(&cc, ',')
@@ -215,18 +217,6 @@ function! SetColorColumn()
 endfunction
 
 " let g:indentLine_char = '┆'
-
-" autocmd FileType cucumber compiler cucumber | setl makeprg=cucumber\ \"%:p\"
-" autocmd FileType ruby
-"   \ if expand('%') =~# '_test\.rb$' |
-"   \   compiler rubyunit | setl makeprg=testrb\ \"%:p\" |
-"   \ elseif expand('%') =~# '_spec\.rb$' |
-"   \   compiler rspec | setl makeprg=rspec\ \"%:p\" |
-"   \ else |
-"   \   compiler ruby | setl makeprg=ruby\ -wc\ \"%:p\" |
-"   \ endif
-" autocmd User Rake
-"   \ if &makeprg !~# 'bundle' | setl makeprg^=bundle\ exec\  | endif
 
 """"""""""""""""""""""""""""""
 " BufExplorer
