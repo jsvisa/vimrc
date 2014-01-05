@@ -164,8 +164,17 @@ set formatoptions=qrn1
 
 " My personal Tags  {
   " set autochdir
+
+  function LoadTagsByFileType()
+    if &filetype == 'c'
+        set tags+=~/tags/tags-nginx
+    elseif
+        set tags+=~/tags/tags-gems
+      endif
+  endfunction
+
   set tags=tags
-  set tags+=~/tags/tags
+  autocmd FileType * call LoadTagsByFileType()
 " }
 
 " Ctags auto update {
