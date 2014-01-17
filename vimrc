@@ -117,9 +117,9 @@ set formatoptions=qrn1
 
 " Set paste/nopaste mode {
   nnoremap <F2>         :set invpaste paste?<CR>
-  inoremap <F2> <C-O>   :set invpaste paste?<CR>
+  " inoremap <F2> <C-O>   :set invpaste paste?<CR>
   set pastetoggle=<F2>
-  set clipboard=unnamed
+  set clipboard=unnamed "share clipboard with system
   " copy selection to system clipboard in Mac Os X
   vnoremap <C-x> :!pbcopy<CR>
   vnoremap <C-c> :w !pbcopy<CR><CR>
@@ -168,7 +168,7 @@ set formatoptions=qrn1
   function LoadTagsByFileType()
     if &filetype == 'c'
         set tags+=~/tags/tags-nginx
-    elseif
+    elseif &filetype == 'rb'
         set tags+=~/tags/tags-gems
       endif
   endfunction
