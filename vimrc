@@ -8,7 +8,7 @@ set expandtab                    " expandtab，用空格代替Tab键
 autocmd InsertLeave *.* write    " 每次退出插入模式时自动保存
 autocmd FocusLost * :wa          "saving on losing focus
 
-" autocmd BufNewFile,BufRead *.html,*.htm,*.css,*.js,*.erb,*.rb,*.yml set tabstop=2 shiftwidth=2 softtabstop=2
+autocmd BufNewFile,BufRead *.html,*.htm,*.css,*.js,*.erb,*.rb,*.yml set tabstop=2 shiftwidth=2 softtabstop=2
 " autocmd FileType c set tabstop=4 shiftwidth=4 softtabstop=4
 
 " Pathogen {
@@ -174,7 +174,9 @@ set formatoptions=qrn1
   endfunction
 
   set tags=tags
-  autocmd FileType * call LoadTagsByFileType()
+  " autocmd FileType * call LoadTagsByFileType()
+  au FileType c,cpp set tags^=~/tags/tags-nginx
+  au FileType *.erb,*.rb set tags^=~/tags/tags-gems
 " }
 
 " Ctags auto update {
@@ -197,7 +199,7 @@ set formatoptions=qrn1
     let resp = system(cmd)
   endfunction
 
-  autocmd BufWritePost *.*rb,*.c,*.cpp,*.h,*.erl call UpdateTags()
+  autocmd BufWritePost *.*rb,*.c,*.cpp,*.h,*.erl,*.lua call UpdateTags()
 " }
 
 " vimdiff color scheme
