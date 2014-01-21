@@ -159,7 +159,11 @@ set formatoptions=qrn1
   let Tlist_Close_On_Select = 1               "选择了tag后自动关闭taglist窗口
   let Tlist_Ctags_Cmd='/usr/local/bin/ctags'  "设置ctags命令的位置
   let Tlist_Auto_Open = 0                     "每次vim运行时自动打开taglist
+  let Tlist_WinWidth = 40
   nnoremap <leader>tl : Tlist<CR>
+" }
+" TagBar {
+  nnoremap <leader>tb : TagbarOpenAutoClose<CR>
 " }
 
 " My personal Tags  {
