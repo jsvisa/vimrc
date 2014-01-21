@@ -49,3 +49,6 @@
 [submodule "bundle/vim-instant-markdown"]
 	path = bundle/vim-instant-markdown
 	url = https://github.com/suan/vim-instant-markdown
+[submodule "bundle/vim-tagbar"]
+	path = bundle/vim-tagbar
+	url = git://github.com/majutsushi/tagbar
