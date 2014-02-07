@@ -1,14 +1,17 @@
 # module and export all
 snippet mod
 	-module(${1:`Filename('', 'my')`}).
-	
+	-export([${2:function}/${3:arity}]).
+snippet module
+	-module(${1:`Filename('', 'my')`}).
+
 	-compile([export_all]).
-	
+
 	start() ->
-	    ${2}
-	
+		${2}
+
 	stop() ->
-	    ok.
+		ok.
 # define directive
 snippet def
 	-define(${1:macro}, ${2:body}).${3}
@@ -24,16 +27,28 @@ snippet beh
 # if expression
 snippet if
 	if
-	    ${1:guard} ->
-	        ${2:body}
-	end
+		${1:guard} ->
+			${2:body};
+	end.
 # case expression
 snippet case
 	case ${1:expression} of
-	    ${2:pattern} ->
-	        ${3:body};
-	end
+		${2:pattern} ->
+			${3:body};
+	end.
 # record directive
 snippet rec
 	-record(${1:record}, {
-	    ${2:field}=${3:value}}).${4}
+		${2:field}=${3:value}}).${4}
+snippet fun
+	fun (${1}) -> ${2} end
+snippet func
+	fun (${1}) ->
+		${2}
+	end
+snippet try
+	try
+		${1}
+	catch
+		${2}
+	end.

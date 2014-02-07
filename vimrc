@@ -58,7 +58,7 @@ set formatoptions=qrn1
   let g:ctrlp_open_new_file = 't'
   let g:ctrlp_open_multiple_files = 'v'
 
-  set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.o
+  set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.o,*.beam
   let g:ctrlp_custom_ignore = {
     \ 'dir':  '\v[\/]\.(git)$',
     \ 'file': '\v\.(log|jpg|png|jpeg)$',
@@ -109,16 +109,16 @@ set formatoptions=qrn1
   nnoremap <leader>gl :GitPull<cr>
   nnoremap <leader>r  :Rake!<cr>
   nnoremap <leader>rr :.Rake!<cr>
-  inoremap (    ()<left>
+  " inoremap (    ()<left>
   " inoremap [    []<left>
-  inoremap "    ""<left>
+  " inoremap "    ""<left>
   " inoremap '    ''<left>
 " }
 
 " Set paste/nopaste mode {
-  nnoremap <F2>         :set invpaste paste?<CR>
-  " inoremap <F2> <C-O>   :set invpaste paste?<CR>
-  set pastetoggle=<F2>
+  nnoremap <C-b>         :set invpaste paste?<CR>
+  " inoremap <C-b> <C-O>   :set invpaste paste?<CR>
+  set pastetoggle=<C-b>
   set clipboard=unnamed "share clipboard with system
   " copy selection to system clipboard in Mac Os X
   vnoremap <C-x> :!pbcopy<CR>
