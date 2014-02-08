@@ -116,9 +116,9 @@ set formatoptions=qrn1
 " }
 
 " Set paste/nopaste mode {
-  nnoremap <C-b>         :set invpaste paste?<CR>
+  nnoremap <leader>b         :set invpaste paste?<CR>
   " inoremap <C-b> <C-O>   :set invpaste paste?<CR>
-  set pastetoggle=<C-b>
+  set pastetoggle=<leader>b
   set clipboard=unnamed "share clipboard with system
   " copy selection to system clipboard in Mac Os X
   vnoremap <C-x> :!pbcopy<CR>
