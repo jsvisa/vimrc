@@ -10,9 +10,6 @@
 [submodule "bundle/vim-markdown"]
     path = bundle/vim-markdown
     url = https://github.com/plasticboy/vim-markdown.git
-[submodule "bundle/vim-erlang"]
-    path = bundle/vim-erlang
-    url = https://github.com/onlychoice/vimerl/
 [submodule "bundle/ctrlp"]
     path = bundle/ctrlp
     url = https://github.com/kien/ctrlp.vim
@@ -32,23 +29,23 @@
     path = bundle/vim-indeneLine
     url = https://github.com/Yggdroot/indentLine.git
 [submodule "bundle/vim-fugitive"]
-	path = bundle/vim-fugitive
-	url = https://github.com/tpope/vim-fugitive
+    path = bundle/vim-fugitive
+    url = https://github.com/tpope/vim-fugitive
 [submodule "bundle/vim-lua"]
-	path = bundle/vim-lua
-	url = https://github.com/vim-scripts/lua.vim.git
+    path = bundle/vim-lua
+    url = https://github.com/vim-scripts/lua.vim.git
 [submodule "bundle/vim-lua-ftplugin"]
-	path = bundle/vim-lua-ftplugin
-	url = http://github.com/xolox/vim-lua-ftplugin
+    path = bundle/vim-lua-ftplugin
+    url = http://github.com/xolox/vim-lua-ftplugin
 [submodule "bundle/vim-misc"]
-	path = bundle/vim-misc
-	url = http://github.com/xolox/vim-misc
+    path = bundle/vim-misc
+    url = http://github.com/xolox/vim-misc
 [submodule "bundle/vim-bufexplorer"]
-	path = bundle/vim-bufexplorer
-	url = https://github.com/vim-scripts/bufexplorer.zip.git
+    path = bundle/vim-bufexplorer
+    url = https://github.com/vim-scripts/bufexplorer.zip.git
 [submodule "bundle/vim-instant-markdown"]
-	path = bundle/vim-instant-markdown
-	url = https://github.com/suan/vim-instant-markdown
+    path = bundle/vim-instant-markdown
+    url = https://github.com/suan/vim-instant-markdown
 [submodule "bundle/vim-tagbar"]
-	path = bundle/vim-tagbar
-	url = git://github.com/majutsushi/tagbar
+    path = bundle/vim-tagbar
+    url = git://github.com/majutsushi/tagbar
