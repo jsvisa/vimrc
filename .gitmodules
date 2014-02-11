@@ -49,3 +49,6 @@
 [submodule "bundle/vim-tagbar"]
     path = bundle/vim-tagbar
     url = git://github.com/majutsushi/tagbar
+[submodule "bundle/vim-elixir"]
+	path = bundle/vim-elixir
+	url = https://github.com/elixir-lang/vim-elixir.git

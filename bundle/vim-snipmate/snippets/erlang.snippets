@@ -1,7 +1,14 @@
 # module and export all
 snippet mod
 	-module(${1:`Filename('', 'my')`}).
+
 	-export([${2:function}/${3:arity}]).
+snippet modb
+	-module(${1:`Filename('', 'my')`}).
+
+	-behavior(${2}).
+
+	-export([${3:function}/${4:arity}]).
 snippet module
 	-module(${1:`Filename('', 'my')`}).
 
@@ -29,26 +36,29 @@ snippet if
 	if
 		${1:guard} ->
 			${2:body};
-	end.
+	end${3:.}
 # case expression
 snippet case
 	case ${1:expression} of
 		${2:pattern} ->
 			${3:body};
-	end.
+	end${4:.}
 # record directive
+snippet rd
+	-record(${1:state}, {${2}}).${3}
 snippet rec
 	-record(${1:record}, {
-		${2:field}=${3:value}}).${4}
+					${2:field}=${3:value}
+					}).${4}
 snippet fun
-	fun (${1}) -> ${2} end
+	fun(${1}) -> ${2} end${3:,}
 snippet func
-	fun (${1}) ->
+	fun(${1}) ->
 		${2}
-	end
+	end${3:,}
 snippet try
 	try
 		${1}
 	catch
 		${2}
-	end.
+	end${3:.}
