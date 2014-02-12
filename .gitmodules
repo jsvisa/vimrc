@@ -52,3 +52,15 @@
 [submodule "bundle/vim-elixir"]
 	path = bundle/vim-elixir
 	url = https://github.com/elixir-lang/vim-elixir.git
+[submodule "bundle/rainbow_parentheses"]
+	path = bundle/rainbow_parentheses
+	url = https://github.com/kien/rainbow_parentheses.vim.git
+[submodule "bundle/delimitMate"]
+	path = bundle/delimitMate
+	url = https://github.com/Raimondi/delimitMate
+[submodule "bundle/vim-expand-region"]
+	path = bundle/vim-expand-region
+	url = https://github.com/terryma/vim-expand-region
+[submodule "bundle/syntastic"]
+	path = bundle/syntastic
+	url = https://github.com/scrooloose/syntastic
