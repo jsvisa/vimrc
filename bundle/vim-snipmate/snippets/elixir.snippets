@@ -1,0 +1,74 @@
+snippet case
+	case ${1} do
+		match: ${2}
+		${3}
+	end
+snippet def
+	def ${1:name} do
+		${2}
+	end
+snippet defimpl
+	defimpl ${1:protocol_name}, for: ${2:data_type} do
+		${3}
+	end
+snippet macro
+	defmacro ${1:name} do
+		${2}
+	end
+snippet mod
+	defmodule ${1:module_name} do
+		${2}
+	end
+snippet defp
+	defp ${1:name} do
+		${2}
+	end
+snippet protocol
+	defprotocol ${1:name}, [${2:function}]
+snippet rd
+	defrecord ${1:record_name}, ${2:functions}
+snippet doc
+	@doc """
+	${1}
+	"""
+snippet fn
+	fn(${1:args}) -> ${2} end
+snippet if
+	if ${1:condition}, do: ${2}
+snippet ifelse
+	if ${1:condition}, do: ${2}, else: ${3}
+snippet iff
+	if ${1} do
+		${2}
+	end
+snippet ifdoelse
+	if ${1:condition} do
+		${2}
+	else:
+		${3}
+	end
+snippet loop
+	loop ${1:values}, ${2:initial} do
+	match: ${3}
+		${4}
+	end
+snippet modoc
+	@moduledoc """
+	${1}
+	"""
+snippet rcv
+	receive do
+		match: ${1}
+			${2}
+	end
+snippet require
+	require ${1:module_name}, as: ${2:alias}
+snippet test
+	test "${1:test_name}" do
+		${2}
+	end
+snippet try
+	try do
+		catch: ${1}
+		${2}
+	end
