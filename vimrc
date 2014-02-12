@@ -71,7 +71,6 @@ set formatoptions=qrn1
 
   nnoremap gcc gcc<ESC>
   nnoremap <F8> :!
-  nnoremap <F10> :Ack
   nnoremap <F5> :!pry<CR>
 
   map <C-h> <C-w>h
@@ -80,7 +79,6 @@ set formatoptions=qrn1
   map <C-l> <C-w>l
   nnoremap <C-l> gt
   nnoremap <C-h> gT
-  " nnoremap <C-r>      :tag<CR>
 
   inoremap <F1> <ESC>
   nnoremap <F1> <ESC>
@@ -91,6 +89,7 @@ set formatoptions=qrn1
 " <leader> hotkey {
   let mapleader = ','
   nnoremap <leader><space> :noh<cr>
+  nnoremap <leader>a :Ack
   nnoremap <leader>w :%s/\s\+$//<cr>:let @/=''<CR>
   nnoremap <leader>t  :tabe<CR>
   nnoremap <leader>c  :tabc<CR>
@@ -109,10 +108,6 @@ set formatoptions=qrn1
   nnoremap <leader>gl :GitPull<cr>
   nnoremap <leader>r  :Rake!<cr>
   nnoremap <leader>rr :.Rake!<cr>
-  " inoremap (    ()<left>
-  " inoremap [    []<left>
-  " inoremap "    ""<left>
-  " inoremap '    ''<left>
 " }
 
 " Set paste/nopaste mode {
@@ -162,14 +157,14 @@ set formatoptions=qrn1
   let Tlist_WinWidth = 40
   nnoremap <leader>tl : Tlist<CR>
 " }
+
 " TagBar {
   nnoremap <leader>tb : TagbarOpenAutoClose<CR>
 " }
 
 " My personal Tags  {
-  " set autochdir
 
-  function LoadTagsByFileType()
+  function! LoadTagsByFileType()
     if &filetype == 'c'
         set tags+=~/tags/tags-nginx
     elseif &filetype == 'rb'
@@ -177,6 +172,7 @@ set formatoptions=qrn1
       endif
   endfunction
 
+  " set autochdir
   set tags=tags
   " autocmd FileType * call LoadTagsByFileType()
   au FileType c,cpp set tags^=~/tags/tags-nginx
@@ -203,17 +199,12 @@ set formatoptions=qrn1
     let resp = system(cmd)
   endfunction
 
-  autocmd BufWritePost *.*rb,*.c,*.cpp,*.h,*.erl,*.lua call UpdateTags()
+  autocmd BufWritePost *.*rb,*.c,*.cpp,*.h,*.erl,*.hrl,*.lua,*.ex,*.exs call UpdateTags()
 " }
 
 " vimdiff color scheme
 highlight DiffChange cterm=none ctermfg=black ctermbg=LightGreen gui=none guifg=bg guibg=LightGreen
 highlight DiffText cterm=none ctermfg=black ctermbg=Red gui=none guifg=bg guibg=Red
-
-" Git Gutter {
-    nnoremap <leader>ggt :GitGutterToggle<cr>
-    let g:gitgutter_enabled = 0
-" }
 
 " Markdown disable folding {
     let g:vim_markdown_folding_disabled=1
@@ -232,6 +223,11 @@ function! SetColorColumn()
 endfunction
 
 " let g:indentLine_char = '┆'
+"
+" Git Gutter {
+    nnoremap <leader>git :GitGutterToggle<CR>
+    let g:gitgutter_enabled = 0
+" }
 
 """"""""""""""""""""""""""""""
 " BufExplorer
@@ -243,4 +239,33 @@ let g:bufExplorerSplitRight=0        " Split left.
 let g:bufExplorerSplitVertical=1     " Split vertically.
 let g:bufExplorerSplitVertSize=30    " Split width
 let g:bufExplorerUseCurrentWindow=1  " Open in new window.
+
+
+""""""""""""""""""""""""""""""
+" Rainbow Parentheses
+"""""""""""""""""""""""""""""""""
+let g:rbpt_colorpairs = [
+    \ ['brown',       'RoyalBlue3'],
+    \ ['Darkblue',    'SeaGreen3'],
+    \ ['darkgray',    'DarkOrchid3'],
+    \ ['darkgreen',   'firebrick3'],
+    \ ['darkcyan',    'RoyalBlue3'],
+    \ ['darkred',     'SeaGreen3'],
+    \ ['darkmagenta', 'DarkOrchid3'],
+    \ ['brown',       'firebrick3'],
+    \ ['gray',        'RoyalBlue3'],
+    \ ['black',       'SeaGreen3'],
+    \ ['darkmagenta', 'DarkOrchid3'],
+    \ ['Darkblue',    'firebrick3'],
+    \ ['darkgreen',   'RoyalBlue3'],
+    \ ['darkcyan',    'SeaGreen3'],
+    \ ['darkred',     'DarkOrchid3'],
+    \ ['red',         'firebrick3'],
+    \ ]
+let g:rbpt_max = 16
+let g:rbpt_loadcmd_toggle = 0
+au VimEnter * RainbowParenthesesToggle
+au Syntax * RainbowParenthesesLoadRound
+au Syntax * RainbowParenthesesLoadSquare
+au Syntax * RainbowParenthesesLoadBraces
 

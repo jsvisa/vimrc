@@ -70,3 +70,16 @@ gt, gT 可以直接在tab之间切换。
 
     $ ctags -R   --exclude=*.js ~/.rvm/gems/ruby-2.0.0-p247/gems/
 
+###NerdTree
+在nerdtree窗口常用操作：(小写当前，大写root)
+
+* x.......Close the current nodes parent收起当前目录树
+* R.......Recursively refresh the current root刷新根目录树
+* r.......Recursively refresh the current directory刷新当前目录
+* P.......Jump to the root node
+* p.......Jump to current nodes parent
+* K.......Jump up inside directories at the current tree depth  到同目录第一个节点
+* J.......Jump down inside directories at the current tree depth 最后一个节点
+* o.......Open files, directories and bookmarks
+* i.......Open selected file in a split window上下分屏
+* s.......Open selected file in a new vsplit左右分屏
