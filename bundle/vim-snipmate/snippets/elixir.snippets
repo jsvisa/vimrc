@@ -16,8 +16,12 @@ snippet macro
 	defmacro ${1:name} do
 		${2}
 	end
+snippet macrop
+	defmacrop ${1:name} do
+		${2}
+	end
 snippet mod
-	defmodule ${1:`substitute(Filename(), '^.', '\u&', '')`} do
+	defmodule ${1:`substitute(Filename(), '\(_\|^\)\(.\)', '\u\2', 'g')`} do
 		${2}
 	end
 snippet pl
@@ -32,24 +36,20 @@ snippet impl
 	end
 snippet rd
 	defrecord ${1:record_name}, ${2:functions}
-snippet doc
-	@doc """
-	${1}
-	"""
 snippet fn
-	fn(${1:args}) -> ${2} end
+	fn${1} -> ${2} end
 snippet if
-	if ${1:condition}, do: ${2}
+	if ${1}, do: ${2}
 snippet if,else
-	if ${1:condition}, do: ${2}, else: ${3}
+	if ${1}, do: ${2}, else: ${3}
 snippet iff
 	if ${1} do
 		${2}
 	end
 snippet ifelse
-	if ${1:condition} do
+	if ${1} do
 		${2}
-	else:
+	else
 		${3}
 	end
 snippet cond
@@ -58,17 +58,19 @@ snippet cond
 	end
 snippet loop
 	loop ${1:values}, ${2:initial} do
-	match: ${3}
-		${4}
+		${3}
 	end
+snippet doc
+	@doc """
+	${1}
+	"""
 snippet modoc
 	@moduledoc """
 	${1}
 	"""
 snippet rcv
 	receive do
-		match: ${1}
-			${2}
+		${2}
 	end
 snippet require
 	require ${1:module_name}, as: ${2:alias}
@@ -81,3 +83,8 @@ snippet try
 		catch: ${1}
 		${2}
 	end
+snippet do
+	do
+		${1}
+	end
+
