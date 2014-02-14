@@ -73,6 +73,3 @@
 [submodule "bundle/vim-nginx"]
     path = bundle/vim-nginx
     url = https://github.com/vim-scripts/nginx.vim
-[submodule "bundle/vim-neocomplecache"]
-    path = bundle/vim-neocomplecache
-    url = https://github.com/Shougo/neocomplcache.vim.git
