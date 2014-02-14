@@ -50,29 +50,29 @@
     path = bundle/vim-tagbar
     url = git://github.com/majutsushi/tagbar
 [submodule "bundle/vim-elixir"]
-	path = bundle/vim-elixir
-	url = https://github.com/elixir-lang/vim-elixir.git
+    path = bundle/vim-elixir
+    url = https://github.com/elixir-lang/vim-elixir.git
 [submodule "bundle/rainbow_parentheses"]
-	path = bundle/rainbow_parentheses
-	url = https://github.com/kien/rainbow_parentheses.vim.git
+    path = bundle/rainbow_parentheses
+    url = https://github.com/kien/rainbow_parentheses.vim.git
 [submodule "bundle/delimitMate"]
-	path = bundle/delimitMate
-	url = https://github.com/Raimondi/delimitMate
+    path = bundle/delimitMate
+    url = https://github.com/Raimondi/delimitMate
 [submodule "bundle/vim-expand-region"]
-	path = bundle/vim-expand-region
-	url = https://github.com/terryma/vim-expand-region
+    path = bundle/vim-expand-region
+    url = https://github.com/terryma/vim-expand-region
 [submodule "bundle/syntastic"]
-	path = bundle/syntastic
-	url = https://github.com/scrooloose/syntastic
+    path = bundle/syntastic
+    url = https://github.com/scrooloose/syntastic
 [submodule "bundle/vim-multiple-cursors"]
-	path = bundle/vim-multiple-cursors
-	url = https://github.com/terryma/vim-multiple-cursors
+    path = bundle/vim-multiple-cursors
+    url = https://github.com/terryma/vim-multiple-cursors
 [submodule "bundle/vim-surround"]
-	path = bundle/vim-surround
-	url = https://github.com/tpope/vim-surround
+    path = bundle/vim-surround
+    url = https://github.com/tpope/vim-surround
 [submodule "bundle/vim-nginx"]
-	path = bundle/vim-nginx
-	url = https://github.com/vim-scripts/nginx.vim
+    path = bundle/vim-nginx
+    url = https://github.com/vim-scripts/nginx.vim
 [submodule "bundle/vim-neocomplecache"]
-	path = bundle/vim-neocomplecache
-	url = https://github.com/Shougo/neocomplcache.vim.git
+    path = bundle/vim-neocomplecache
+    url = https://github.com/Shougo/neocomplcache.vim.git
