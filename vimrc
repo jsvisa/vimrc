@@ -210,7 +210,7 @@ highlight DiffText cterm=none ctermfg=black ctermbg=Red gui=none guifg=bg guibg=
     let g:vim_markdown_folding_disabled=1
 " }
 
-set cc=100
+" set cc=100
 map <leader>ch :call SetColorColumn()<CR>
 function! SetColorColumn()
   let col_num = virtcol(".")
