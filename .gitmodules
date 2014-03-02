@@ -22,9 +22,6 @@
 [submodule "bundle/vim-ack"]
     path = bundle/vim-ack
     url = https://github.com/mileszs/ack.vim.git
-[submodule "bundle/vim-gitgutter"]
-    path = bundle/vim-gitgutter
-    url = git://github.com/airblade/vim-gitgutter.git
 [submodule "bundle/vim-indeneLine"]
     path = bundle/vim-indeneLine
     url = https://github.com/Yggdroot/indentLine.git

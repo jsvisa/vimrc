@@ -223,11 +223,6 @@ function! SetColorColumn()
 endfunction
 
 " let g:indentLine_char = '┆'
-"
-" Git Gutter {
-    nnoremap <leader>git :GitGutterToggle<CR>
-    let g:gitgutter_enabled = 0
-" }
 
 """"""""""""""""""""""""""""""
 " BufExplorer
