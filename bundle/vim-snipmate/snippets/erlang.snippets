@@ -46,7 +46,7 @@ snippet case
 # record directive
 snippet rd
 	-record(${1:state}, {${2}}).${3}
-snippet rec
+snippet record
 	-record(${1:record}, {
 					${2:field}=${3:value}
 					}).${4}
@@ -57,18 +57,18 @@ snippet func
 		${2}
 	end${3:,}
 snippet try
-	try
-		${1}
+	try ${1} of
+		${2}
 	catch
-		${2}
-	end${3:.}
-snippet rcv
-	receive
-		${2}
-	end${3:.}
-snippet rcvf
-	receive
-		${2}
-	after
 		${3}
-	end${4:.}
+	end
+snippet rec
+	receive
+		${1}
+	end
+snippet receive
+	receive
+		${1}
+	after
+		${2}
+	end

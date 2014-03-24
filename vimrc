@@ -60,7 +60,7 @@ set formatoptions=qrn1
 
   set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.o,*.beam
   let g:ctrlp_custom_ignore = {
-    \ 'dir':  '\v[\/]\.(git)$',
+    \ 'dir':  '\v[\/](_build|deps|\.(git|hg|svn))$',
     \ 'file': '\v\.(log|jpg|png|jpeg)$',
     \ }
 " }
