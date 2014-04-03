@@ -1,8 +1,8 @@
 # module and export all
 snippet mod
-	-module(${1:`Filename('', 'my')`}).
-
-	-export([${2:function}/${3:arity}]).
+	-module(${1:`Filename('', 'my')`}).${2}
+snippet com
+	-compile(${1:export_all}).${2}
 snippet modb
 	-module(${1:`Filename('', 'my')`}).
 
@@ -24,7 +24,7 @@ snippet def
 	-define(${1:macro}, ${2:body}).${3}
 # export directive
 snippet exp
-	-export([${1:function}/${2:arity}]).
+	-export([${1:function}/${2:arity}]).${3}
 # include directive
 snippet inc
 	-include("${1:file}").${2}

@@ -2237,8 +2237,12 @@ lib:send
 lib:sendw
 list_to_atom
 list_to_binary
+list_to_bitstring
 list_to_existing_atom
 list_to_integer
+list_to_float
+list_to_pid
+list_to_tuple
 lists:all
 lists:any
 lists:append
