@@ -3,12 +3,12 @@ Vimcfg
 
 My private vim configuration including *.vim/* directory and *.vimrc* file
 
-###Hint:
-You should create a symbol link to *./.vimrc*,
+###How to start using?
+1. `cd ~ && git clone https://github.com/jsvisa/.vim`
+2. `cd .vim && git submodule update --init`
+3. `ln -snf ~/.vim/vimrc ~/.vimrc`
 
-otherwise Vim can't read *~/.vim/* directory.
-
-eg: `ln -snf ~/.vim/vimrc ~/.vimrc`
+Hint: You should create a symbol link to *./vimrc*, otherwise **Vim** can't read *~/.vim/* directory.
 
 ###Useful vim commands:
 `:scriptnames  show the vim loading configure files`</p>
