@@ -26,8 +26,8 @@ set tabstop=4
 set softtabstop=4
 
 set grepprg=ack
-map <F3> :cp<cr>
-map <F4> :cn<cr>
+map <F3> :cp<CR>
+map <F4> :cn<CR>
 
 " set cursorline " 为光标所在行加下划线
 set number         " 显示行号
@@ -60,7 +60,7 @@ set formatoptions=qrn1
 
   set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.o,*.beam
   let g:ctrlp_custom_ignore = {
-    \ 'dir':  '\v[\/](_build|deps|\.(git|hg|svn))$',
+    \ 'dir':  '\v[\/](_build|deps|rel|\.(git|hg|svn))$',
     \ 'file': '\v\.(log|jpg|png|jpeg)$',
     \ }
 " }
@@ -88,9 +88,9 @@ set formatoptions=qrn1
 
 " <leader> hotkey {
   let mapleader = ','
-  nnoremap <leader><space> :noh<cr>
+  nnoremap <leader><space> :noh<CR>
   nnoremap <leader>a :Ack
-  nnoremap <leader>w :%s/\s\+$//<cr>:let @/=''<CR>
+  nnoremap <leader>w :%s/\s\+$//<CR>:let @/=''<CR>
   nnoremap <leader>t  :tabe<CR>
   nnoremap <leader>c  :tabc<CR>
   nnoremap <leader>e  :e#<CR>
@@ -101,13 +101,15 @@ set formatoptions=qrn1
   nnoremap <leader>ne :NERDTree<CR>
   nnoremap <leader>nc :NERDTreeClose<CR>
 
-  nnoremap <leader>gs :GitStatus<cr>
-  nnoremap <leader>gc :GitCommit<cr>
-  nnoremap <leader>ga :GitAdd<cr>
-  nnoremap <leader>gp :GitPush<cr>
-  nnoremap <leader>gl :GitPull<cr>
-  nnoremap <leader>r  :Rake!<cr>
-  nnoremap <leader>rr :.Rake!<cr>
+  nnoremap <leader>gs :GitStatus<CR>
+  nnoremap <leader>gc :GitCommit<CR>
+  nnoremap <leader>ga :GitAdd<CR>
+  nnoremap <leader>gp :GitPush<CR>
+  nnoremap <leader>gl :GitPull<CR>
+  nnoremap <leader>r  :Rake!<CR>
+  nnoremap <leader>rr :.Rake!<CR>
+  nnoremap <leader>os :! open %:p -a Safari<CR><CR>
+  nnoremap <leader>oc :! open %:p -a Firefox<CR><CR>
 " }
 
 " Set paste/nopaste mode {
