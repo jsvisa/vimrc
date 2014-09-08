@@ -8,7 +8,7 @@ set expandtab                    " expandtab，用空格代替Tab键
 autocmd InsertLeave *.* write    " 每次退出插入模式时自动保存
 autocmd FocusLost * :wa          "saving on losing focus
 
-autocmd BufNewFile,BufRead *.html,*.htm,*.css,*.js,*.erb,*.rb,*.yml set tabstop=2 shiftwidth=2 softtabstop=2
+autocmd BufNewFile,BufRead *.html,*.htm,*.css,*.js,*.erb,*.rb,*.rake,*.yml set tabstop=2 shiftwidth=2 softtabstop=2
 " autocmd FileType c set tabstop=4 shiftwidth=4 softtabstop=4
 
 " Pathogen {
