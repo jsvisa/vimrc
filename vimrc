@@ -5,6 +5,10 @@ filetype plugin indent on        " 启用自动补全
 set encoding=utf8
 set expandtab                    " expandtab，用空格代替Tab键
 
+" let g:molokai_original = 1
+" let g:rehash256 = 1
+" colorscheme solarized
+
 autocmd InsertLeave *.* write    " 每次退出插入模式时自动保存
 autocmd FocusLost * :wa          "saving on losing focus
 
@@ -30,6 +34,7 @@ map <F3> :cp<CR>
 map <F4> :cn<CR>
 
 " set cursorline " 为光标所在行加下划线
+" set cursorcolumn
 set number         " 显示行号
 set cindent        " 自动缩进4空格
 set smartindent    " 智能自动缩进
