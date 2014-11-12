@@ -12,7 +12,7 @@ set expandtab                    " expandtab，用空格代替Tab键
 autocmd InsertLeave *.* write    " 每次退出插入模式时自动保存
 autocmd FocusLost * :wa          "saving on losing focus
 
-autocmd BufNewFile,BufRead *.html,*.htm,*.css,*.js,*.erb,*.rb,*.rake,*.yml set tabstop=2 shiftwidth=2 softtabstop=2
+autocmd BufNewFile,BufRead *.html,*.htm,*.css,*.js,*.erb,*.rb,*.rake,*.yml,Gemfile set tabstop=2 shiftwidth=2 softtabstop=2
 " autocmd FileType c set tabstop=4 shiftwidth=4 softtabstop=4
 
 " Pathogen {
@@ -63,7 +63,7 @@ set formatoptions=qrn1
   let g:ctrlp_open_new_file = 't'
   let g:ctrlp_open_multiple_files = 'v'
 
-  set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.o,*.beam
+  set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.o,*.beam,*.pyc
   let g:ctrlp_custom_ignore = {
     \ 'dir':  '\v[\/](_build|deps|rel|\.(git|hg|svn))$',
     \ 'file': '\v\.(log|jpg|png|jpeg)$',
@@ -76,7 +76,6 @@ set formatoptions=qrn1
 
   nnoremap gcc gcc<ESC>
   nnoremap <F8> :!
-  nnoremap <F5> :!pry<CR>
 
   map <C-h> <C-w>h
   map <C-j> <C-w>j
@@ -88,6 +87,9 @@ set formatoptions=qrn1
   inoremap <F1> <ESC>
   nnoremap <F1> <ESC>
   vnoremap <F1> <ESC>
+  inoremap <F5> :CtrlPClearCache<CR>
+  nnoremap <F5> :CtrlPClearCache<CR>
+  vnoremap <F5> :CtrlPClearCache<CR>
   nnoremap ; :
 " }
 
@@ -115,6 +117,7 @@ set formatoptions=qrn1
   nnoremap <leader>rr :.Rake!<CR>
   nnoremap <leader>os :! open %:p -a Safari<CR><CR>
   nnoremap <leader>oc :! open %:p -a Firefox<CR><CR>
+  nnoremap <leader>g :Dash<CR>
 " }
 
 " Set paste/nopaste mode {
