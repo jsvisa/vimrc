@@ -12,7 +12,7 @@ set expandtab                    " expandtab，用空格代替Tab键
 autocmd InsertLeave *.* write    " 每次退出插入模式时自动保存
 autocmd FocusLost * :wa          "saving on losing focus
 
-autocmd BufNewFile,BufRead *.html,*.htm,*.css,*.js,*.erb,*.rb,*.rake,*.yml,Gemfile set tabstop=2 shiftwidth=2 softtabstop=2
+autocmd BufNewFile,BufRead *.c,*.py,*.erl,*.sh set tabstop=4 shiftwidth=4 softtabstop=4
 " autocmd FileType c set tabstop=4 shiftwidth=4 softtabstop=4
 
 " Pathogen {
@@ -25,9 +25,9 @@ set omnifunc=syntaxcomplete#Complete
 " set completeopt=longest,menuone
 
 set bs=2
-set shiftwidth=4
-set tabstop=4
-set softtabstop=4
+set shiftwidth=2
+set tabstop=2
+set softtabstop=2
 
 set grepprg=ack
 map <F3> :cp<CR>
@@ -274,3 +274,4 @@ au Syntax * RainbowParenthesesLoadRound
 au Syntax * RainbowParenthesesLoadSquare
 au Syntax * RainbowParenthesesLoadBraces
 
+let g:html_indent_tags = 'p\|li\|nav'

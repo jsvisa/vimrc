@@ -76,3 +76,12 @@
 [submodule "bundle/vim-ragtag"]
     path = bundle/vim-ragtag
     url = https://github.com/tpope/vim-ragtag
+[submodule "bundle/vim-html5"]
+	path = bundle/vim-html5
+	url = https://github.com/othree/html5.vim
+[submodule "bundle/vim-haml"]
+	path = bundle/vim-haml
+	url = https://github.com/tpope/vim-haml
+[submodule "bundle/vim-less"]
+	path = bundle/vim-less
+	url = https://github.com/groenewege/vim-less
