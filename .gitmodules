@@ -68,8 +68,11 @@
     path = bundle/vim-nginx
     url = https://github.com/vim-scripts/nginx.vim
 [submodule "bundle/vim-emmet"]
-	path = bundle/vim-emmet
-	url = https://github.com/mattn/emmet-vim.git
+    path = bundle/vim-emmet
+    url = https://github.com/mattn/emmet-vim.git
 [submodule "bundle/vim-dash"]
-	path = bundle/vim-dash
-	url = https://github.com/rizzatti/dash.vim
+    path = bundle/vim-dash
+    url = https://github.com/rizzatti/dash.vim
+[submodule "bundle/vim-ragtag"]
+    path = bundle/vim-ragtag
+    url = https://github.com/tpope/vim-ragtag
