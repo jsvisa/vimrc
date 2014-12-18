@@ -9,10 +9,10 @@ set expandtab                    " expandtab，用空格代替Tab键
 " let g:rehash256 = 1
 " colorscheme solarized
 
-autocmd InsertLeave *.* write    " 每次退出插入模式时自动保存
-autocmd FocusLost * :wa          "saving on losing focus
+au InsertLeave *.* write    " 每次退出插入模式时自动保存
+au FocusLost * :wa          "saving on losing focus
 
-autocmd BufNewFile,BufRead *.c,*.py,*.erl,*.sh,*.go set tabstop=4 shiftwidth=4 softtabstop=4
+au BufNewFile,BufRead *.c,*.py,*.erl,*.sh,*.go,*.lua,*.vim set tabstop=4 shiftwidth=4 softtabstop=4
 " autocmd FileType c set tabstop=4 shiftwidth=4 softtabstop=4
 
 " Pathogen {
@@ -131,8 +131,9 @@ set formatoptions=qrn1
   vnoremap <C-c> :w !pbcopy<CR><CR>
 " }
 
-" Display extra whitespace {
-  set list listchars=tab:»·,trail:·
+" Display extra Tab except Golang {
+  let blacklist = ['go', 'py']
+  au BufWritePre * if index(blacklist, &ft) < 0 | set list listchars=tab:»·,trail:·
 
   fun! StripTrailingWhitespace()
     " Don't strip on these filetypes
