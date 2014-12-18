@@ -12,7 +12,7 @@ set expandtab                    " expandtab，用空格代替Tab键
 autocmd InsertLeave *.* write    " 每次退出插入模式时自动保存
 autocmd FocusLost * :wa          "saving on losing focus
 
-autocmd BufNewFile,BufRead *.c,*.py,*.erl,*.sh set tabstop=4 shiftwidth=4 softtabstop=4
+autocmd BufNewFile,BufRead *.c,*.py,*.erl,*.sh,*.go set tabstop=4 shiftwidth=4 softtabstop=4
 " autocmd FileType c set tabstop=4 shiftwidth=4 softtabstop=4
 
 " Pathogen {
@@ -65,7 +65,7 @@ set formatoptions=qrn1
 
   set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.o,*.beam,*.pyc
   let g:ctrlp_custom_ignore = {
-    \ 'dir':  '\v[\/](_build|deps|rel|\.(git|hg|svn))$',
+    \ 'dir':  '\v[\/](_build|deps|rel|coverage|\.(git|hg|svn))$',
     \ 'file': '\v\.(log|jpg|png|jpeg)$',
     \ }
 " }
@@ -84,7 +84,7 @@ set formatoptions=qrn1
   nnoremap <C-l> gt
   nnoremap <C-h> gT
 
-  inoremap <F1> <ESC>
+  noremap <F1> <ESC>
   nnoremap <F1> <ESC>
   vnoremap <F1> <ESC>
   inoremap <F5> :CtrlPClearCache<CR>
@@ -118,6 +118,7 @@ set formatoptions=qrn1
   nnoremap <leader>os :! open %:p -a Safari<CR><CR>
   nnoremap <leader>oc :! open %:p -a Firefox<CR><CR>
   nnoremap <leader>g :Dash<CR>
+  nnoremap <leader>m :CtrlPClearCache<CR>
 " }
 
 " Set paste/nopaste mode {
@@ -209,7 +210,7 @@ set formatoptions=qrn1
     let resp = system(cmd)
   endfunction
 
-  autocmd BufWritePost *.*rb,*.c,*.cpp,*.h,*.erl,*.hrl,*.lua,*.ex,*.exs call UpdateTags()
+  autocmd BufWritePost *.*rb,*.c,*.cpp,*.h,*.erl,*.hrl,*.lua,*.ex,*.exs,*.go call UpdateTags()
 " }
 
 " vimdiff color scheme
