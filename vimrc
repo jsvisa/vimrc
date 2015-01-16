@@ -1,3 +1,6 @@
+" -*- mode: vim -*-
+" vi: set shiftwidth=2 tabstop=2 softtabstop=2:
+
 syntax on
 filetype on
 filetype plugin on               " 针对不同的文件类型加载对应的插件
@@ -5,29 +8,25 @@ filetype plugin indent on        " 启用自动补全
 set encoding=utf8
 set expandtab                    " expandtab，用空格代替Tab键
 
-" let g:molokai_original = 1
-" let g:rehash256 = 1
-" colorscheme solarized
+let g:rehash256 = 1
+colorscheme molokai
+let g:molokai_original = 1
 
 au InsertLeave *.* write    " 每次退出插入模式时自动保存
-au FocusLost * :wa          "saving on losing focus
+au FocusLost * :wa          " saving on losing focus
 
-au BufNewFile,BufRead *.c,*.py,*.erl,*.sh,*.go,*.lua,*.vim set tabstop=4 shiftwidth=4 softtabstop=4
-" autocmd FileType c set tabstop=4 shiftwidth=4 softtabstop=4
+" au BufNewFile,BufRead *.c,*.py,*.erl,*.sh,*.go,*.lua,*.vim set tabstop=4 shiftwidth=4 softtabstop=4
+set shiftwidth=4 tabstop=4 softtabstop=4
+au BufNewFile,BufRead *.rb,*.ex,*.exs set bs=2 sw=2 ts=2 st=2
 
 " Pathogen {
   call pathogen#infect()
-  call pathogen#helptags() "update all plugins help doc
+  call pathogen#helptags() " update all plugins help doc
 " }
 
 set omnifunc=syntaxcomplete#Complete
 " set path=**
 " set completeopt=longest,menuone
-
-set bs=2
-set shiftwidth=2
-set tabstop=2
-set softtabstop=2
 
 set grepprg=ack
 map <F3> :cp<CR>
@@ -48,13 +47,13 @@ hi Search term=standout ctermbg=11
 set hidden
 
 vnoremap / /\v "add \v after key in /
-set ignorecase "搜索小写正文时大小写不敏感，搜索正文包含大写时大小写敏感
+set ignorecase " 搜索小写正文时大小写不敏感，搜索正文包含大写时大小写敏感
 set smartcase
-set incsearch "高亮搜索文本
+set incsearch " 高亮搜索文本
 set showmatch
 set hlsearch
 
-set fileencodings=utf-8 ",gbk "使用utf-8或gbk打开文件
+set fileencodings=utf-8 ",gbk  " 使用utf-8或gbk打开文件
 
 " set wrap   "换行设置
 set formatoptions=qrn1
@@ -84,7 +83,7 @@ set formatoptions=qrn1
   nnoremap <C-l> gt
   nnoremap <C-h> gT
 
-  noremap <F1> <ESC>
+  inoremap <F1> <ESC>
   nnoremap <F1> <ESC>
   vnoremap <F1> <ESC>
   inoremap <F5> :CtrlPClearCache<CR>
@@ -98,9 +97,9 @@ set formatoptions=qrn1
   nnoremap <leader><space> :noh<CR>
   nnoremap <leader>a :Ack
   nnoremap <leader>w :%s/\s\+$//<CR>:let @/=''<CR>
-  nnoremap <leader>t  :tabe<CR>
-  nnoremap <leader>c  :tabc<CR>
-  nnoremap <leader>e  :e#<CR>
+  nnoremap <leader>t :tabe<CR>
+  nnoremap <leader>c :tabc<CR>
+  nnoremap <leader>e :e#<CR>
   " nnoremap <leader>,e  :e <CR>=expand("%:p:h") .  '/' <CR>
   nnoremap <leader>vm :e ~/.vim/vimrc<CR>
   nnoremap <leader>rb :e ~/.vim/bundle/vim-snipmate/snippets/<CR>
@@ -119,6 +118,11 @@ set formatoptions=qrn1
   nnoremap <leader>oc :! open %:p -a Firefox<CR><CR>
   nnoremap <leader>g :Dash<CR>
   nnoremap <leader>m :CtrlPClearCache<CR>
+
+  " for quickfix
+  nnoremap <leader>cn :cn<CR>
+  nnoremap <leader>cp :cp<CR>
+  nnoremap <leader>cl :ccl<CR>
 " }
 
 " Set paste/nopaste mode {
@@ -131,16 +135,16 @@ set formatoptions=qrn1
   vnoremap <C-c> :w !pbcopy<CR><CR>
 " }
 
+
 " Display extra Tab except Golang {
-  let blacklist = ['go', 'py']
-  au BufWritePre * if index(blacklist, &ft) < 0 | set list listchars=tab:»·,trail:·
 
   fun! StripTrailingWhitespace()
-    " Don't strip on these filetypes
-    if &ft =~ 'snippets'
-        return
-    endif
     %s/\s\+$//e
+    " Don't strip on these filetypes
+    let blacklist = ['snippets', 'go', 'py']
+    if index(blacklist, &ft) < 0
+      set list listchars=tab:»·,trail:·
+    endif
   endfun
 
   autocmd BufWritePre * call StripTrailingWhitespace()
@@ -211,7 +215,19 @@ set formatoptions=qrn1
     let resp = system(cmd)
   endfunction
 
-  autocmd BufWritePost *.*rb,*.c,*.cpp,*.h,*.erl,*.hrl,*.lua,*.ex,*.exs,*.go call UpdateTags()
+  autocmd BufWritePost *.*rb,*.c,*.cpp,*.h,*.erl,*.hrl,*.lua,*.ex,*.exs call UpdateTags()
+" }
+
+" Gotags auto update {
+  function! UpdateGoTags()
+    let f = expand("%:p")
+    let cwd = getcwd()
+    let tagfilename = cwd . "/tags"
+    let cmd = 'gotags -R -silent=true -f ' . tagfilename . ' *.go'
+    let resp = system(cmd)
+  endfunction
+
+  autocmd BufWritePost *.go call UpdateGoTags()
 " }
 
 " vimdiff color scheme
@@ -219,7 +235,7 @@ highlight DiffChange cterm=none ctermfg=black ctermbg=LightGreen gui=none guifg=
 highlight DiffText cterm=none ctermfg=black ctermbg=Red gui=none guifg=bg guibg=Red
 
 " Markdown disable folding {
-    let g:vim_markdown_folding_disabled=1
+  let g:vim_markdown_folding_disabled=1
 " }
 
 set cc=100
@@ -228,9 +244,9 @@ function! SetColorColumn()
   let col_num = virtcol(".")
   let cc_list = split(&cc, ',')
   if count(cc_list, string(col_num)) <= 0
-  execute "set cc+=".col_num
+    execute "set cc+=".col_num
   else
-  execute "set cc-=".col_num
+    execute "set cc-=".col_num
   endif
 endfunction
 
@@ -277,3 +293,40 @@ au Syntax * RainbowParenthesesLoadSquare
 au Syntax * RainbowParenthesesLoadBraces
 
 let g:html_indent_tags = 'p\|li\|nav'
+
+" au FileType go nmap <leader>r <Plug>(go-run)
+" au FileType go nmap <leader>b <Plug>(go-build)
+" au FileType go nmap <leader>t <Plug>(go-test)
+" au FileType go nmap <leader>c <Plug>(go-coverage)
+"
+let g:ycm_key_list_select_completion = ['<c-n>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<c-p>', '<Up>']
+autocmd CompleteDone * pclose
+
+" let g:tagbar_type_go = {
+"     \ 'ctagstype' : 'go',
+"     \ 'kinds'     : [
+"         \ 'p:package',
+"         \ 'i:imports:1',
+"         \ 'c:constants',
+"         \ 'v:variables',
+"         \ 't:types',
+"         \ 'n:interfaces',
+"         \ 'w:fields',
+"         \ 'e:embedded',
+"         \ 'm:methods',
+"         \ 'r:constructor',
+"         \ 'f:functions'
+"     \ ],
+"     \ 'sro' : '.',
+"     \ 'kind2scope' : {
+"         \ 't' : 'ctype',
+"         \ 'n' : 'ntype'
+"     \ },
+"     \ 'scope2kind' : {
+"         \ 'ctype' : 't',
+"         \ 'ntype' : 'n'
+"     \ },
+"     \ 'ctagsbin'  : 'gotags',
+"     \ 'ctagsargs' : '-sort -silent'
+" \ }

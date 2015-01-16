@@ -76,10 +76,12 @@ snippet gpl
 # int
 snippet i
 	int
+sinppet pa
+	package "${1:main}"
 # import
 snippet im
 	import (
-		"${1:package}"
+		"${1:fmt}"
 	)
 # interface
 snippet in
@@ -147,11 +149,16 @@ snippet fun
 	}
 	${0}
 # function on receiver
-snippet fum
+snippet func
 	func (${1:receiver} ${2:type}) ${3:funcName}(${4}) ${5:error} {
 		${6}
 	}
 	${0}
+# init
+snippet init
+	func init() {
+		${1}
+	}
 # log printf
 snippet lf
 	log.Printf("%${1:s}", ${2:var})
