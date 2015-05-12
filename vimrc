@@ -20,8 +20,8 @@ set shiftwidth=4 tabstop=4 softtabstop=4
 au BufNewFile,BufRead *.rb,*.ex,*.exs set bs=2 sw=2 ts=2 st=2
 
 " Pathogen {
-  call pathogen#infect()
-  call pathogen#helptags() " update all plugins help doc
+call pathogen#infect()
+call pathogen#helptags() " update all plugins help doc
 " }
 
 set omnifunc=syntaxcomplete#Complete
@@ -62,9 +62,9 @@ set formatoptions=qrn1
   let g:ctrlp_open_new_file = 't'
   let g:ctrlp_open_multiple_files = 'v'
 
-  set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.o,*.beam,*.pyc
+  set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.tar,*.gz,*.o,*.beam,*.pyc
   let g:ctrlp_custom_ignore = {
-    \ 'dir':  '\v[\/](_build|deps|rel|coverage|\.(git|hg|svn))$',
+    \ 'dir':  '\v[\/](_build|rel|bin|coverage|\.(git|hg|svn))$',
     \ 'file': '\v\.(log|jpg|png|jpeg)$',
     \ }
 " }
@@ -107,11 +107,6 @@ set formatoptions=qrn1
   nnoremap <leader>ne :NERDTree<CR>
   nnoremap <leader>nc :NERDTreeClose<CR>
 
-  nnoremap <leader>gs :GitStatus<CR>
-  nnoremap <leader>gc :GitCommit<CR>
-  nnoremap <leader>ga :GitAdd<CR>
-  nnoremap <leader>gp :GitPush<CR>
-  nnoremap <leader>gl :GitPull<CR>
   nnoremap <leader>r  :Rake!<CR>
   nnoremap <leader>rr :.Rake!<CR>
   nnoremap <leader>os :! open %:p -a Safari<CR><CR>
@@ -139,23 +134,23 @@ set formatoptions=qrn1
 " Display extra Tab except Golang {
 
   fun! StripTrailingWhitespace()
+    retab
     %s/\s\+$//e
     " Don't strip on these filetypes
-    let blacklist = ['snippets', 'go', 'py']
-    if index(blacklist, &ft) < 0
-      set list listchars=tab:»·,trail:·
-    endif
+    " let blacklist = ['snippets', 'go', 'py']
+    " if index(blacklist, &ft) < 0
+    "   set list listchars=tab:»·,trail:·
+    " endif
   endfun
 
   autocmd BufWritePre * call StripTrailingWhitespace()
-  autocmd BufWritePre * retab
 " }
 
 " Powerline {
   set guifont=PowerlineSymbols\ for\ Powerline
   set nocompatible
   set laststatus=2
-  " set statusline=%f:\ %l
+  set statusline=%f:\ %l
   set t_Co=256
   let g:Powerline_symbols = 'unicode'
   set rtp+={path_to_powerline}/powerline/bindings/vim
@@ -176,13 +171,14 @@ set formatoptions=qrn1
 
 " TagBar {
   nnoremap <leader>tb : TagbarOpenAutoClose<CR>
+  nnoremap <leader>tbc : TagbarClose<CR>
 " }
 
 " My personal Tags  {
 
   function! LoadTagsByFileType()
     if &filetype == 'c'
-        set tags+=~/tags/tags-nginx
+        " set tags+=~/tags/tags-nginx
     elseif &filetype == 'rb'
         set tags+=~/tags/tags-gems
       endif
@@ -190,9 +186,9 @@ set formatoptions=qrn1
 
   " set autochdir
   set tags=tags
-  " autocmd FileType * call LoadTagsByFileType()
-  au FileType c,cpp set tags^=~/tags/tags-nginx
-  au FileType *.erb,*.rb set tags^=~/tags/tags-gems
+  autocmd FileType * call LoadTagsByFileType()
+  " au FileType c,cpp set tags^=~/tags/tags-nginx
+  " au FileType *.erb,*.rb set tags^=~/tags/tags-gems
 " }
 
 " Ctags auto update {
@@ -223,7 +219,7 @@ set formatoptions=qrn1
     let f = expand("%:p")
     let cwd = getcwd()
     let tagfilename = cwd . "/tags"
-    let cmd = 'gotags -R -silent=true -f ' . tagfilename . ' *.go'
+    let cmd = 'gotags -R -silent=true -f ' . tagfilename . ' ./'
     let resp = system(cmd)
   endfunction
 
@@ -274,7 +270,6 @@ let g:rbpt_colorpairs = [
     \ ['darkgreen',   'firebrick3'],
     \ ['darkcyan',    'RoyalBlue3'],
     \ ['darkred',     'SeaGreen3'],
-    \ ['darkmagenta', 'DarkOrchid3'],
     \ ['brown',       'firebrick3'],
     \ ['gray',        'RoyalBlue3'],
     \ ['black',       'SeaGreen3'],
@@ -284,6 +279,7 @@ let g:rbpt_colorpairs = [
     \ ['darkcyan',    'SeaGreen3'],
     \ ['darkred',     'DarkOrchid3'],
     \ ['red',         'firebrick3'],
+    \ ['darkmagenta', 'DarkOrchid3'],
     \ ]
 let g:rbpt_max = 16
 let g:rbpt_loadcmd_toggle = 0
@@ -301,6 +297,7 @@ let g:html_indent_tags = 'p\|li\|nav'
 "
 let g:ycm_key_list_select_completion = ['<c-n>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<c-p>', '<Up>']
+let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
 autocmd CompleteDone * pclose
 
 " let g:tagbar_type_go = {
