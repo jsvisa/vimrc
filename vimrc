@@ -35,10 +35,16 @@ Plugin 'evanmiller/nginx-vim-syntax'
 Plugin 'tpope/vim-rails'
 Plugin 'tomtom/tcomment_vim'
 Plugin 'vim-scripts/taglist.vim'
-Plugin 'vim-erlang/vim-erlang-omnicomplete'
-Plugin 'vim-erlang/vim-erlang-compiler'
 Plugin 'derekwyatt/vim-scala'
 Plugin 'vim-ruby/vim-ruby'
+Plugin 'suan/vim-instant-markdown'
+Plugin 'jsvisa/snipmate.vim'
+
+Plugin 'vim-erlang/vim-erlang-runtime'
+Plugin 'vim-erlang/vim-erlang-compiler'
+Plugin 'vim-erlang/vim-erlang-omnicomplete'
+Plugin 'vim-erlang/vim-erlang-tags'
+Plugin 'jsvisa/vim-erlang-skeleteons'
 
 
 " All of your Plugins must be added before the following line
@@ -174,19 +180,22 @@ set formatoptions=qrn1
 " }
 
 
-" Display extra Tab except Golang {
-
   fun! StripTrailingWhitespace()
     retab
     %s/\s\+$//e
+  endfun
+
+" Display extra Tab except Golang {
+  fun! DisplayTrailingWhitespace()
     " Don't strip on these filetypes
-    " let blacklist = ['snippets', 'go', 'py']
-    " if index(blacklist, &ft) < 0
-    "   set list listchars=tab:»·,trail:·
-    " endif
+    let blacklist = ['snippets', 'go', 'py']
+    if index(blacklist, &ft) < 0
+      set list listchars=tab:»·,trail:·
+    endif
   endfun
 
   autocmd BufWritePre * call StripTrailingWhitespace()
+  autocmd BufReadPre * call DisplayTrailingWhitespace()
 " }
 
 " Powerline {
@@ -341,4 +350,4 @@ let g:html_indent_tags = 'p\|li\|nav'
 let g:ycm_key_list_select_completion = ['<c-n>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<c-p>', '<Up>']
 let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
-autocmd CompleteDone * pclose
+" autocmd CompleteDone * pclose
