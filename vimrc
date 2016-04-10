@@ -57,7 +57,7 @@ filetype on
 filetype plugin on               " 针对不同的文件类型加载对应的插件
 filetype plugin indent on        " 启用自动补全
 set encoding=utf8
-set expandtab                    " expandtab，用空格代替Tab键
+" set expandtab                    " expandtab，用空格代替Tab键
 
 let g:rehash256 = 1
 colorscheme molokai
@@ -66,14 +66,8 @@ let g:molokai_original = 1
 au InsertLeave *.* write    " 每次退出插入模式时自动保存
 au FocusLost * :wa          " saving on losing focus
 
-" au BufNewFile,BufRead *.c,*.py,*.erl,*.sh,*.go,*.lua,*.vim set tabstop=4 shiftwidth=4 softtabstop=4
-set shiftwidth=4 tabstop=4 softtabstop=4
-au BufNewFile,BufRead *.rb,*.ex,*.exs,*.scala set bs=2 sw=2 ts=2 st=2
-
-" Pathogen {
-" call pathogen#infect()
-" call pathogen#helptags() " update all plugins help doc
-" }
+au FileType ruby,elixir,scala,vim setlocal ts=2 sw=2
+au FileType go,erlang,c,cpp,shell setlocal ts=4 sw=4
 
 set omnifunc=syntaxcomplete#Complete
 " set path=**
@@ -89,7 +83,7 @@ set number         " 显示行号
 set cindent        " 自动缩进4空格
 set smartindent    " 智能自动缩进
 set autoindent     " 设置自动缩进
-set autoread       " 文件在Vim之外修改过，自动重新读入
+set autoread       " 文件在 Vim 之外修改过，自动重新读入
 set autowriteall   " 提示保存
 set wildmenu
 set wildmode=list:longest
@@ -141,7 +135,7 @@ set formatoptions=qrn1
   nnoremap <F5> :CtrlPClearCache<CR>
   vnoremap <F5> :CtrlPClearCache<CR>
   nnoremap ; :
-" }
+"  }
 
 " <leader> hotkey {
   let mapleader = ','
@@ -160,8 +154,6 @@ set formatoptions=qrn1
 
   nnoremap <leader>r  :Rake!<CR>
   nnoremap <leader>rr :.Rake!<CR>
-  nnoremap <leader>os :! open %:p -a Safari<CR><CR>
-  nnoremap <leader>oc :! open %:p -a Firefox<CR><CR>
   nnoremap <leader>g :Dash<CR>
   nnoremap <leader>m :CtrlPClearCache<CR>
 
@@ -181,23 +173,19 @@ set formatoptions=qrn1
   vnoremap <C-c> :w !pbcopy<CR><CR>
 " }
 
-
   fun! StripTrailingWhitespace()
+    setlocal expandtab
     retab
     %s/\s\+$//e
   endfun
 
 " Display extra Tab except Golang {
   fun! DisplayTrailingWhitespace()
-    " Don't strip on these filetypes
-    let blacklist = ['snippets', 'go', 'py']
-    if index(blacklist, &ft) < 0
-      set list listchars=tab:»·,trail:·
-    endif
+    setlocal list listchars=tab:»·,trail:·
   endfun
 
-  autocmd BufWritePre * call StripTrailingWhitespace()
-  autocmd BufReadPre * call DisplayTrailingWhitespace()
+  autocmd FileType c,python,erlang,elixir,ruby,shell call DisplayTrailingWhitespace()
+  autocmd BufWritePost * call StripTrailingWhitespace()
 " }
 
 " Powerline {
