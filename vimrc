@@ -46,6 +46,8 @@ Plugin 'vim-erlang/vim-erlang-omnicomplete'
 Plugin 'vim-erlang/vim-erlang-tags'
 Plugin 'jsvisa/vim-erlang-skeleteons'
 
+Plugin 'thoughtbot/vim-rspec'
+
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -351,3 +353,5 @@ let g:ycm_key_list_select_completion = ['<c-n>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<c-p>', '<Up>']
 let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
 " autocmd CompleteDone * pclose
+"
+set runtimepath^=~/.vim/bundle/vim-erlang-runtime/
