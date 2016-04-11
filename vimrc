@@ -65,9 +65,8 @@ let g:molokai_original = 1
 
 au InsertLeave *.* write    " 每次退出插入模式时自动保存
 au FocusLost * :wa          " saving on losing focus
-
+setlocal ts=4 sw=4
 au FileType ruby,elixir,scala,vim setlocal ts=2 sw=2
-au FileType go,erlang,c,cpp,shell setlocal ts=4 sw=4
 
 set omnifunc=syntaxcomplete#Complete
 " set path=**
