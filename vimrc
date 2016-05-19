@@ -47,7 +47,9 @@ Plugin 'vim-erlang/vim-erlang-tags'
 Plugin 'jsvisa/vim-erlang-skeleteons'
 
 Plugin 'thoughtbot/vim-rspec'
+Plugin 'kchmck/vim-coffee-script'
 
+Plugin 'exu/pgsql.vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -66,7 +68,8 @@ let g:molokai_original = 1
 au InsertLeave *.* write    " 每次退出插入模式时自动保存
 au FocusLost * :wa          " saving on losing focus
 setlocal ts=4 sw=4
-au FileType ruby,elixir,scala,vim setlocal ts=2 sw=2
+au FileType ruby,elixir,scala,vim,coffee setlocal ts=2 sw=2
+au FileType c,go,python setlocal ts=4 sw=4
 
 set omnifunc=syntaxcomplete#Complete
 " set path=**
@@ -219,10 +222,12 @@ set formatoptions=qrn1
 
   function! LoadTagsByFileType()
     if &filetype == 'c'
-        " set tags+=~/tags/tags-nginx
+      set tags+=~/tags/tags-nginx
     elseif &filetype == 'rb'
-        set tags+=~/tags/tags-gems
-      endif
+      set tags+=~/tags/tags-gems
+    elseif &filetype == 'go'
+      set tags+=~/.go/tags
+    endif
   endfunction
 
   " set autochdir
