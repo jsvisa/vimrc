@@ -50,6 +50,9 @@ Plugin 'thoughtbot/vim-rspec'
 Plugin 'kchmck/vim-coffee-script'
 
 Plugin 'exu/pgsql.vim'
+Plugin 'nathanielc/vim-tickscript'
+
+Plugin 'chase/vim-ansible-yaml'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -150,7 +153,7 @@ set formatoptions=qrn1
   " nnoremap <leader>,e  :e <CR>=expand("%:p:h") .  '/' <CR>
   nnoremap <leader>vm :e ~/.vim/vimrc<CR>
   nnoremap <leader>rb :e ~/.vim/bundle/vim-snipmate/snippets/<CR>
-  nnoremap <leader>so :source ~/.vimrc<CR>
+  nnoremap <leader>so :source ~/.vim/vimrc<CR>
   nnoremap <leader>ne :NERDTree<CR>
   nnoremap <leader>nc :NERDTreeClose<CR>
 
