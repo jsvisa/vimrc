@@ -45,6 +45,7 @@ Plugin 'vim-erlang/vim-erlang-compiler'
 Plugin 'vim-erlang/vim-erlang-omnicomplete'
 Plugin 'vim-erlang/vim-erlang-tags'
 Plugin 'jsvisa/vim-erlang-skeleteons'
+Plugin 'slashmili/alchemist.vim'
 
 Plugin 'thoughtbot/vim-rspec'
 Plugin 'kchmck/vim-coffee-script'
