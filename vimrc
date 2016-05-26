@@ -74,6 +74,7 @@ au FocusLost * :wa          " saving on losing focus
 setlocal ts=4 sw=4
 au FileType ruby,elixir,scala,vim,coffee,yaml setlocal ts=2 sw=2
 au FileType go,c,shell,python,erlang setlocal ts=4 sw=4
+au FileType tick set commentstring=//%s
 
 set omnifunc=syntaxcomplete#Complete
 " set path=**
