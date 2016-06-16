@@ -52,8 +52,8 @@ Plugin 'kchmck/vim-coffee-script'
 
 Plugin 'exu/pgsql.vim'
 Plugin 'nathanielc/vim-tickscript'
-
 Plugin 'chase/vim-ansible-yaml'
+Plugin 'cespare/vim-toml'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
