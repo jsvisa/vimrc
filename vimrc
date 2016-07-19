@@ -193,7 +193,7 @@ set formatoptions=qrn1
 
   autocmd FileType c,python,erlang,elixir,ruby,shell call DisplayTrailingWhitespace()
 
-  autocmd BufWritePost *.*rb,*.c,*.cpp,*.h,*.sh,*.py,*.erl,*.hrl,*.lua,*.ex,*.exs call StripTrailingWhitespace()
+  autocmd BufWritePost *.coffee,*.js,*.*rb,*.c,*.cpp,*.h,*.sh,*.py,*.erl,*.hrl,*.lua,*.ex,*.exs,*.config,*.schema call StripTrailingWhitespace()
 " }
 
 " Powerline {
