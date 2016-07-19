@@ -353,3 +353,5 @@ let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/
 " autocmd CompleteDone * pclose
 "
 set runtimepath^=~/.vim/bundle/vim-erlang-runtime/
+
+let NERDTreeIgnore = ['\.pyc$', '\.o$', '\.beam$', '\.so$']
