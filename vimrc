@@ -181,8 +181,12 @@ set formatoptions=qrn1
 " }
 
   fun! StripTrailingWhitespace()
-    setlocal expandtab
-    retab
+    if (&ft == "make" || &ft=='go')
+      " nothing to do
+    else
+      setlocal expandtab
+      retab
+    endif
     %s/\s\+$//e
   endfun
 
@@ -192,8 +196,8 @@ set formatoptions=qrn1
   endfun
 
   autocmd FileType c,python,erlang,elixir,ruby,shell call DisplayTrailingWhitespace()
+  autocmd BufWritePost * call StripTrailingWhitespace()
 
-  autocmd BufWritePost *.coffee,*.js,*.*rb,*.c,*.cpp,*.h,*.sh,*.py,*.erl,*.hrl,*.lua,*.ex,*.exs,*.config,*.schema call StripTrailingWhitespace()
 " }
 
 " Powerline {
