@@ -12,6 +12,7 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 
+Plugin 'sheerun/vim-polyglot'
 Plugin 'scrooloose/nerdtree'
 Plugin 'kien/ctrlp.vim'
 Plugin 'Lokaltog/vim-powerline'
@@ -73,7 +74,7 @@ au InsertLeave *.* write    " 每次退出插入模式时自动保存
 au FocusLost * :wa          " saving on losing focus
 setlocal ts=4 sw=4
 au FileType ruby,elixir,scala,vim,coffee,yaml,toml,conf,shell setlocal ts=2 sw=2
-au FileType lua,go,c,python,erlang setlocal ts=4 sw=4
+au FileType lua,go,c,python,erlang,makefile setlocal ts=4 sw=4
 au FileType tick set commentstring=//%s
 
 set omnifunc=syntaxcomplete#Complete
