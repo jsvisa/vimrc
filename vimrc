@@ -13,6 +13,7 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 
 Plugin 'sheerun/vim-polyglot'
+Plugin 'ludovicchabant/vim-gutentags'
 Plugin 'scrooloose/nerdtree'
 Plugin 'kien/ctrlp.vim'
 Plugin 'Lokaltog/vim-powerline'
@@ -218,7 +219,6 @@ set formatoptions=qrn1
   let Tlist_Use_Right_Window = 1              "在右侧窗口中显示taglist
   let Tlist_GainFocus_On_ToggleOpen = 1       "打开taglist时，光标保留在taglist窗口
   let Tlist_Close_On_Select = 1               "选择了tag后自动关闭taglist窗口
-  let Tlist_Ctags_Cmd='/usr/local/bin/ctags'  "设置ctags命令的位置
   let Tlist_Auto_Open = 0                     "每次vim运行时自动打开taglist
   let Tlist_WinWidth = 40
   nnoremap <leader>tl : Tlist<CR>
@@ -249,26 +249,7 @@ set formatoptions=qrn1
 " }
 
 " Ctags auto update {
-  function! DelTagOfFile(file)
-    let fullpath = a:file
-    let cwd = getcwd()
-    let tagfilename = cwd . "/tags"
-    let f = substitute(fullpath, cwd . "/", "", "")
-    let f = escape(f, './')
-    let cmd = 'sed -i "/' . f . '/d" "' . tagfilename . '"'
-    let resp = system(cmd)
-  endfunction
-
-  function! UpdateTags()
-    let f = expand("%:p")
-    let cwd = getcwd()
-    let tagfilename = cwd . "/tags"
-    let cmd = 'ctags -a -f ' . tagfilename . ' --c++-kinds=+p --fields=+iaS --extra=+q ' . '"' . f . '"'
-    call DelTagOfFile(f)
-    let resp = system(cmd)
-  endfunction
-
-  autocmd BufWritePost *.*rb,*.c,*.cpp,*.h,*.erl,*.hrl,*.lua,*.ex,*.exs call UpdateTags()
+  let g:gutentags_cache_dir = '~/.tags_cache'
 " }
 
 " Gotags auto update {
