@@ -12,6 +12,7 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 
+" Global
 Plugin 'sheerun/vim-polyglot'
 Plugin 'ludovicchabant/vim-gutentags'
 Plugin 'scrooloose/nerdtree'
@@ -22,21 +23,23 @@ Plugin 'Yggdroot/indentLine'
 Plugin 'tpope/vim-fugitive'
 Plugin 'vim-scripts/bufexplorer.zip'
 Plugin 'majutsushi/tagbar'
-Plugin 'elixir-lang/vim-elixir'
+Plugin 'neomake/neomake'
 Plugin 'kien/rainbow_parentheses.vim'
 Plugin 'Raimondi/delimitMate'
 Plugin 'scrooloose/syntastic'
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-ragtag'
+Plugin 'Valloric/YouCompleteMe'         " $./install.py --clang-completer --gocode-completer
+Plugin 'vim-scripts/taglist.vim'
+Plugin 'tomtom/tcomment_vim'
+
 Plugin 'tpope/vim-haml'
+Plugin 'elixir-lang/vim-elixir'
 Plugin 'groenewege/vim-less'
 Plugin 'fatih/vim-go'
-Plugin 'Valloric/YouCompleteMe'         " $./install.py --clang-completer --gocode-completer
 Plugin 'evanmiller/nginx-vim-syntax'
 Plugin 'tpope/vim-rails'
-Plugin 'tomtom/tcomment_vim'
-Plugin 'vim-scripts/taglist.vim'
 Plugin 'derekwyatt/vim-scala'
 Plugin 'vim-ruby/vim-ruby'
 Plugin 'suan/vim-instant-markdown'
@@ -112,6 +115,9 @@ set fileencodings=utf-8 ",gbk  " 使用utf-8或gbk打开文件
 " set wrap   "换行设置
 set formatoptions=qrn1
 
+" autocmd! BufWritePost * Neomake
+let g:neomake_enabled_makers = ['elixir']
+
 " Settings of ctrlp {
   let g:ctrlp_open_new_file = 't'
   let g:ctrlp_open_multiple_files = 'v'
@@ -183,6 +189,7 @@ set formatoptions=qrn1
 " }
 
   fun! StripTrailingWhitespace()
+    Neomake
     if (&ft == "make" || &ft=='go')
       " nothing to do
     else
