@@ -77,8 +77,8 @@ let g:molokai_original = 1
 au InsertLeave *.* write    " 每次退出插入模式时自动保存
 au FocusLost * :wa          " saving on losing focus
 setlocal ts=4 sw=4
-au FileType ruby,elixir,scala,vim,coffee,yaml,toml,conf,shell setlocal ts=2 sw=2
-au FileType lua,go,c,python,erlang,makefile setlocal ts=4 sw=4
+au FileType ruby,elixir,scala,vim,coffee,yaml,toml,conf,cpp setlocal ts=2 sw=2
+au FileType sh,shell,lua,go,c,python,erlang,makefile setlocal ts=4 sw=4
 au FileType tick set commentstring=//%s
 
 set omnifunc=syntaxcomplete#Complete
@@ -260,15 +260,15 @@ let g:neomake_enabled_makers = ['elixir']
 " }
 
 " Gotags auto update {
-  function! UpdateGoTags()
-    let f = expand("%:p")
-    let cwd = getcwd()
-    let tagfilename = cwd . "/tags"
-    let cmd = 'gotags -R -silent=true -f ' . tagfilename . ' ./'
-    let resp = system(cmd)
-  endfunction
+  " function! UpdateGoTags()
+  "   let f = expand("%:p")
+  "   let cwd = getcwd()
+  "   let tagfilename = cwd . "/tags"
+  "   let cmd = 'gotags -R -silent=true -f ' . tagfilename . ' ./'
+  "   let resp = system(cmd)
+  " endfunction
 
-  autocmd BufWritePost *.go call UpdateGoTags()
+  " autocmd BufWritePost *.go call UpdateGoTags()
 " }
 
 " vimdiff color scheme
