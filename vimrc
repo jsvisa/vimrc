@@ -124,7 +124,7 @@ let g:neomake_enabled_makers = ['elixir']
 
   set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.tar,*.gz,*.o,*.beam,*.pyc
   let g:ctrlp_custom_ignore = {
-    \ 'dir':  '\v[\/](_build|rel|bin|coverage|\.(git|hg|svn))$',
+    \ 'dir':  '\v[\/](_build|rel|bin|coverage|vendor|\.(git|hg|svn))$',
     \ 'file': '\v\.(log|jpg|png|jpeg)$',
     \ }
 " }
@@ -260,15 +260,15 @@ let g:neomake_enabled_makers = ['elixir']
 " }
 
 " Gotags auto update {
-  " function! UpdateGoTags()
-  "   let f = expand("%:p")
-  "   let cwd = getcwd()
-  "   let tagfilename = cwd . "/tags"
-  "   let cmd = 'gotags -R -silent=true -f ' . tagfilename . ' ./'
-  "   let resp = system(cmd)
-  " endfunction
+  function! UpdateGoTags()
+    let f = expand("%:p")
+    let cwd = getcwd()
+    let tagfilename = cwd . "/tags"
+    let cmd = 'gotags -silent=true -f ' . tagfilename . ' `find . -path ./vendor -prune -o -name "*.go"`'
+    let resp = system(cmd)
+  endfunction
 
-  " autocmd BufWritePost *.go call UpdateGoTags()
+  autocmd BufWritePost *.go call UpdateGoTags()
 " }
 
 " vimdiff color scheme
@@ -348,3 +348,14 @@ let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/
 set runtimepath^=~/.vim/bundle/vim-erlang-runtime/
 
 let NERDTreeIgnore = ['\.pyc$', '\.o$', '\.beam$', '\.so$']
+
+""""""""""""""""""""""""""""""
+" Start Golang
+"""""""""""""""""""""""""""""""""
+" auto import packages when saving the file
+let g:go_fmt_command = "goimports"
+
+
+""""""""""""""""""""""""""""""
+" End Golang
+"""""""""""""""""""""""""""""""""
