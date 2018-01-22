@@ -60,6 +60,9 @@ Plugin 'nathanielc/vim-tickscript'
 Plugin 'chase/vim-ansible-yaml'
 Plugin 'cespare/vim-toml'
 
+Plugin 'artur-shaik/vim-javacomplete2'
+Plugin 'robertbraeutigam/vim-java-tags'
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 
@@ -102,6 +105,11 @@ set wildmode=list:longest
 set backspace=indent,eol,start
 hi Search term=standout ctermbg=11
 set hidden
+
+" fix: vim inside tmux slow scrolling, see more from
+" https://unix.stackexchange.com/questions/49414/tmux-output-is-slower-when-vertical-splits-exist-why
+set lazyredraw
+set ttyfast
 
 vnoremap / /\v "add \v after key in /
 set ignorecase " 搜索小写正文时大小写不敏感，搜索正文包含大写时大小写敏感
@@ -354,6 +362,8 @@ let NERDTreeIgnore = ['\.pyc$', '\.o$', '\.beam$', '\.so$']
 """""""""""""""""""""""""""""""""
 " auto import packages when saving the file
 let g:go_fmt_command = "goimports"
+
+let g:neomake_go_gometalinter_args = ['--enable-all', '--disable=errcheck']
 
 
 """"""""""""""""""""""""""""""
