@@ -62,6 +62,7 @@ Plugin 'cespare/vim-toml'
 
 Plugin 'artur-shaik/vim-javacomplete2'
 Plugin 'robertbraeutigam/vim-java-tags'
+Plugin 'chr4/nginx.vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
