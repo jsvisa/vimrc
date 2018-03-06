@@ -64,6 +64,11 @@ Plugin 'artur-shaik/vim-javacomplete2'
 Plugin 'robertbraeutigam/vim-java-tags'
 Plugin 'chr4/nginx.vim'
 
+Plugin 'hashivim/vim-terraform'
+Plugin 'juliosueiras/vim-terraform-completion'
+
+Plugin 'tomlion/vim-solidity'
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 
@@ -80,9 +85,9 @@ let g:molokai_original = 1
 
 au InsertLeave *.* write    " 每次退出插入模式时自动保存
 au FocusLost * :wa          " saving on losing focus
-setlocal ts=4 sw=4
+set ts=4 sw=4
 au FileType ruby,elixir,scala,vim,coffee,yaml,toml,conf,cpp setlocal ts=2 sw=2
-au FileType sh,shell,lua,go,c,python,erlang,makefile setlocal ts=4 sw=4
+au FileType nginx,sh,shell,lua,go,c,python,erlang,makefile setlocal ts=4 sw=4
 au FileType tick set commentstring=//%s
 
 set omnifunc=syntaxcomplete#Complete
@@ -356,7 +361,7 @@ let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/
 "
 set runtimepath^=~/.vim/bundle/vim-erlang-runtime/
 
-let NERDTreeIgnore = ['\.pyc$', '\.o$', '\.beam$', '\.so$']
+let NERDTreeIgnore = ['\.pyc$', '\.o$', '\.swp', '\.beam$', '\.so$', '\.tar.gz$']
 
 """"""""""""""""""""""""""""""
 " Start Golang
@@ -364,7 +369,7 @@ let NERDTreeIgnore = ['\.pyc$', '\.o$', '\.beam$', '\.so$']
 " auto import packages when saving the file
 let g:go_fmt_command = "goimports"
 
-let g:neomake_go_gometalinter_args = ['--enable-all', '--disable=errcheck']
+let g:neomake_go_gometalinter_args = ["--disable-all", "--enable=golint", "--exclude=\"exported \\w+ (\\S*['.]*)([a-zA-Z'.*]*) should have comment or be unexported\""]
 
 
 """"""""""""""""""""""""""""""
