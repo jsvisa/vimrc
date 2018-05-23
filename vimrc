@@ -24,13 +24,14 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'vim-scripts/bufexplorer.zip'
 Plugin 'majutsushi/tagbar'
 Plugin 'neomake/neomake'
-Plugin 'kien/rainbow_parentheses.vim'
+Plugin 'luochen1990/rainbow'
+" Plugin 'kien/rainbow_parentheses.vim'
 Plugin 'Raimondi/delimitMate'
 Plugin 'scrooloose/syntastic'
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-ragtag'
-Plugin 'Valloric/YouCompleteMe'         " $./install.py --clang-completer --gocode-completer
+Plugin 'Valloric/YouCompleteMe'         " $ ./install.py --clang-completer --gocode-completer
 Plugin 'vim-scripts/taglist.vim'
 Plugin 'tomtom/tcomment_vim'
 
@@ -38,6 +39,7 @@ Plugin 'tpope/vim-haml'
 Plugin 'elixir-lang/vim-elixir'
 Plugin 'groenewege/vim-less'
 Plugin 'fatih/vim-go'
+Plugin 'fatih/molokai'
 Plugin 'evanmiller/nginx-vim-syntax'
 Plugin 'tpope/vim-rails'
 Plugin 'derekwyatt/vim-scala'
@@ -86,7 +88,7 @@ let g:molokai_original = 1
 au InsertLeave *.* write    " 每次退出插入模式时自动保存
 au FocusLost * :wa          " saving on losing focus
 set ts=4 sw=4
-au FileType ruby,elixir,scala,vim,coffee,yaml,toml,conf,cpp setlocal ts=2 sw=2
+au FileType cc,ruby,elixir,scala,vim,coffee,yaml,toml,conf,cpp setlocal ts=2 sw=2
 au FileType nginx,sh,shell,lua,go,c,python,erlang,makefile setlocal ts=4 sw=4
 au FileType tick set commentstring=//%s
 
@@ -322,30 +324,31 @@ let g:bufExplorerUseCurrentWindow=1  " Open in new window.
 """"""""""""""""""""""""""""""
 " Rainbow Parentheses
 """""""""""""""""""""""""""""""""
-let g:rbpt_colorpairs = [
-    \ ['brown',       'RoyalBlue3'],
-    \ ['Darkblue',    'SeaGreen3'],
-    \ ['darkgray',    'DarkOrchid3'],
-    \ ['darkgreen',   'firebrick3'],
-    \ ['darkcyan',    'RoyalBlue3'],
-    \ ['darkred',     'SeaGreen3'],
-    \ ['brown',       'firebrick3'],
-    \ ['gray',        'RoyalBlue3'],
-    \ ['black',       'SeaGreen3'],
-    \ ['darkmagenta', 'DarkOrchid3'],
-    \ ['Darkblue',    'firebrick3'],
-    \ ['darkgreen',   'RoyalBlue3'],
-    \ ['darkcyan',    'SeaGreen3'],
-    \ ['darkred',     'DarkOrchid3'],
-    \ ['red',         'firebrick3'],
-    \ ['darkmagenta', 'DarkOrchid3'],
-    \ ]
-let g:rbpt_max = 16
-let g:rbpt_loadcmd_toggle = 0
-au VimEnter * RainbowParenthesesToggle
-au Syntax * RainbowParenthesesLoadRound
-au Syntax * RainbowParenthesesLoadSquare
-au Syntax * RainbowParenthesesLoadBraces
+" let g:rbpt_colorpairs = [
+"     \ ['brown',       'RoyalBlue3'],
+"     \ ['Darkblue',    'SeaGreen3'],
+"     \ ['darkgray',    'DarkOrchid3'],
+"     \ ['darkgreen',   'firebrick3'],
+"     \ ['darkcyan',    'RoyalBlue3'],
+"     \ ['darkred',     'SeaGreen3'],
+"     \ ['brown',       'firebrick3'],
+"     \ ['gray',        'RoyalBlue3'],
+"     \ ['black',       'SeaGreen3'],
+"     \ ['darkmagenta', 'DarkOrchid3'],
+"     \ ['Darkblue',    'firebrick3'],
+"     \ ['darkgreen',   'RoyalBlue3'],
+"     \ ['darkcyan',    'SeaGreen3'],
+"     \ ['darkred',     'DarkOrchid3'],
+"     \ ['red',         'firebrick3'],
+"     \ ['darkmagenta', 'DarkOrchid3'],
+"     \ ]
+" let g:rbpt_max = 16
+" let g:rbpt_loadcmd_toggle = 0
+" au VimEnter * RainbowParenthesesToggle
+" au Syntax * RainbowParenthesesLoadRound
+" au Syntax * RainbowParenthesesLoadSquare
+" au Syntax * RainbowParenthesesLoadBraces
+let g:rainbow_active = 1
 
 let g:html_indent_tags = 'p\|li\|nav'
 
@@ -366,8 +369,17 @@ let NERDTreeIgnore = ['\.pyc$', '\.o$', '\.swp', '\.beam$', '\.so$', '\.tar.gz$'
 """"""""""""""""""""""""""""""
 " Start Golang
 """""""""""""""""""""""""""""""""
+
 " auto import packages when saving the file
 let g:go_fmt_command = "goimports"
+
+" the default DefMode is guru, which is slow for my vagrant,
+" so switch to godef.
+" see more from https://github.com/fatih/vim-go/issues/887
+let g:go_def_mode = "godef"
+set nocursorcolumn
+syntax sync minlines=256
+set re=1
 
 let g:neomake_go_gometalinter_args = ["--disable-all", "--enable=golint", "--exclude=\"exported \\w+ (\\S*['.]*)([a-zA-Z'.*]*) should have comment or be unexported\""]
 
