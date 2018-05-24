@@ -381,7 +381,19 @@ set nocursorcolumn
 syntax sync minlines=256
 set re=1
 
-let g:neomake_go_gometalinter_args = ["--disable-all", "--enable=golint", "--exclude=\"exported \\w+ (\\S*['.]*)([a-zA-Z'.*]*) should have comment or be unexported\""]
+" the same to ethereum's ci
+let g:neomake_go_gometalinter_args = [
+  \ "--vendor",
+  \ "--tests",
+  \ "--disable-all",
+  \ "--enable=goimports",
+  \ "--enable=varcheck",
+  \ "--enable=vet",
+  \ "--enable=gofmt",
+  \ "--enable=misspell",
+  \ "--enable=goconst",
+  \ "--min-occurrences=6",
+  \ ]
 
 
 """"""""""""""""""""""""""""""
