@@ -32,7 +32,6 @@ Plugin 'terryma/vim-multiple-cursors'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-ragtag'
 Plugin 'Valloric/YouCompleteMe'         " $ ./install.py --clang-completer --gocode-completer
-Plugin 'vim-scripts/taglist.vim'
 Plugin 'tomtom/tcomment_vim'
 
 Plugin 'tpope/vim-haml'
@@ -236,18 +235,8 @@ let g:neomake_enabled_makers = ['elixir']
   set noshowmode
 " }
 
-" Taglist {
-  let Tlist_Show_One_File = 1                 "只显示当前文件的taglist，默认是显示多个
-  let Tlist_Exit_OnlyWindow = 1               "如果taglist是最后一个窗口，则退出vim
-  let Tlist_Use_Right_Window = 1              "在右侧窗口中显示taglist
-  let Tlist_GainFocus_On_ToggleOpen = 1       "打开taglist时，光标保留在taglist窗口
-  let Tlist_Close_On_Select = 1               "选择了tag后自动关闭taglist窗口
-  let Tlist_Auto_Open = 0                     "每次vim运行时自动打开taglist
-  let Tlist_WinWidth = 40
-  nnoremap <leader>tl : Tlist<CR>
-" }
-
 " TagBar {
+  nnoremap <leader>tl : TagbarToggle<CR>
   nnoremap <leader>tb : TagbarOpenAutoClose<CR>
   nnoremap <leader>tbc : TagbarClose<CR>
 " }
@@ -395,6 +384,33 @@ let g:neomake_go_gometalinter_args = [
   \ "--min-occurrences=6",
   \ ]
 
+let g:tagbar_type_go = {
+  \ 'ctagstype' : 'go',
+  \ 'kinds'     : [
+    \ 'p:package',
+    \ 'i:imports:1',
+    \ 'c:constants',
+    \ 'v:variables',
+    \ 't:types',
+    \ 'n:interfaces',
+    \ 'w:fields',
+    \ 'e:embedded',
+    \ 'm:methods',
+    \ 'r:constructor',
+    \ 'f:functions'
+  \ ],
+  \ 'sro' : '.',
+  \ 'kind2scope' : {
+    \ 't' : 'ctype',
+    \ 'n' : 'ntype'
+  \ },
+  \ 'scope2kind' : {
+    \ 'ctype' : 't',
+    \ 'ntype' : 'n'
+  \ },
+  \ 'ctagsbin'  : 'gotags',
+  \ 'ctagsargs' : '-sort -silent'
+\ }
 
 """"""""""""""""""""""""""""""
 " End Golang
