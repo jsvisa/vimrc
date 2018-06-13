@@ -118,7 +118,6 @@ set hidden
 set lazyredraw
 set ttyfast
 
-vnoremap / /\v "add \v after key in /
 set ignorecase " 搜索小写正文时大小写不敏感，搜索正文包含大写时大小写敏感
 set smartcase
 set incsearch " 高亮搜索文本
@@ -145,18 +144,27 @@ let g:neomake_enabled_makers = ['elixir']
 " }
 
 " Easy navigation {
+  " n  Normal mode map. Defined using ':nmap' or ':nnoremap'.
+  " i  Insert mode map. Defined using ':imap' or ':inoremap'.
+  " v  Visual and select mode map. Defined using ':vmap' or ':vnoremap'.
+  " x  Visual mode map. Defined using ':xmap' or ':xnoremap'.
+  " s  Select mode map. Defined using ':smap' or ':snoremap'.
+  " c  Command-line mode map. Defined using ':cmap' or ':cnoremap'.
+  " o  Operator pending mode map. Defined using ':omap' or ':onoremap'.
   " 'noremap' means no recursive mapping
+
   inoremap jj <ESC>
 
-  nnoremap gcc gcc<ESC>
   nnoremap <F8> :!
 
-  map <C-h> <C-w>h
-  map <C-j> <C-w>j
-  map <C-k> <C-w>k
-  map <C-l> <C-w>l
-  nnoremap <C-l> gt
-  nnoremap <C-h> gT
+  " switch between splits
+  nnoremap <C-h> <C-w><C-h>
+  nnoremap <C-j> <C-w><C-j>
+  nnoremap <C-k> <C-w><C-k>
+  nnoremap <C-l> <C-w><C-l>
+
+  " ack search with yanked
+  nnoremap <C-f> :Ack <C-r>"<ESC>
 
   inoremap <F1> <ESC>
   nnoremap <F1> <ESC>
