@@ -74,6 +74,8 @@ Plugin 'rust-lang/rust.vim'
 
 Plugin 'ekalinin/Dockerfile.vim'
 
+Plugin 'w0rp/ale'
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 
@@ -455,4 +457,23 @@ let g:rustfmt_autosave = 1
 let g:gutentags_ctags_exclude = ["node_modules", "build"]
 """"""""""""""""""""""""""""""
 " End tags
+"""""""""""""""""""""""""""""""""
+
+""""""""""""""""""""""""""""""
+" Start ale
+"""""""""""""""""""""""""""""""""
+let g:ale_fixers = {
+\   '*': ['remove_trailing_lines', 'trim_whitespace'],
+\   'javascript': ['eslint'],
+\   'python': ['yapf'],
+\}
+
+let g:ale_linters = {
+\ 'python': ['flake8'],
+\}
+let g:ale_fix_on_save = 1
+let g:ale_completion_enabled = 0
+let g:ale_lint_on_text_changed = 'never'
+""""""""""""""""""""""""""""""
+" End ale
 """""""""""""""""""""""""""""""""
