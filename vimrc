@@ -97,7 +97,7 @@ set omnifunc=syntaxcomplete#Complete
 " set path=**
 " set completeopt=longest,menuone
 
-set grepprg=ack
+set grepprg=ag
 map <F3> :cp<CR>
 map <F4> :cn<CR>
 
@@ -167,6 +167,7 @@ let g:neomake_enabled_makers = ['elixir']
 
   " ack search with yanked
   nnoremap <C-f> :Ack <C-r>"<ESC>
+  let g:ackprg = 'rg --vimgrep'
 
   inoremap <F1> <ESC>
   nnoremap <F1> <ESC>
@@ -422,6 +423,17 @@ let g:tagbar_type_go = {
   \ 'ctagsargs' : '-sort -silent'
 \ }
 
+let g:tagbar_type_solidity = {
+  \ 'ctagstype': 'solidity',
+  \ 'kinds' : [
+    \ 'c:contracts',
+    \ 'e:events',
+    \ 'f:functions',
+    \ 'm:mappings',
+    \ 'v:varialbes',
+  \ ]
+  \ }
+
 """"""""""""""""""""""""""""""
 " End Golang
 """""""""""""""""""""""""""""""""
@@ -433,4 +445,12 @@ let g:tagbar_type_go = {
 let g:rustfmt_autosave = 1
 """"""""""""""""""""""""""""""
 " End Rust
+"""""""""""""""""""""""""""""""""
+
+""""""""""""""""""""""""""""""
+" Start tags
+"""""""""""""""""""""""""""""""""
+let g:gutentags_ctags_exclude = ["node_modules", "build"]
+""""""""""""""""""""""""""""""
+" End tags
 """""""""""""""""""""""""""""""""
