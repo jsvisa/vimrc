@@ -72,6 +72,8 @@ Plugin 'tomlion/vim-solidity'
 
 Plugin 'rust-lang/rust.vim'
 
+Plugin 'ekalinin/Dockerfile.vim'
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 
