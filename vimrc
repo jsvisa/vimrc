@@ -70,6 +70,8 @@ Plugin 'juliosueiras/vim-terraform-completion'
 
 Plugin 'tomlion/vim-solidity'
 
+Plugin 'rust-lang/rust.vim'
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 
@@ -422,4 +424,13 @@ let g:tagbar_type_go = {
 
 """"""""""""""""""""""""""""""
 " End Golang
+"""""""""""""""""""""""""""""""""
+
+
+""""""""""""""""""""""""""""""
+" Start Rust
+"""""""""""""""""""""""""""""""""
+let g:rustfmt_autosave = 1
+""""""""""""""""""""""""""""""
+" End Rust
 """""""""""""""""""""""""""""""""
