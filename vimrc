@@ -31,7 +31,7 @@ Plugin 'scrooloose/syntastic'
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-ragtag'
-Plugin 'Valloric/YouCompleteMe'         " $ ./install.py --clang-completer --gocode-completer
+Plugin 'Valloric/YouCompleteMe' " $ ./install.py --clang-completer --go-completer --rust-completer
 Plugin 'tomtom/tcomment_vim'
 
 Plugin 'tpope/vim-haml'
@@ -79,6 +79,7 @@ Plugin 'w0rp/ale'
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 
+set nobackup                 " no ~xxx files
 syntax on
 filetype on
 filetype plugin on               " 针对不同的文件类型加载对应的插件
@@ -144,7 +145,7 @@ let g:neomake_enabled_makers = ['elixir']
 
   set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.tar,*.gz,*.o,*.beam,*.pyc
   let g:ctrlp_custom_ignore = {
-    \ 'dir':  '\v[\/](_build|rel|bin|coverage|vendor|\.(git|hg|svn))$',
+    \ 'dir':  '\v[\/](_build|rel|deps|bin|tests|coverage|vendor|\.(git|hg|svn))$',
     \ 'file': '\v\.(log|jpg|png|jpeg)$',
     \ }
 " }
@@ -277,6 +278,7 @@ let g:neomake_enabled_makers = ['elixir']
 
 " Ctags auto update {
   let g:gutentags_cache_dir = '~/.tags_cache'
+  let g:gutentags_enabled = 1
 " }
 
 " Gotags auto update {
@@ -288,7 +290,7 @@ let g:neomake_enabled_makers = ['elixir']
     let resp = system(cmd)
   endfunction
 
-  autocmd BufWritePost *.go call UpdateGoTags()
+  " autocmd BufWritePost *.go call UpdateGoTags()
 " }
 
 " vimdiff color scheme
@@ -466,6 +468,7 @@ let g:ale_fixers = {
 \   '*': ['remove_trailing_lines', 'trim_whitespace'],
 \   'javascript': ['eslint'],
 \   'python': ['yapf'],
+\   'go': ['gofmt', 'goimports'],
 \}
 
 let g:ale_linters = {
@@ -473,7 +476,9 @@ let g:ale_linters = {
 \}
 let g:ale_fix_on_save = 1
 let g:ale_completion_enabled = 0
+let g:ale_linters_explicit = 1            " Only run linters named in ale_linters settings.
 let g:ale_lint_on_text_changed = 'never'
+let g:ale_go_gofmt_options = '-s'
 """"""""""""""""""""""""""""""
 " End ale
 """""""""""""""""""""""""""""""""
