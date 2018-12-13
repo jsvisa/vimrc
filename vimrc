@@ -13,7 +13,7 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 
 " Global
-Plugin 'sheerun/vim-polyglot'
+Plugin 'sheerun/vim-polyglot'     " A solid language pack for Vim.
 Plugin 'ludovicchabant/vim-gutentags'
 Plugin 'scrooloose/nerdtree'
 Plugin 'kien/ctrlp.vim'
@@ -25,6 +25,7 @@ Plugin 'vim-scripts/bufexplorer.zip'
 Plugin 'majutsushi/tagbar'
 Plugin 'neomake/neomake'
 Plugin 'luochen1990/rainbow'
+Plugin 'tmux-plugins/vim-tmux-focus-events'
 " Plugin 'kien/rainbow_parentheses.vim'
 Plugin 'Raimondi/delimitMate'
 Plugin 'scrooloose/syntastic'
@@ -75,6 +76,8 @@ Plugin 'rust-lang/rust.vim'
 Plugin 'ekalinin/Dockerfile.vim'
 
 Plugin 'w0rp/ale'
+
+Plugin 'spacewander/openresty-vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -145,7 +148,7 @@ let g:neomake_enabled_makers = ['elixir']
 
   set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.tar,*.gz,*.o,*.beam,*.pyc
   let g:ctrlp_custom_ignore = {
-    \ 'dir':  '\v[\/](_build|rel|deps|bin|tests|coverage|vendor|\.(git|hg|svn))$',
+    \ 'dir':  '\v[\/](_build|rel|luajit|deps|bin|coverage|vendor|\.(git|hg|svn))$',
     \ 'file': '\v\.(log|jpg|png|jpeg)$',
     \ }
 " }
@@ -373,6 +376,14 @@ set runtimepath^=~/.vim/bundle/vim-erlang-runtime/
 let NERDTreeIgnore = ['\.pyc$', '\.o$', '\.swp', '\.beam$', '\.so$', '\.tar.gz$']
 
 """"""""""""""""""""""""""""""
+" Start polyglot
+"""""""""""""""""""""""""""""""""
+let g:polyglot_disabled = ['markdown']
+""""""""""""""""""""""""""""""
+" End polyglot
+"""""""""""""""""""""""""""""""""
+
+""""""""""""""""""""""""""""""
 " Start Golang
 """""""""""""""""""""""""""""""""
 
@@ -473,6 +484,7 @@ let g:ale_fixers = {
 
 let g:ale_linters = {
 \ 'python': ['flake8'],
+\ 'lua': ['luacheck'],
 \}
 let g:ale_fix_on_save = 1
 let g:ale_completion_enabled = 0
