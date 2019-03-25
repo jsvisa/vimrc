@@ -17,7 +17,7 @@ Plugin 'sheerun/vim-polyglot'     " A solid language pack for Vim.
 Plugin 'ludovicchabant/vim-gutentags'
 Plugin 'scrooloose/nerdtree'
 Plugin 'kien/ctrlp.vim'
-Plugin 'Lokaltog/vim-powerline'
+Plugin 'vim-airline/vim-airline'
 Plugin 'mileszs/ack.vim'
 Plugin 'Yggdroot/indentLine'
 Plugin 'tpope/vim-fugitive'
@@ -97,11 +97,13 @@ let g:molokai_original = 1
 au InsertLeave *.* write    " 每次退出插入模式时自动保存
 au FocusLost * :wa          " saving on losing focus
 set ts=4 sw=4
-au FileType cc,ruby,elixir,scala,vim,coffee,yaml,toml,conf,cpp setlocal ts=2 sw=2
+set omnifunc=syntaxcomplete#Complete
+au FileType java,vue,js,cc,ruby,elixir,scala,vim,coffee,yaml,toml,conf,cpp setlocal ts=2 sw=2
 au FileType nginx,sh,shell,lua,go,c,python,erlang,makefile setlocal ts=4 sw=4
 au FileType tick set commentstring=//%s
+" au FileType json autocmd BufWritePre <buffer> %!python -m json.tool
 
-set omnifunc=syntaxcomplete#Complete
+au FileType java setlocal omnifunc=javacomplete#Complete
 " set path=**
 " set completeopt=longest,menuone
 
@@ -148,7 +150,7 @@ let g:neomake_enabled_makers = ['elixir']
 
   set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.tar,*.gz,*.o,*.beam,*.pyc
   let g:ctrlp_custom_ignore = {
-    \ 'dir':  '\v[\/](_build|rel|luajit|deps|bin|coverage|vendor|\.(git|hg|svn))$',
+    \ 'dir':  '\v[\/](_build|build|rel|luajit|deps|bin|coverage|vendor|\.(git|hg|svn))$',
     \ 'file': '\v\.(log|jpg|png|jpeg)$',
     \ }
 " }
@@ -188,6 +190,8 @@ let g:neomake_enabled_makers = ['elixir']
 
 " <leader> hotkey {
   let mapleader = ','
+  nnoremap <leader>io :let g:indentLine_enabled=1<CR>
+  nnoremap <leader>if :let g:indentLine_enabled=0<CR>
   nnoremap <leader><space> :noh<CR>
   nnoremap <leader>a :Ack
   nnoremap <leader>w :%s/\s\+$//<CR>:let @/=''<CR>
@@ -241,17 +245,6 @@ let g:neomake_enabled_makers = ['elixir']
   autocmd FileType c,python,erlang,elixir,ruby,shell call DisplayTrailingWhitespace()
   autocmd BufWritePost * call StripTrailingWhitespace()
 
-" }
-
-" Powerline {
-  set guifont=PowerlineSymbols\ for\ Powerline
-  set nocompatible
-  set laststatus=2
-  set statusline=%f:\ %l
-  set t_Co=256
-  let g:Powerline_symbols = 'unicode'
-  set rtp+={path_to_powerline}/powerline/bindings/vim
-  set noshowmode
 " }
 
 " TagBar {
@@ -366,6 +359,15 @@ let g:html_indent_tags = 'p\|li\|nav'
 " au FileType go nmap <leader>t <Plug>(go-test)
 " au FileType go nmap <leader>c <Plug>(go-coverage)
 "
+" append the triggers to the default one
+  " \   'go,python': ['re!\w{4}'],
+let g:ycm_semantic_triggers =  {
+  \   'python': ['re!from\s+\S+\s+import\s'],
+  \ }
+let g:ycm_add_preview_to_completeopt = 0  " don't show the preview pane
+" let g:ycm_show_diagnostics_ui = 0 " don't show the diagnostics ui
+let g:ycm_autoclose_preview_window_after_completion=1
+map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
 let g:ycm_key_list_select_completion = ['<c-n>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<c-p>', '<Up>']
 let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
@@ -478,13 +480,14 @@ let g:gutentags_ctags_exclude = ["node_modules", "build"]
 let g:ale_fixers = {
 \   '*': ['remove_trailing_lines', 'trim_whitespace'],
 \   'javascript': ['eslint'],
-\   'python': ['yapf'],
+\   'python': ['black'],
 \   'go': ['gofmt', 'goimports'],
+\   'json': ['fixjson'],
 \}
 
 let g:ale_linters = {
-\ 'python': ['flake8'],
-\ 'lua': ['luacheck'],
+\   'python': ['flake8'],
+\   'lua': ['luacheck'],
 \}
 let g:ale_fix_on_save = 1
 let g:ale_completion_enabled = 0
@@ -493,4 +496,23 @@ let g:ale_lint_on_text_changed = 'never'
 let g:ale_go_gofmt_options = '-s'
 """"""""""""""""""""""""""""""
 " End ale
+"""""""""""""""""""""""""""""""""
+
+"python with virtualenv support
+py << EOF
+import os
+import sys
+if 'VIRTUAL_ENV' in os.environ:
+  project_base_dir = os.environ['VIRTUAL_ENV']
+  activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
+  execfile(activate_this, dict(__file__=activate_this))
+EOF
+
+
+""""""""""""""""""""""""""""""
+" Start Java
+"""""""""""""""""""""""""""""""""
+let g:JaveComplete_AutoStartServer = 1
+""""""""""""""""""""""""""""""
+" End Java
 """""""""""""""""""""""""""""""""
