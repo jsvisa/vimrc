@@ -2,13 +2,17 @@
 
 import os
 import sys
-from subprocess import *
+from subprocess import Popen, PIPE
 import shutil
 
 
 def usage():
-    print 'Usage: \nclang_complete XcodeProjectFolderPath macosx/iphoneos/iphonesimulator'
-    print 'clang_complete XcodeProjectFolderPath ProjectName TargetName macosx/iphoneos/iphonesimulator'
+    print(
+        "Usage: \nclang_complete XcodeProjectFolderPath macosx/iphoneos/iphonesimulator"
+    )
+    print(
+        "clang_complete XcodeProjectFolderPath ProjectName TargetName macosx/iphoneos/iphonesimulator"
+    )
 
 
 def targets_in_projectfile(projectfile):
@@ -18,14 +22,20 @@ def targets_in_projectfile(projectfile):
     @rtype : list
     """
     targets = []
-    output = Popen(["xcrun", "xcodebuild", "-list", "-project", projectfile], stdout=PIPE).communicate()[0]
+    output = Popen(
+        ["xcrun", "xcodebuild", "-list", "-project", projectfile], stdout=PIPE
+    ).communicate()[0]
     findtargetsection = False
     spacenumber = 0
 
-    for line in output.split('\n'):
-        if True == findtargetsection and spacenumber > 0 and line.startswith(' ' * spacenumber * 2):
+    for line in output.split("\n"):
+        if (
+            findtargetsection is True
+            and spacenumber > 0
+            and line.startswith(" " * spacenumber * 2)
+        ):
             targets.append(line.strip())
-        elif line.strip() == 'Targets:':
+        elif line.strip() == "Targets:":
             findtargetsection = True
             spacenumber = len(line) - len(line.strip())
         else:
@@ -34,7 +44,7 @@ def targets_in_projectfile(projectfile):
     return targets
 
 
-def get_clang_args(projectfolder, projectfilepath, target, sdk='iphonesimulator'):
+def get_clang_args(projectfolder, projectfilepath, target, sdk="iphonesimulator"):
     """
     find the arguments which xcode used to build source files
     @param projectfilepath:
@@ -43,41 +53,56 @@ def get_clang_args(projectfolder, projectfilepath, target, sdk='iphonesimulator'
     @rtype: str
     """
 
-    deriveddatapath = os.path.join(projectfolder, '.clang_driveddata')
+    deriveddatapath = os.path.join(projectfolder, ".clang_driveddata")
     if os.path.exists(deriveddatapath):
         shutil.rmtree(deriveddatapath)
     # Popen(['xcrun', 'xcodebuild', 'clean', '-project', projectfilepath, '-target', target], stdout=PIPE).communicate()
-    output = Popen(['xcrun', 'xcodebuild',
-                    '-configuration', 'Debug',
-                    '-project', projectfilepath,
-                    '-target', target,
-                    '-sdk', sdk,
-                    'ONLY_ACTIVE_ARCH=NO',
-                    'BUILD_DIR=%s' % deriveddatapath,
-                    'BUILD_ROOT=%s' % deriveddatapath,
-                    'CACHE_ROOT=%s/cache' % deriveddatapath,
-                    'OBJROOT=%s' % deriveddatapath,
-                    'MODULE_CACHE_DIR=%s/ModuleCache' % deriveddatapath,
-                    'SHARED_PRECOMPS_DIR=%s/Build/Intermediates/PrecompiledHeaders' % deriveddatapath,
-                    'SYMROOT=%s/Build/Products' % deriveddatapath], stdout=PIPE).communicate()[0]
+    output = Popen(
+        [
+            "xcrun",
+            "xcodebuild",
+            "-configuration",
+            "Debug",
+            "-project",
+            projectfilepath,
+            "-target",
+            target,
+            "-sdk",
+            sdk,
+            "ONLY_ACTIVE_ARCH=NO",
+            "BUILD_DIR=%s" % deriveddatapath,
+            "BUILD_ROOT=%s" % deriveddatapath,
+            "CACHE_ROOT=%s/cache" % deriveddatapath,
+            "OBJROOT=%s" % deriveddatapath,
+            "MODULE_CACHE_DIR=%s/ModuleCache" % deriveddatapath,
+            "SHARED_PRECOMPS_DIR=%s/Build/Intermediates/PrecompiledHeaders"
+            % deriveddatapath,
+            "SYMROOT=%s/Build/Products" % deriveddatapath,
+        ],
+        stdout=PIPE,
+    ).communicate()[0]
 
-    buildoutput = output.split('\n')
-    args = ''
+    buildoutput = output.split("\n")
+    args = ""
     for idx, line in enumerate(buildoutput):
-        if line.startswith('CompileC') and '.m ' in line and idx < (len(buildoutput)-2):
-            for idy in range(idx+1, len(buildoutput)):
+        if (
+            line.startswith("CompileC")
+            and ".m " in line
+            and idx < (len(buildoutput) - 2)
+        ):
+            for idy in range(idx + 1, len(buildoutput)):
                 nexline = buildoutput[idy]
-                if '/usr/bin/clang' in nexline:
-                    startstr = '/usr/bin/clang'
-                    endstr = '-MMD -MT dependencies'
-                    start = nexline.find(startstr)+len(startstr)
+                if "/usr/bin/clang" in nexline:
+                    startstr = "/usr/bin/clang"
+                    endstr = "-MMD -MT dependencies"
+                    start = nexline.find(startstr) + len(startstr)
                     end = nexline.find(endstr, start)
                     args = nexline[start:end].strip()
                     break
             break
 
     if len(args) == 0:
-        print output
+        print(output)
 
     return args
 
@@ -88,6 +113,7 @@ def get_all_header_folder(projectfolder):
             if f.split(".")[-1] in ("h", "m", "mm", "c"):
                 return True
         return False
+
     folderlist = []
     for (path, dirs, files) in os.walk(projectfolder):
         if directories_contains_source(files):
@@ -98,6 +124,7 @@ def get_all_header_folder(projectfolder):
 def format_directories(directories):
     return "\n".join(['-I"%s"' % (p,) for p in directories])
 
+
 def main(argv):
     if len(argv) != 2 and len(argv) != 4:
         usage()
@@ -106,7 +133,7 @@ def main(argv):
     projectfolder = os.path.abspath(argv[0])
 
     if not os.path.exists(projectfolder):
-        print '%s is not exists.' % projectfolder
+        print("%s is not exists." % projectfolder)
         sys.exit(1)
 
     projectname = targetname = sdk = None
@@ -119,53 +146,69 @@ def main(argv):
         sdk = argv[1]
         for root, dirs, files in os.walk(projectfolder):
             for dir in dirs:
-                if dir.endswith('.xcodeproj'):
+                if dir.endswith(".xcodeproj"):
                     projectname = dir
                     break
 
-    if sdk not in ['macosx', 'iphoneos', 'iphonesimulator']:
-        print 'SDK is not correct. It should be one of macosx/iphoneos/iphonesimulator.'
+    if sdk not in ["macosx", "iphoneos", "iphonesimulator"]:
+        print(
+            "SDK is not correct. It should be one of macosx/iphoneos/iphonesimulator."
+        )
         sys.exit(1)
 
     targets = targets_in_projectfile(os.path.join(projectfolder, projectname))
 
     if len(targets) == 0:
-        print 'The xcode project %s has no valid target.' % projectname
+        print("The xcode project %s has no valid target." % projectname)
         sys.exit(1)
 
-    if None == targetname:
+    if targetname is None:
         targetname = targets[0]
-    elif not targetname in targets:
-        print 'Target "%s" is not in existing target list %s.' % (targetname, targets)
+    elif targetname not in targets:
+        print('Target "%s" is not in existing target list %s.' % (targetname, targets))
 
-    print 'Processing target "%s" in project "%s"...' % (targetname, projectname)
+    print('Processing target "%s" in project "%s"...' % (targetname, projectname))
 
-    argstring = get_clang_args(projectfolder, os.path.join(projectfolder, projectname), targetname, sdk)
-    args = (('\n-'.join((' '+argstring).split(' -'))).strip('\n ')).split('\n')
+    argstring = get_clang_args(
+        projectfolder, os.path.join(projectfolder, projectname), targetname, sdk
+    )
+    args = (("\n-".join((" " + argstring).split(" -"))).strip("\n ")).split("\n")
 
     if len(args) == 0 or len(argstring) == 0:
-        print('Build target "%s" failed. Please check your code.' % targetname)
+        print(('Build target "%s" failed. Please check your code.' % targetname))
         sys.exit(1)
 
     folderlist = get_all_header_folder(projectfolder)
 
-    clang_args = ('\n'.join([x for x in args if '\\ ' not in x])).strip('\n ') + '\n' + format_directories([x for x in folderlist if '\\ ' not in x])
+    clang_args = (
+        ("\n".join([x for x in args if "\\ " not in x])).strip("\n ")
+        + "\n"
+        + format_directories([x for x in folderlist if "\\ " not in x])
+    )
 
-    clang_completefile = os.path.join(projectfolder, '.clang_complete')
+    clang_completefile = os.path.join(projectfolder, ".clang_complete")
     if os.path.exists(clang_completefile):
-        os.rename(clang_completefile, clang_completefile+'.bak')
+        os.rename(clang_completefile, clang_completefile + ".bak")
     os.system('echo "%s" > %s' % (clang_args, clang_completefile))
 
-    filteredpath = [x for x in args if '\\ ' in x] + [x for x in folderlist if '\\ ' in x]
+    filteredpath = [x for x in args if "\\ " in x] + [
+        x for x in folderlist if "\\ " in x
+    ]
     if len(filteredpath) > 0:
-        print 'Please make sure there is no white space in your project path and target name because of a bug in clang.\n' \
-              'Following paths are not valid, correct the path with "\ " and try again.\n'
+        print(
+            """
+            Please make sure there is no white space in your project path and target name because of a bug in clang.
+            Following paths are not valid, correct the path with "\ " and try again.
+            """
+        )
         for path in [x for x in filteredpath]:
-            print path
+            print(path)
 
-    print
-    print 'Processed target "%s" in project "%s". Please restart your MacVIM now.' % (targetname, projectname)
+    print(
+        'Processed target "%s" in project "%s". Please restart your MacVIM now.'
+        % (targetname, projectname)
+    )
+
 
 if __name__ == "__main__":
     main(sys.argv[1:])
-
