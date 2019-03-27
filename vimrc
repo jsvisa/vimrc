@@ -26,13 +26,12 @@ Plugin 'majutsushi/tagbar'
 Plugin 'neomake/neomake'
 Plugin 'luochen1990/rainbow'
 Plugin 'tmux-plugins/vim-tmux-focus-events'
-" Plugin 'kien/rainbow_parentheses.vim'
 Plugin 'Raimondi/delimitMate'
 Plugin 'scrooloose/syntastic'
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-ragtag'
-Plugin 'Valloric/YouCompleteMe' " $ ./install.py --clang-completer --go-completer --rust-completer
+Plugin 'Valloric/YouCompleteMe' " $ ./install.py --clang-completer --clangd-completer --go-completer --rust-completer
 Plugin 'tomtom/tcomment_vim'
 
 Plugin 'tpope/vim-haml'
@@ -79,8 +78,15 @@ Plugin 'w0rp/ale'
 
 Plugin 'spacewander/openresty-vim'
 
+Plugin 'autozimu/LanguageClient-neovim'
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
+
+" disable the error alarm and logo
+set noerrorbells
+set novisualbell
+set t_vb=
 
 set nobackup                 " no ~xxx files
 syntax on
@@ -107,9 +113,7 @@ au FileType java setlocal omnifunc=javacomplete#Complete
 " set path=**
 " set completeopt=longest,menuone
 
-set grepprg=ag
-map <F3> :cp<CR>
-map <F4> :cn<CR>
+set grepprg=rg
 
 " set cursorline " 为光标所在行加下划线
 " set cursorcolumn
@@ -130,7 +134,7 @@ set hidden
 set lazyredraw
 set ttyfast
 
-set ignorecase " 搜索小写正文时大小写不敏感，搜索正文包含大写时大小写敏感
+set ignorecase " 搜索小写正文时大小写不敏感，搜索正文包含大写时大小写敏感, 影响到 if 字符串相同性判断
 set smartcase
 set incsearch " 高亮搜索文本
 set showmatch
@@ -164,6 +168,7 @@ let g:neomake_enabled_makers = ['elixir']
   " c  Command-line mode map. Defined using ':cmap' or ':cnoremap'.
   " o  Operator pending mode map. Defined using ':omap' or ':onoremap'.
   " 'noremap' means no recursive mapping
+  "  除非递归是必须的，否则总是使用非递归映射
 
   inoremap jj <ESC>
 
@@ -175,16 +180,14 @@ let g:neomake_enabled_makers = ['elixir']
   nnoremap <C-k> <C-w><C-k>
   nnoremap <C-l> <C-w><C-l>
 
-  " ack search with yanked
-  nnoremap <C-f> :Ack <C-r>"<ESC>
+  " ack search the current word.
+  " instead of :grep, the return of grep is printed in a small box, not in quickfix)
+  nnoremap <silent> <C-f> :Ack '<cword>' .<CR>
+  " nnoremap <C-f> :Ack <cWORD> .<CR> " for uppercase
   let g:ackprg = 'rg --vimgrep'
 
-  inoremap <F1> <ESC>
-  nnoremap <F1> <ESC>
-  vnoremap <F1> <ESC>
-  inoremap <F5> :CtrlPClearCache<CR>
-  nnoremap <F5> :CtrlPClearCache<CR>
-  vnoremap <F5> :CtrlPClearCache<CR>
+  noremap <F1> <ESC>
+  noremap <F5> :CtrlPClearCache<CR>
   nnoremap ; :
 "  }
 
@@ -199,9 +202,9 @@ let g:neomake_enabled_makers = ['elixir']
   nnoremap <leader>c :tabc<CR>
   nnoremap <leader>e :e#<CR>
   " nnoremap <leader>,e  :e <CR>=expand("%:p:h") .  '/' <CR>
-  nnoremap <leader>vm :e ~/.vim/vimrc<CR>
+  nnoremap <leader>vm :e $MYVIMRC<CR>
   nnoremap <leader>rb :e ~/.vim/bundle/vim-snipmate/snippets/<CR>
-  nnoremap <leader>so :source ~/.vim/vimrc<CR>
+  nnoremap <leader>so :source $MYVIMRC<CR>
   nnoremap <leader>ne :NERDTree<CR>
   nnoremap <leader>nc :NERDTreeClose<CR>
 
@@ -211,9 +214,34 @@ let g:neomake_enabled_makers = ['elixir']
   nnoremap <leader>m :CtrlPClearCache<CR>
 
   " for quickfix
+  function! QuickfixToggle()
+    let nr1 = winnr("$")
+    cwindow
+    let nr2 = winnr("$")
+    if nr1 == nr2
+      cclose
+    endif
+  endfunction
+  nnoremap <leader>q :call QuickfixToggle()<cr>
+
+  function! LocationToggle()
+    let nr1 = winnr("$")
+    lwindow
+    let nr2 = winnr("$")
+    if nr1 == nr2
+      lclose
+    endif
+  endfunction
+  nnoremap <leader>l :call QuickfixToggle()<cr>
+
   nnoremap <leader>cn :cn<CR>
   nnoremap <leader>cp :cp<CR>
   nnoremap <leader>cl :ccl<CR>
+
+  nnoremap <left> <nop>
+  nnoremap <right> <nop>
+  nnoremap <up> <nop>
+  nnoremap <down> <nop>
 " }
 
 " Set paste/nopaste mode {
@@ -226,16 +254,29 @@ let g:neomake_enabled_makers = ['elixir']
   vnoremap <C-c> :w !pbcopy<CR><CR>
 " }
 
+" 没有作用域限制的 Vimscript 函数必须以一个大写字母开头！
+" 函数通过 :call StripTrailingWhitespace() 调用
+" 如果一个 Vimscript 函数不返回一个值，它隐式返回 0
+" a function with argument ex: 'a:' to retrive the function arguments
+" fun Farg(name)
+"   echo a:name
+" endfun
+"
+" and a function with varlist:
+" fun Farglist(name, ...)
+"   echo a:name
+"   echo a.0
+"   echo a.1
+" endfun
   fun! StripTrailingWhitespace()
     Neomake
-    if (&ft == "make" || &ft=='go')
-      " nothing to do
-    else
+    if index(['make', 'go'], &ft) >= 0
       setlocal expandtab
       retab
     endif
     %s/\s\+$//e
   endfun
+
 
 " Display extra Tab except Golang {
   fun! DisplayTrailingWhitespace()
@@ -248,45 +289,89 @@ let g:neomake_enabled_makers = ['elixir']
 " }
 
 " TagBar {
-  nnoremap <leader>tl : TagbarToggle<CR>
-  nnoremap <leader>tb : TagbarOpenAutoClose<CR>
-  nnoremap <leader>tbc : TagbarClose<CR>
+  nnoremap <silent> <leader>tl : TagbarToggle<CR>
+  nnoremap <silent> <leader>tb : TagbarOpenAutoClose<CR>
+  nnoremap <silent> <leader>tbc : TagbarClose<CR>
 " }
 
 " My personal Tags  {
 
   function! LoadTagsByFileType()
-    if &filetype == 'c'
+    " if ==? ignore case; and ==# case senstive
+    if &filetype ==? 'c'
       set tags+=~/tags/tags-nginx
-    elseif &filetype == 'rb'
+    elseif &filetype ==? 'rb'
       set tags+=~/tags/tags-gems
-    elseif &filetype == 'go'
+    elseif &filetype ==? 'go'
       set tags+=~/.go/tags
     endif
   endfunction
 
   " set autochdir
-  set tags=tags
-  autocmd FileType * call LoadTagsByFileType()
+  set tags=./.tags;,.tags
+  " autocmd FileType * call LoadTagsByFileType()
   " au FileType c,cpp set tags^=~/tags/tags-nginx
   " au FileType *.erb,*.rb set tags^=~/tags/tags-gems
 " }
 
-" Ctags auto update {
-  let g:gutentags_cache_dir = '~/.tags_cache'
+
+""""""""""""""""""""""""""""""
+" Start ctags
+"""""""""""""""""""""""""""""""""
+" from https://www.zhihu.com/question/47691414/answer/373700711
   let g:gutentags_enabled = 1
-" }
+  " :messages to show gutentags messages
+  let g:gutentags_trace = 0
+  let g:gutentags_define_advanced_commands = 1
+  let $GTAGSLABEL = 'native-pygments'
+  let $GTAGSCONF = '/root/.config/gtags/gtags.conf'
+
+  " gutentags 搜索工程目录的标志，当前文件路径向上递归直到碰到这些文件/目录名
+  let g:gutentags_project_root = ['.root', '.svn', '.git', '.hg', '.project']
+
+  " 所生成的数据文件的名称
+  let g:gutentags_ctags_tagfile = '.tags'
+
+  " 同时开启 ctags 和 gtags 支持：
+  let g:gutentags_modules = []
+  if executable('gtags-cscope') && executable('gtags')
+    let g:gutentags_modules += ['gtags_cscope']
+  elseif executable('ctags')
+    let g:gutentags_modules += ['ctags']
+  endif
+
+  " 将自动生成的 ctags/gtags 文件全部放入 ~/.cache/tags 目录中，避免污染工程目录
+  let g:gutentags_cache_dir = expand('~/.cache/tags')
+
+  " 配置 ctags 的参数
+  let g:gutentags_ctags_extra_args = ['--fields=+niazS', '--extras=+q']
+  let g:gutentags_ctags_extra_args += ['--c++-kinds=+px']
+  let g:gutentags_ctags_extra_args += ['--c-kinds=+px']
+
+  " 如果使用 universal ctags 需要增加下面一行
+  let g:gutentags_ctags_extra_args += ['--output-format=e-ctags']
+
+  " 禁用 gutentags 自动加载 gtags 数据库的行为
+  let g:gutentags_auto_add_gtags_cscope = 0
+
+  let g:gutentags_ctags_exclude = ["node_modules", "build"]
+""""""""""""""""""""""""""""""
+" End ctags
+"""""""""""""""""""""""""""""""""
+
 
 " Gotags auto update {
   function! UpdateGoTags()
-    let f = expand("%:p")
+    " %     -> current file(relative path)
+    " %:p   -> current file(absolute path)
+    let cfp = expand("%:p")
     let cwd = getcwd()
     let tagfilename = cwd . "/tags"
-    let cmd = 'gotags -silent=true -f ' . tagfilename . ' `find . -path ./vendor -prune -o -name "*.go"`'
+    let cmd = 'gotags -silent=true -f ' . tagfilename . cfp
     let resp = system(cmd)
   endfunction
 
-  " autocmd BufWritePost *.go call UpdateGoTags()
+  autocmd BufWritePost *.go call UpdateGoTags()
 " }
 
 " vimdiff color scheme
@@ -298,7 +383,7 @@ highlight DiffText cterm=none ctermfg=black ctermbg=Red gui=none guifg=bg guibg=
 " }
 
 set cc=100
-map <leader>ch :call SetColorColumn()<CR>
+noremap <leader>ch :call SetColorColumn()<CR>
 function! SetColorColumn()
   let col_num = virtcol(".")
   let cc_list = split(&cc, ',')
@@ -322,34 +407,6 @@ let g:bufExplorerSplitVertical=1     " Split vertically.
 let g:bufExplorerSplitVertSize=30    " Split width
 let g:bufExplorerUseCurrentWindow=1  " Open in new window.
 
-
-""""""""""""""""""""""""""""""
-" Rainbow Parentheses
-"""""""""""""""""""""""""""""""""
-" let g:rbpt_colorpairs = [
-"     \ ['brown',       'RoyalBlue3'],
-"     \ ['Darkblue',    'SeaGreen3'],
-"     \ ['darkgray',    'DarkOrchid3'],
-"     \ ['darkgreen',   'firebrick3'],
-"     \ ['darkcyan',    'RoyalBlue3'],
-"     \ ['darkred',     'SeaGreen3'],
-"     \ ['brown',       'firebrick3'],
-"     \ ['gray',        'RoyalBlue3'],
-"     \ ['black',       'SeaGreen3'],
-"     \ ['darkmagenta', 'DarkOrchid3'],
-"     \ ['Darkblue',    'firebrick3'],
-"     \ ['darkgreen',   'RoyalBlue3'],
-"     \ ['darkcyan',    'SeaGreen3'],
-"     \ ['darkred',     'DarkOrchid3'],
-"     \ ['red',         'firebrick3'],
-"     \ ['darkmagenta', 'DarkOrchid3'],
-"     \ ]
-" let g:rbpt_max = 16
-" let g:rbpt_loadcmd_toggle = 0
-" au VimEnter * RainbowParenthesesToggle
-" au Syntax * RainbowParenthesesLoadRound
-" au Syntax * RainbowParenthesesLoadSquare
-" au Syntax * RainbowParenthesesLoadBraces
 let g:rainbow_active = 1
 
 let g:html_indent_tags = 'p\|li\|nav'
@@ -467,16 +524,9 @@ let g:rustfmt_autosave = 1
 """""""""""""""""""""""""""""""""
 
 """"""""""""""""""""""""""""""
-" Start tags
-"""""""""""""""""""""""""""""""""
-let g:gutentags_ctags_exclude = ["node_modules", "build"]
-""""""""""""""""""""""""""""""
-" End tags
-"""""""""""""""""""""""""""""""""
-
-""""""""""""""""""""""""""""""
 " Start ale
 """""""""""""""""""""""""""""""""
+let g:ale_completion_enabled = 1
 let g:ale_fixers = {
 \   '*': ['remove_trailing_lines', 'trim_whitespace'],
 \   'javascript': ['eslint'],
@@ -489,11 +539,20 @@ let g:ale_linters = {
 \   'python': ['flake8'],
 \   'lua': ['luacheck'],
 \}
+
 let g:ale_fix_on_save = 1
 let g:ale_completion_enabled = 0
 let g:ale_linters_explicit = 1            " Only run linters named in ale_linters settings.
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_go_gofmt_options = '-s'
+
+let g:ale_echo_msg_format = '[%linter%] %code: %%s'
+let g:ale_lint_on_text_changed = 'normal'
+let g:ale_lint_on_insert_leave = 1
+let g:airline#extensions#ale#enabled = 1
+
+nnoremap <silent> <leader>n :ALENext<CR>
+nnoremap <silent> <leader>m :ALEPrevious<CR>
 """"""""""""""""""""""""""""""
 " End ale
 """""""""""""""""""""""""""""""""
@@ -515,4 +574,23 @@ EOF
 let g:JaveComplete_AutoStartServer = 1
 """"""""""""""""""""""""""""""
 " End Java
+"""""""""""""""""""""""""""""""""
+
+""""""""""""""""""""""""""""""
+" Start LSP-Client
+"""""""""""""""""""""""""""""""""
+" \ 'python': ['/root/.pyenv/shims/pyls'],
+let g:LanguageClient_serverCommands = {
+\   'c': ['/usr/local/bin/ccls'],
+\   'go': ['/root/.go/bin/go-langserver'],
+\ }
+
+nnoremap <silent> <F5> :call LanguageClient_contextMenu()<CR>
+" Or map each action separately
+nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
+nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
+nnoremap <silent> gr :call LanguageClient#textDocument_references()<CR>
+nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
+""""""""""""""""""""""""""""""
+" End LSP-Client
 """""""""""""""""""""""""""""""""
