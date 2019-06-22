@@ -80,6 +80,8 @@ Plugin 'spacewander/openresty-vim'
 
 Plugin 'autozimu/LanguageClient-neovim'
 
+Plugin 'alcesleo/vim-uppercase-sql'
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 
@@ -94,7 +96,7 @@ filetype on
 filetype plugin on               " 针对不同的文件类型加载对应的插件
 filetype plugin indent on        " 启用自动补全
 set encoding=utf8
-" set expandtab                    " expandtab，用空格代替Tab键
+set expandtab                    " expandtab，用空格代替Tab键
 
 let g:rehash256 = 1
 colorscheme molokai
@@ -104,8 +106,8 @@ au InsertLeave *.* write    " 每次退出插入模式时自动保存
 au FocusLost * :wa          " saving on losing focus
 set ts=4 sw=4
 set omnifunc=syntaxcomplete#Complete
-au FileType java,vue,js,cc,ruby,elixir,scala,vim,coffee,yaml,toml,conf,cpp setlocal ts=2 sw=2
-au FileType nginx,sh,shell,lua,go,c,python,erlang,makefile setlocal ts=4 sw=4
+au FileType java,vue,javascript,js,cc,ruby,elixir,scala,vim,coffee,yaml,toml,conf,cpp setlocal ts=2 sw=2 expandtab
+au FileType nginx,sh,shell,lua,go,c,python,erlang,makefile setlocal ts=4 sw=4 expandtab
 au FileType tick set commentstring=//%s
 " au FileType json autocmd BufWritePre <buffer> %!python -m json.tool
 
@@ -208,9 +210,6 @@ let g:neomake_enabled_makers = ['elixir']
   nnoremap <leader>ne :NERDTree<CR>
   nnoremap <leader>nc :NERDTreeClose<CR>
 
-  nnoremap <leader>r  :Rake!<CR>
-  nnoremap <leader>rr :.Rake!<CR>
-  nnoremap <leader>g :Dash<CR>
   nnoremap <leader>m :CtrlPClearCache<CR>
 
   " for quickfix
@@ -270,7 +269,7 @@ let g:neomake_enabled_makers = ['elixir']
 " endfun
   fun! StripTrailingWhitespace()
     Neomake
-    if index(['make', 'go'], &ft) >= 0
+    if index(['make', 'go'], &ft) < 0
       setlocal expandtab
       retab
     endif
@@ -294,29 +293,29 @@ let g:neomake_enabled_makers = ['elixir']
   nnoremap <silent> <leader>tbc : TagbarClose<CR>
 " }
 
-" My personal Tags  {
-
-  function! LoadTagsByFileType()
-    " if ==? ignore case; and ==# case senstive
-    if &filetype ==? 'c'
-      set tags+=~/tags/tags-nginx
-    elseif &filetype ==? 'rb'
-      set tags+=~/tags/tags-gems
-    elseif &filetype ==? 'go'
-      set tags+=~/.go/tags
-    endif
-  endfunction
-
-  " set autochdir
-  set tags=./.tags;,.tags
-  " autocmd FileType * call LoadTagsByFileType()
-  " au FileType c,cpp set tags^=~/tags/tags-nginx
-  " au FileType *.erb,*.rb set tags^=~/tags/tags-gems
-" }
+" " My personal Tags  {
+"
+"   function! LoadTagsByFileType()
+"     " if ==? ignore case; and ==# case senstive
+"     if &filetype ==? 'c'
+"       set tags+=~/tags/tags-nginx
+"     elseif &filetype ==? 'rb'
+"       set tags+=~/tags/tags-gems
+"     elseif &filetype ==? 'go'
+"       set tags+=~/.go/tags
+"     endif
+"   endfunction
+"
+"   " set autochdir
+"   set tags=./.tags;,.tags
+"   " autocmd FileType * call LoadTagsByFileType()
+"   " au FileType c,cpp set tags^=~/tags/tags-nginx
+"   " au FileType *.erb,*.rb set tags^=~/tags/tags-gems
+" " }
 
 
 """"""""""""""""""""""""""""""
-" Start ctags
+" Start gtags
 """""""""""""""""""""""""""""""""
 " from https://www.zhihu.com/question/47691414/answer/373700711
   let g:gutentags_enabled = 1
@@ -338,23 +337,23 @@ let g:neomake_enabled_makers = ['elixir']
     let g:gutentags_modules += ['gtags_cscope']
   elseif executable('ctags')
     let g:gutentags_modules += ['ctags']
+    " 配置 ctags 的参数
+    let g:gutentags_ctags_extra_args = ['--fields=+niazS', '--extras=+q']
+    let g:gutentags_ctags_extra_args += ['--c++-kinds=+px']
+    let g:gutentags_ctags_extra_args += ['--c-kinds=+px']
+
+    " 如果使用 universal ctags 需要增加下面一行
+    let g:gutentags_ctags_extra_args += ['--output-format=e-ctags']
   endif
 
   " 将自动生成的 ctags/gtags 文件全部放入 ~/.cache/tags 目录中，避免污染工程目录
   let g:gutentags_cache_dir = expand('~/.cache/tags')
 
-  " 配置 ctags 的参数
-  let g:gutentags_ctags_extra_args = ['--fields=+niazS', '--extras=+q']
-  let g:gutentags_ctags_extra_args += ['--c++-kinds=+px']
-  let g:gutentags_ctags_extra_args += ['--c-kinds=+px']
-
-  " 如果使用 universal ctags 需要增加下面一行
-  let g:gutentags_ctags_extra_args += ['--output-format=e-ctags']
-
   " 禁用 gutentags 自动加载 gtags 数据库的行为
   let g:gutentags_auto_add_gtags_cscope = 0
 
-  let g:gutentags_ctags_exclude = ["node_modules", "build"]
+  let g:gutentags_ctags_exclude = ['node_modules', 'build']
+  " let g:gutentags_ctags_exclude_filetypes = ['markdown', 'json', 'vim']
 """"""""""""""""""""""""""""""
 " End ctags
 """""""""""""""""""""""""""""""""
