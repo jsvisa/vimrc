@@ -318,7 +318,7 @@ let g:neomake_enabled_makers = ['elixir']
 " Start gtags
 """""""""""""""""""""""""""""""""
 " from https://www.zhihu.com/question/47691414/answer/373700711
-  let g:gutentags_enabled = 1
+  let g:gutentags_enabled = 0
   " :messages to show gutentags messages
   let g:gutentags_trace = 0
   let g:gutentags_define_advanced_commands = 1
@@ -421,9 +421,10 @@ let g:ycm_semantic_triggers =  {
   \   'python': ['re!from\s+\S+\s+import\s'],
   \ }
 let g:ycm_add_preview_to_completeopt = 0  " don't show the preview pane
-" let g:ycm_show_diagnostics_ui = 0 " don't show the diagnostics ui
-let g:ycm_autoclose_preview_window_after_completion=1
-map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
+" let g:ycm_show_diagnostics_ui = 0 " don't show the diagnostics UI
+let g:ycm_autoclose_preview_window_after_completion = 1
+nnoremap <C-]> :YcmCompleter GoToDefinitionElseDeclaration<CR>
+nnoremap <C-r> :YcmCompleter GoToReferences<CR>
 let g:ycm_key_list_select_completion = ['<c-n>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<c-p>', '<Up>']
 let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
