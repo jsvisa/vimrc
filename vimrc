@@ -354,6 +354,7 @@ let g:neomake_enabled_makers = ['elixir']
 
   let g:gutentags_ctags_exclude = ['node_modules', 'build']
   " let g:gutentags_ctags_exclude_filetypes = ['markdown', 'json', 'vim']
+  " debug gtags from https://github.com/hanxi/blog/issues/19
 """"""""""""""""""""""""""""""
 " End ctags
 """""""""""""""""""""""""""""""""
@@ -419,6 +420,9 @@ let g:html_indent_tags = 'p\|li\|nav'
   " \   'go,python': ['re!\w{4}'],
 let g:ycm_semantic_triggers =  {
   \   'python': ['re!from\s+\S+\s+import\s'],
+  \   'cs,d,elixir,go,groovy,java,javascript,julia,perl6,python,scala,typescript,vb': ['.'],
+  \   'lua': ['.', ':'],
+  \   'erlang': [':'],
   \ }
 let g:ycm_add_preview_to_completeopt = 0  " don't show the preview pane
 " let g:ycm_show_diagnostics_ui = 0 " don't show the diagnostics UI
