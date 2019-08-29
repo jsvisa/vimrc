@@ -6,6 +6,9 @@ filetype off                  " required
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
+" add https://github.com/junegunn/fzf
+set rtp+=~/.fzf
+
 call vundle#begin()
 " alternatively, pass a path where Vundle should install plugins
 
@@ -82,6 +85,9 @@ Plugin 'spacewander/openresty-vim'
 Plugin 'autozimu/LanguageClient-neovim'
 
 Plugin 'alcesleo/vim-uppercase-sql'
+
+Plugin 'junegunn/fzf.vim'
+
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -429,7 +435,7 @@ let g:ycm_add_preview_to_completeopt = 0  " don't show the preview pane
 " let g:ycm_show_diagnostics_ui = 0 " don't show the diagnostics UI
 let g:ycm_autoclose_preview_window_after_completion = 1
 nnoremap <C-]> :YcmCompleter GoToDefinitionElseDeclaration<CR>
-nnoremap <C-r> :YcmCompleter GoToReferences<CR>
+nnoremap <C-'> :YcmCompleter GoToReferences<CR>
 let g:ycm_key_list_select_completion = ['<c-n>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<c-p>', '<Up>']
 let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
@@ -599,3 +605,6 @@ nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
 """"""""""""""""""""""""""""""
 " End LSP-Client
 """""""""""""""""""""""""""""""""
+
+nnoremap <C-p> :Files<Cr>
+nnoremap <C-g> :Rg<Cr>
